@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/skillTest"
+        android:icon="@drawable/ic_menu_skill_test"
+        android:title="Skill Test" />
+    <item
+        android:id="@+id/fullTest"
+        android:icon="@drawable/ic_menu_full_test"
+        android:title="Full Test" />
+    <item
+        android:id="@+id/miniTest"
+        android:icon="@drawable/ic_menu_mini_test"
+        android:title="Mini Test" />
+    <item
+        android:id="@+id/vocabulary"
+        android:icon="@drawable/ic_menu_vocabulary"
+        android:title="Vocabulary" />
+    <item
+        android:id="@+id/grammar"
+        android:icon="@drawable/ic_menu_grammar"
+        android:title="Grammar" />
+</menu>

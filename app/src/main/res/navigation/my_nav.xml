@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/skillTest">
+
+    <fragment
+        android:id="@+id/skillTest"
+        android:name="com.example.toeic_adventure.SkillTest"
+        android:label="fragment_skill_test"
+        tools:layout="@layout/fragment_skill_test" />
+    <fragment
+        android:id="@+id/fullTest"
+        android:name="com.example.toeic_adventure.FullTest"
+        android:label="fragment_full_test"
+        tools:layout="@layout/fragment_full_test" />
+    <fragment
+        android:id="@+id/miniTest"
+        android:name="com.example.toeic_adventure.MiniTest"
+        android:label="fragment_mini_test"
+        tools:layout="@layout/fragment_mini_test" />
+    <fragment
+        android:id="@+id/vocabulary"
+        android:name="com.example.toeic_adventure.Vocabulary"
+        android:label="fragment_vocabulary"
+        tools:layout="@layout/fragment_vocabulary" />
+    <fragment
+        android:id="@+id/grammar"
+        android:name="com.example.toeic_adventure.Grammar"
+        android:label="fragment_grammar"
+        tools:layout="@layout/fragment_grammar" />
+</navigation>
