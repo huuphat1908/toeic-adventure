@@ -98,12 +98,20 @@ public class FullTest extends Fragment {
         Country exam2 = new Country("Exam 2021", "us", 320000000);
         Country exam3 = new Country("Big Step toeic", "us", 142000000);
         Country exam4 = new Country("Hacker New Toeic", "us", 142000000);
+        Country exam5 = new Country("Big Step toeic", "us", 142000000);
+        Country exam6 = new Country("Hacker New Toeic", "us", 142000000);
+        Country exam7 = new Country("Big Step toeic", "us", 142000000);
+        Country exam8 = new Country("Hacker New Toeic", "us", 142000000);
 
 
         list.add(exam1);
         list.add(exam2);
         list.add(exam3);
         list.add(exam4);
+        list.add(exam5);
+        list.add(exam6);
+        list.add(exam7);
+        list.add(exam8);
 
         return list;
     }
