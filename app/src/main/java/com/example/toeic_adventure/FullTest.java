@@ -7,6 +7,21 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
+import java.util.ArrayList;
+import java.util.List;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +74,37 @@ public class FullTest extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_full_test, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_full_test, container, false);
+        List<Country> image_details = getListData();
+        final ListView listView = rootView.findViewById(R.id.listView);
+        listView.setAdapter(new CustomListAdapter(getContext(), image_details));
+
+        // When the user clicks on the ListItem
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                Object o = listView.getItemAtPosition(position);
+                Country country = (Country) o;
+                Toast.makeText(getContext(), "Selected :" + " " + country, Toast.LENGTH_LONG).show();
+            }
+        });
+        return rootView;
+    }
+
+    private List<Country> getListData() {
+        List<Country> list = new ArrayList<Country>();
+        Country exam1 = new Country("Exam 20222", "us", 98000000);
+        Country exam2 = new Country("Exam 2021", "us", 320000000);
+        Country exam3 = new Country("Big Step toeic", "us", 142000000);
+        Country exam4 = new Country("Hacker New Toeic", "us", 142000000);
+
+
+        list.add(exam1);
+        list.add(exam2);
+        list.add(exam3);
+        list.add(exam4);
+
+        return list;
     }
 }
