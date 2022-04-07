@@ -1,14 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SkillTest">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Skill test screen" />
+        android:orientation="vertical"
+        android:weightSum="100">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:orientation="horizontal">
+            <Button
+                android:padding="0dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:background="@android:color/transparent"
+                android:textSize="13sp"
+                android:text="Trình độ" />
+        </RelativeLayout>
 
+        <ScrollView
+            android:layout_weight="95"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:background="@drawable/sharp_cardview_bg"
+                    android:orientation="horizontal"
+                    android:weightSum="100"
+                    android:padding="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_weight="8"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="5dp"
+                        android:src="@drawable/part1_thumbnail"
+                        tools:ignore="VectorDrawableCompat" />
+                    <LinearLayout
+                        android:layout_weight="92"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:text="Phần 1: Hình ảnh" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="0dp"
+                            android:text="Tương ứng với mỗi bức ảnh, bạn sẽ được nghe 04 câu mô tả về nó. Nhiệm vụ của bạn là phải chọn câu mô tả đúng nhất cho bức ảnh" />
+                        <RelativeLayout
+                            android:paddingTop="7dp"
+                            android:paddingBottom="7dp"
+                            android:layout_centerVertical="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:id="@+id/image1"
+                                android:layout_height="20dp"
+                                android:layout_width="20dp"
+                                android:layout_marginRight="5dp"
+                                android:src="@drawable/listening_icon"
+                                tools:ignore="VectorDrawableCompat" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/image1"
+                                android:text="Bài nghe" />
+                            <ImageView
+                                android:layout_toLeftOf="@id/text1"
+                                android:layout_height="20dp"
+                                android:layout_width="20dp"
+                                android:layout_marginRight="5dp"
+                                android:src="@drawable/stack_icon"
+                                tools:ignore="VectorDrawableCompat" />
+                            <TextView
+                                android:id="@+id/text1"
+                                android:layout_alignParentRight="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="76 bài" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 </FrameLayout>
