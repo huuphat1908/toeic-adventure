@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:background="@drawable/sharp_cardview_bg"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_weight="8"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:paddingEnd="10dp"
+            android:src="@drawable/part1_thumbnail" />
+        <LinearLayout
+            android:layout_weight="92"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/text_color"
+                android:id="@+id/textViewName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Phần 1: Hình ảnh" />
+            <TextView
+                android:id="@+id/textViewDesc"
+                android:textColor="@color/text_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:text="@string/part1_description" />
+            <RelativeLayout
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/image1"
+                    android:layout_height="20dp"
+                    android:layout_width="20dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/listening_icon" />
+                <TextView
+                    android:id="@+id/textViewSkillType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/image1"
+                    android:textColor="@color/text_color"
+                    android:text="Bài nghe" />
+                <ImageView
+                    android:layout_toStartOf="@id/textViewNumberOfTests"
+                    android:layout_height="20dp"
+                    android:layout_width="20dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/stack_icon" />
+                <TextView
+                    android:id="@+id/textViewNumberOfTests"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:text="76 bài" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
