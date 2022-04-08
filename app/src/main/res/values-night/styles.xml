@@ -1,6 +1,2 @@
 <resources>
-
-    <style name="Widget.Theme.Toeicadventure.MyView" parent="">
-        <item name="android:background">@color/gray_600</item>
-    </style>
 </resources>
