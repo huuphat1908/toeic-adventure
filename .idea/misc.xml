@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/15. Java/[2].App_Toeic/toeic-adventure/app/src/main/res/layout/fragment_full_test.xml" value="0.22" />
+        <entry key="..\:/15. Java/[2].App_Toeic/toeic-adventure/app/src/main/res/layout/fragment_skill_test.xml" value="0.1" />
+        <entry key="..\:/15. Java/[2].App_Toeic/toeic-adventure/app/src/main/res/layout/list_item_layout.xml" value="0.2" />
+        <entry key="..\:/15. Java/[2].App_Toeic/toeic-adventure/app/src/main/res/layout/skill_test_item.xml" value="0.1" />
         <entry key="..\:/Project/toeic_adventure/app/src/main/res/drawable/ic_launcher_background.xml" value="0.151" />
         <entry key="..\:/Project/toeic_adventure/app/src/main/res/layout/activity_full_test.xml" value="0.20416666666666666" />
         <entry key="..\:/Project/toeic_adventure/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
