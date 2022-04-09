@@ -123,14 +123,7 @@ public class SkillTestActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Init view from fragment_skill_test layout
-        if (view == null)
-        {
-            view = inflater.inflate(R.layout.fragment_skill_test, container,false);
-        }
-        else {
-            ViewGroup parent = (ViewGroup) view.getParent();
-            parent.removeView(view);
-        }
+        view = inflater.inflate(R.layout.fragment_skill_test, container,false);
 
         // Init adapter and set it to Skill Test List View
         arraySkillTest = initArraySkillTest();
