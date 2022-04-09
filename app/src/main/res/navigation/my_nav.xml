@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_mini_test" />
     <fragment
         android:id="@+id/vocabulary"
-        android:name="com.example.toeic_adventure.Vocabulary"
+        android:name="com.example.toeic_adventure.VocabularyActivity"
         android:label="fragment_vocabulary"
         tools:layout="@layout/fragment_vocabulary" />
     <fragment
