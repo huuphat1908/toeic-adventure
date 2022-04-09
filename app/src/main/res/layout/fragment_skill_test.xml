@@ -1,14 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SkillTest">
+    tools:context=".SkillTestActivity">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Skill test screen" />
+        android:orientation="vertical"
+        android:weightSum="100">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:orientation="horizontal">
+            <Button
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:background="@android:color/transparent"
+                android:textSize="13sp"
+                android:text="Trình độ" />
+        </RelativeLayout>
 
+        <ListView
+            android:id="@+id/listViewSkillTest"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="94"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="200dp"
+            android:clipToPadding="false"/>
+        <ScrollView
+            android:layout_weight="94"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:background="@drawable/sharp_cardview_bg"
+                    android:orientation="horizontal"
+                    android:weightSum="100"
+                    android:padding="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_weight="8"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:paddingRight="10dp"
+                        android:src="@drawable/part3_thumbnail"
+                        tools:ignore="VectorDrawableCompat" />
+                    <LinearLayout
+                        android:layout_weight="92"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:text="Phần 3: Hội thoại ngắn" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="0dp"
+                            android:text="@string/part2_description" />
+                        <RelativeLayout
+                            android:paddingTop="7dp"
+                            android:paddingBottom="7dp"
+                            android:layout_centerVertical="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:id="@+id/image3"
+                                android:layout_height="20dp"
+                                android:layout_width="20dp"
+                                android:layout_marginRight="5dp"
+                                android:src="@drawable/listening_icon"
+                                tools:ignore="VectorDrawableCompat" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/image3"
+                                android:text="Bài nghe" />
+                            <ImageView
+                                android:layout_toLeftOf="@id/text3"
+                                android:layout_height="20dp"
+                                android:layout_width="20dp"
+                                android:layout_marginRight="5dp"
+                                android:src="@drawable/stack_icon"
+                                tools:ignore="VectorDrawableCompat" />
+                            <TextView
+                                android:id="@+id/text3"
+                                android:layout_alignParentRight="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="64 bài" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:background="@drawable/sharp_cardview_bg"
+                    android:orientation="horizontal"
+                    android:weightSum="100"
+                    android:padding="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_weight="8"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:paddingRight="10dp"
+                        android:src="@drawable/part4_thumbnail"
+                        tools:ignore="VectorDrawableCompat" />
+                    <LinearLayout
+                        android:layout_weight="92"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:text="Phần 4: Đoạn thông tin ngắn" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="0dp"
+                            android:text="@string/part2_description" />
+                        <RelativeLayout
+                            android:paddingTop="7dp"
+                            android:paddingBottom="7dp"
+                            android:layout_centerVertical="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:id="@+id/image4"
+                                android:layout_height="20dp"
+                                android:layout_width="20dp"
+                                android:layout_marginRight="5dp"
+                                android:src="@drawable/listening_icon"
+                                tools:ignore="VectorDrawableCompat" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/image4"
+                                android:text="Bài nghe" />
+                            <ImageView
+                                android:layout_toLeftOf="@id/text4"
+                                android:layout_height="20dp"
+                                android:layout_width="20dp"
+                                android:layout_marginRight="5dp"
+                                android:src="@drawable/stack_icon"
+                                tools:ignore="VectorDrawableCompat" />
+                            <TextView
+                                android:id="@+id/text4"
+                                android:layout_alignParentRight="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="64 bài" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 </FrameLayout>

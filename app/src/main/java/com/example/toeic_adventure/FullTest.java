@@ -94,16 +94,24 @@ public class FullTest extends Fragment {
 
     private List<Country> getListData() {
         List<Country> list = new ArrayList<Country>();
-        Country exam1 = new Country("Exam 20222", "us", 98000000);
-        Country exam2 = new Country("Exam 2021", "us", 320000000);
-        Country exam3 = new Country("Big Step toeic", "us", 142000000);
-        Country exam4 = new Country("Hacker New Toeic", "us", 142000000);
+        Country exam1 = new Country("Exam 20222", "part1_thumbnail", 98000000);
+        Country exam2 = new Country("Exam 2021", "part2_thumbnail", 320000000);
+        Country exam3 = new Country("Big Step toeic", "part3_thumbnail", 142000000);
+        Country exam4 = new Country("Hacker New Toeic", "part4_thumbnail", 142000000);
+        Country exam5 = new Country("Big Step toeic", "part5_thumbnail", 142000000);
+        Country exam6 = new Country("Hacker New Toeic", "part6_thumbnail", 142000000);
+        Country exam7 = new Country("Big Step toeic", "part7_thumbnail", 142000000);
+        Country exam8 = new Country("Hacker New Toeic", "part1_thumbnail", 142000000);
 
 
         list.add(exam1);
         list.add(exam2);
         list.add(exam3);
         list.add(exam4);
+        list.add(exam5);
+        list.add(exam6);
+        list.add(exam7);
+        list.add(exam8);
 
         return list;
     }
