@@ -28,7 +28,7 @@ public class SkillTestAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return SkillTestList.get(i);
     }
 
     @Override

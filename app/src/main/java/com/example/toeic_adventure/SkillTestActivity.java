@@ -1,18 +1,16 @@
 package com.example.toeic_adventure;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -139,8 +137,11 @@ public class SkillTestActivity extends Fragment {
         // Add handler for click item event
         lvSkillTest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                Toast.makeText(getContext(), "You have click item " + position, Toast.LENGTH_LONG).show();
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                SkillTest item = (SkillTest) parent.getItemAtPosition(position);
+                Intent intent = new Intent(v.getContext(), TestProgressActivity.class);
+                intent.putExtra("title", item.Name);
+                startActivity(intent);
             }
         });
 
