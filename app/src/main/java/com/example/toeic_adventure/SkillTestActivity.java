@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -21,6 +23,7 @@ public class SkillTestActivity extends Fragment {
     ListView lvSkillTest;
     View view;
     ArrayList<SkillTest> arraySkillTest;
+    private Button buttonOpenDialog;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -138,13 +141,28 @@ public class SkillTestActivity extends Fragment {
         lvSkillTest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                SkillTest item = (SkillTest) parent.getItemAtPosition(position);
-                Intent intent = new Intent(v.getContext(), TestProgressActivity.class);
-                intent.putExtra("title", item.Name);
-                startActivity(intent);
+//                SkillTest item = (SkillTest) parent.getItemAtPosition(position);
+//                Intent intent = new Intent(v.getContext(), TestProgressActivity.class);
+//                intent.putExtra("title", item.Name);
+//                startActivity(intent);
+                buttonOpenDialogClicked();
             }
+
+
         });
 
         return view;
+    }
+
+    private void buttonOpenDialogClicked()  {
+        SkillTestDialog.FullNameListener listener = new SkillTestDialog.FullNameListener() {
+            @Override
+            public void fullNameEntered(String fullName) {
+                Toast.makeText(view.getContext(), "Full name: " + fullName, Toast.LENGTH_LONG).show();
+            }
+        };
+        final SkillTestDialog dialog = new SkillTestDialog(view.getContext(), listener);
+
+        dialog.show();
     }
 }
