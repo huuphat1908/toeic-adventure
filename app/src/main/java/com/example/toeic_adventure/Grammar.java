@@ -7,6 +7,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +65,45 @@ public class Grammar extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_grammar, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_grammar, container, false);
+        List<Country> image_details = getListData();
+        final ListView listView = rootView.findViewById(R.id.listView);
+        listView.setAdapter(new CustomListAdapter(getContext(), image_details));
+
+        // When the user clicks on the ListItem
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                Object o = listView.getItemAtPosition(position);
+                Country country = (Country) o;
+                Toast.makeText(getContext(), "Selected :" + " " + country, Toast.LENGTH_LONG).show();
+            }
+        });
+        return rootView;
+    }
+
+    private List<Country> getListData() {
+        List<Country> list = new ArrayList<Country>();
+        Country exam1 = new Country("Ngữ pháp cơ bản", "part1_thumbnail", 98000000);
+        Country exam2 = new Country("Mẹo thi TOEIC Part 1", "part2_thumbnail", 320000000);
+        Country exam3 = new Country("Mẹo thi TOEIC Part 2", "part3_thumbnail", 142000000);
+        Country exam4 = new Country("Mẹo thi TOEIC Part 3", "part4_thumbnail", 142000000);
+        Country exam5 = new Country("Mẹo thi TOEIC Part 4", "part5_thumbnail", 142000000);
+        Country exam6 = new Country("Mẹo thi TOEIC Part 5", "part6_thumbnail", 142000000);
+        Country exam7 = new Country("Mẹo thi TOEIC Part 6", "part7_thumbnail", 142000000);
+        Country exam8 = new Country("Mẹo thi TOEIC Part 7", "part1_thumbnail", 142000000);
+
+
+        list.add(exam1);
+        list.add(exam2);
+        list.add(exam3);
+        list.add(exam4);
+        list.add(exam5);
+        list.add(exam6);
+        list.add(exam7);
+        list.add(exam8);
+
+        return list;
     }
 }
