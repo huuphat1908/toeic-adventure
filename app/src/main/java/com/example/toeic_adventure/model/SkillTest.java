@@ -1,4 +1,6 @@
-package com.example.toeic_adventure;
+package com.example.toeic_adventure.model;
+
+import com.example.toeic_adventure.TestType;
 
 public class SkillTest {
     public String Name;

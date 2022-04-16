@@ -12,12 +12,12 @@
         tools:layout="@layout/fragment_skill_test" />
     <fragment
         android:id="@+id/fullTest"
-        android:name="com.example.toeic_adventure.FullTest"
+        android:name="com.example.toeic_adventure.FullTestActivity"
         android:label="fragment_full_test"
         tools:layout="@layout/fragment_full_test" />
     <fragment
         android:id="@+id/miniTest"
-        android:name="com.example.toeic_adventure.MiniTest"
+        android:name="com.example.toeic_adventure.MiniTestActivity"
         android:label="fragment_mini_test"
         tools:layout="@layout/fragment_mini_test" />
     <fragment
@@ -27,7 +27,7 @@
         tools:layout="@layout/fragment_vocabulary" />
     <fragment
         android:id="@+id/grammar"
-        android:name="com.example.toeic_adventure.Grammar"
+        android:name="com.example.toeic_adventure.GrammarActivity"
         android:label="fragment_grammar"
         tools:layout="@layout/fragment_grammar" />
 </navigation>
