@@ -145,13 +145,7 @@ public class SkillTestActivity extends Fragment {
     }
 
     private void buttonOpenDialogClicked()  {
-        SkillTestDialog.FullNameListener listener = new SkillTestDialog.FullNameListener() {
-            @Override
-            public void fullNameEntered(String fullName) {
-                Toast.makeText(view.getContext(), "Full name: " + fullName, Toast.LENGTH_LONG).show();
-            }
-        };
-        final SkillTestDialog dialog = new SkillTestDialog(view.getContext(), listener);
+        final SkillTestDialog dialog = new SkillTestDialog(view.getContext());
 
         dialog.show();
     }

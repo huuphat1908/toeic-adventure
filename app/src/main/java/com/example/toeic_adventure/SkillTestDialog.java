@@ -7,27 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 public class SkillTestDialog extends Dialog {
-
-    interface FullNameListener {
-        public void fullNameEntered(String fullName);
-    }
-
     public Context context;
 
-    private EditText editTextFullName;
-    private Button buttonOK;
-    private Button buttonCancel;
+    private Button buttonEasy;
+    private Button buttonMedium;
+    private Button buttonHard;
 
-    private SkillTestDialog.FullNameListener listener;
-
-    public SkillTestDialog(Context context, SkillTestDialog.FullNameListener listener) {
+    public SkillTestDialog(Context context) {
         super(context);
         this.context = context;
-        this.listener = listener;
     }
 
     @Override
@@ -36,41 +27,45 @@ public class SkillTestDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.skill_test_dialog);
 
-        this.editTextFullName = (EditText) findViewById(R.id.editText_fullName);
-        this.buttonOK = (Button) findViewById(R.id.button_ok);
-        this.buttonCancel  = (Button) findViewById(R.id.button_cancel);
+        this.buttonEasy = (Button) findViewById(R.id.button_easy);
+        this.buttonMedium  = (Button) findViewById(R.id.button_medium);
+        this.buttonHard = (Button) findViewById(R.id.button_hard);
 
-        this.buttonOK .setOnClickListener(new View.OnClickListener() {
+        this.buttonEasy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buttonOKClick();
+                buttonLevelClick("Easy");
             }
         });
-        this.buttonCancel.setOnClickListener(new View.OnClickListener() {
+        this.buttonMedium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buttonCancelClick();
+                buttonLevelClick("Medium");
+            }
+        });
+        this.buttonHard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buttonLevelClick("Hard");
             }
         });
     }
 
-    // User click "OK" button.
-    private void buttonOKClick()  {
-        String fullName = this.editTextFullName.getText().toString();
+    private void buttonLevelClick(String level)  {
 
-        if(fullName== null || fullName.isEmpty())  {
-            Toast.makeText(this.context, "Please enter your name", Toast.LENGTH_LONG).show();
-            return;
+        switch (level) {
+            case "Easy":
+            case "Medium":
+            case "Hard": {
+                Toast.makeText(this.context, level, Toast.LENGTH_LONG).show();
+                break;
+            }
+            default:
+                Toast.makeText(this.context, "Chicken", Toast.LENGTH_LONG).show();
+                break;
         }
         this.dismiss(); // Close Dialog
 
-        if(this.listener!= null)  {
-            this.listener.fullNameEntered(fullName);
-        }
     }
 
-    // User click "Cancel" button.
-    private void buttonCancelClick()  {
-        this.dismiss();
-    }
 }
