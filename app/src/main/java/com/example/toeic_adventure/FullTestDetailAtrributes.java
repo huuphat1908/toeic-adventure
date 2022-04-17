@@ -1,12 +1,12 @@
 package com.example.toeic_adventure;
 
-public class MiniTestAttributes {
+public class FullTestDetailAtrributes {
     private String nameMiniTest;
 
     // Image name (Without extension)
     private String stateMiniTest;
 
-    public MiniTestAttributes(String nameMiniTest, String stateMiniTest) {
+    public FullTestDetailAtrributes(String nameMiniTest, String stateMiniTest) {
         this.nameMiniTest= nameMiniTest;
         this.stateMiniTest= stateMiniTest;
     }

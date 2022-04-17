@@ -34,7 +34,7 @@
             android:text="Tạo bài thi thử ngẫu nhiên" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:layout_marginBottom="5dp"
@@ -44,7 +44,7 @@
                 android:id="@+id/imageView"
                 android:layout_marginRight="5dp"
                 android:layout_width="38px"
-                android:layout_height="38px"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/question_icon" />
 
@@ -57,6 +57,13 @@
                 android:gravity="center_vertical"
                 android:layout_weight="1"
                 android:text="Bạn chưa học bài này" />
+            <ImageView
+                android:id="@+id/image_download_full_test_detail"
+                android:layout_marginRight="5dp"
+                android:layout_width="38px"
+                android:layout_height="38px"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/icon_dowload_full_test_detail" />
 
         </LinearLayout>
     </LinearLayout>

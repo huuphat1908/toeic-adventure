@@ -78,8 +78,8 @@ public class MiniTest extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 Object o = listView.getItemAtPosition(position);
-                Country country = (Country) o;
-                Toast.makeText(getContext(), "Selected :" + " " + country, Toast.LENGTH_LONG).show();
+                MiniTestAttributes niniTestAttributes = (MiniTestAttributes) o;
+                Toast.makeText(getContext(), "Selected :" + " " + niniTestAttributes, Toast.LENGTH_LONG).show();
             }
         });
         return rootView;
@@ -87,19 +87,19 @@ public class MiniTest extends Fragment {
 
     private List<MiniTestAttributes> getListData() {
         List<MiniTestAttributes> list = new ArrayList<MiniTestAttributes>();
-        MiniTestAttributes exam1 = new MiniTestAttributes("Tạo bài thi ngẫu nhiên", "Bạn chưa học bài này", 98000000);
-        MiniTestAttributes exam2 = new MiniTestAttributes("Mini Test 1", "Bạn chưa học bài này", 320000000);
-        MiniTestAttributes exam3 = new MiniTestAttributes("Mini Test 2", "Bạn chưa học bài này", 142000000);
-        MiniTestAttributes exam4 = new MiniTestAttributes("Mini Test 3", "Bạn chưa học bài này", 142000000);
-        MiniTestAttributes exam5 = new MiniTestAttributes("Mini Test 4", "Bạn chưa học bài này", 142000000);
-        MiniTestAttributes exam6 = new MiniTestAttributes("Mini Test 5", "Bạn chưa học bài này", 142000000);
-        MiniTestAttributes exam7 = new MiniTestAttributes("Mini Test 6", "Bạn chưa học bài này", 142000000);
-        MiniTestAttributes exam8 = new MiniTestAttributes("Mini Test 7", "Bạn chưa học bài này", 142000000);
-        MiniTestAttributes exam9 = new MiniTestAttributes("Mini Test 8", "Bạn chưa học bài này", 142000000);
-        MiniTestAttributes exam10 = new MiniTestAttributes("Mini Test 9", "Bạn chưa học bài này", 142000000);
-        MiniTestAttributes exam11 = new MiniTestAttributes("Mini Test 10", "Bạn chưa học bài này", 142000000);
-        MiniTestAttributes exam12 = new MiniTestAttributes("Mini Test 11", "Bạn chưa học bài này", 142000000);
-        MiniTestAttributes exam13 = new MiniTestAttributes("Mini Test 12", "Bạn chưa học bài này", 142000000);
+        MiniTestAttributes exam1 = new MiniTestAttributes("Tạo bài thi ngẫu nhiên", "Bạn chưa học bài này");
+        MiniTestAttributes exam2 = new MiniTestAttributes("Mini Test 1", "Bạn chưa học bài này");
+        MiniTestAttributes exam3 = new MiniTestAttributes("Mini Test 2", "Bạn chưa học bài này");
+        MiniTestAttributes exam4 = new MiniTestAttributes("Mini Test 3", "Bạn chưa học bài này");
+        MiniTestAttributes exam5 = new MiniTestAttributes("Mini Test 4", "Bạn chưa học bài này");
+        MiniTestAttributes exam6 = new MiniTestAttributes("Mini Test 5", "Bạn chưa học bài này");
+        MiniTestAttributes exam7 = new MiniTestAttributes("Mini Test 6", "Bạn chưa học bài này");
+        MiniTestAttributes exam8 = new MiniTestAttributes("Mini Test 7", "Bạn chưa học bài này");
+        MiniTestAttributes exam9 = new MiniTestAttributes("Mini Test 8", "Bạn chưa học bài này");
+        MiniTestAttributes exam10 = new MiniTestAttributes("Mini Test 9", "Bạn chưa học bài này");
+        MiniTestAttributes exam11 = new MiniTestAttributes("Mini Test 10", "Bạn chưa học bài này");
+        MiniTestAttributes exam12 = new MiniTestAttributes("Mini Test 11", "Bạn chưa học bài này");
+        MiniTestAttributes exam13 = new MiniTestAttributes("Mini Test 12", "Bạn chưa học bài này");
 
 
         list.add(exam1);
