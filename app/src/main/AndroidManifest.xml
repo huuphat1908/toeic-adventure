@@ -20,7 +20,6 @@
             android:resource="@xml/shape" />
 
         <activity
-            android:name=".TestProgressActivity"
             android:name=".SkillTestListActivity"
             android:exported="false" />
         <activity
