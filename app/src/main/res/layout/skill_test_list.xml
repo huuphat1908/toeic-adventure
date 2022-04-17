@@ -20,6 +20,9 @@
         android:id="@+id/lvSkillTestList"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="150dp"
         android:divider="@android:color/transparent"
-        android:dividerHeight="10sp"/>
+        android:dividerHeight="10sp"
+        android:clipToPadding="false"/>
 </LinearLayout>
