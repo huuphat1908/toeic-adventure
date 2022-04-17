@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.toeic_adventure.model.SkillTest;
+
 import java.util.List;
 
 public class SkillTestAdapter extends BaseAdapter {

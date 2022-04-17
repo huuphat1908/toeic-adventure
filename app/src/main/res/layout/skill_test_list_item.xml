@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp"
+    android:weightSum="100"
+    android:background="@drawable/sharp_cardview_bg">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvName"
+        android:text="Tệp câu hỏi số 1" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivIcon"
+            android:src="@drawable/question" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvStatus"
+            android:text="Bạn chưa học bài này"
+            android:layout_marginStart="5dp"/>
+    </LinearLayout>
+</LinearLayout>

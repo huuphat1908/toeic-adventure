@@ -6,21 +6,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.toeic_adventure.model.SkillTest;
+
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SkillTestActivity#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SkillTestActivity extends Fragment {
     ListView lvSkillTest;
     View view;
     ArrayList<SkillTest> arraySkillTest;
+    Button btnLevel;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -90,15 +90,6 @@ public class SkillTestActivity extends Fragment {
         return array;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SkillTest.
-     */
-    // TODO: Rename and change types and number of parameters
     public static SkillTestActivity newInstance(String param1, String param2) {
         SkillTestActivity fragment = new SkillTestActivity();
         Bundle args = new Bundle();
@@ -126,6 +117,7 @@ public class SkillTestActivity extends Fragment {
         // Init adapter and set it to Skill Test List View
         arraySkillTest = initArraySkillTest();
         lvSkillTest = (ListView) view.findViewById(R.id.listViewSkillTest);
+        btnLevel = (Button) view.findViewById(R.id.btnLevel);
         lvSkillTest.setDivider(null);
         SkillTestAdapter adapter = new SkillTestAdapter(
                 getContext(),
@@ -139,12 +131,28 @@ public class SkillTestActivity extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 SkillTest item = (SkillTest) parent.getItemAtPosition(position);
-                Intent intent = new Intent(v.getContext(), TestProgressActivity.class);
+                Intent intent = new Intent(v.getContext(), SkillTestListActivity.class);
                 intent.putExtra("title", item.Name);
                 startActivity(intent);
             }
         });
-
+        btnLevel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                buttonOpenDialogClicked();
+            }
+        });
         return view;
+    }
+
+    private void buttonOpenDialogClicked()  {
+        SkillTestDialog.FullNameListener listener = new SkillTestDialog.FullNameListener() {
+            @Override
+            public void fullNameEntered(String fullName) {
+                Toast.makeText(view.getContext(), "Full name: " + fullName, Toast.LENGTH_LONG).show();
+            }
+        };
+        final SkillTestDialog dialog = new SkillTestDialog(view.getContext(), listener);
+
+        dialog.show();
     }
 }

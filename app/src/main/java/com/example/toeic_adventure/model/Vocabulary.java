@@ -1,4 +1,4 @@
-package com.example.toeic_adventure;
+package com.example.toeic_adventure.model;
 
 public class Vocabulary {
     public Integer No = 0;

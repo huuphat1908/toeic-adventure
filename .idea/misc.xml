@@ -31,12 +31,6 @@
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/sample_skill_test_item_view.xml" value="0.25" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/sharp_cardview_bg.xml" value="0.21574074074074073" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/skill_test_item.xml" value="0.1" />
-        <entry key="..\:/Users/PC/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/fragment_vocabulary.xml" value="0.1" />
-        <entry key="..\:/Users/PC/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/list_item_layout.xml" value="0.12360688956433637" />
-        <entry key="..\:/Users/PC/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/skill_test_item.xml" value="0.15443840579710144" />
-        <entry key="..\:/Users/PC/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/vocabulary_item.xml" value="0.264" />
-        <entry key="..\:/Users/PC/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/vocalbylar_item.xml" value="0.15443840579710144" />
-        <entry key="..\:/Users/PC/AndroidStudioProjects/toeic-adventure/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2495" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.153" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/drawable/ic_launcher_background.xml" value="0.153" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/drawable/ic_menu_full_test.xml" value="0.153" />
@@ -45,16 +39,24 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/drawable/ic_menu_skill_test.xml" value="0.153" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/drawable/ic_menu_vocabulary.xml" value="0.153" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/drawable/sharp_cardview_bg.xml" value="0.17" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/activity_full_test_detail.xml" value="0.25" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/fragment_full_test.xml" value="0.18614130434782608" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/fragment_grammar.xml" value="0.18614130434782608" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/fragment_mini_test.xml" value="0.33" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/fragment_skill_test.xml" value="0.25" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/fragment_vocabulary.xml" value="0.18614130434782608" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/full_test_detail_item.xml" value="0.11730072463768115" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/list_item_layout.xml" value="0.25" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/main_activity.xml" value="0.18614130434782608" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/mini_test_item.xml" value="0.5" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/skill_test_item.xml" value="0.2682291666666667" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/toeic-adventure/app/src/main/res/menu/bottom_menu.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/fragment_vocabulary.xml" value="0.1" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/list_item_layout.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/skill_test_item.xml" value="0.15443840579710144" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/vocabulary_item.xml" value="0.264" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/vocalbylar_item.xml" value="0.15443840579710144" />
+        <entry key="..\:/Users/PC/AndroidStudioProjects/toeic-adventure/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2495" />
       </map>
     </option>
   </component>

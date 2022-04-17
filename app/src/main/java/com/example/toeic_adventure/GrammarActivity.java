@@ -1,9 +1,6 @@
 package com.example.toeic_adventure;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +8,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
+import com.example.toeic_adventure.model.Country;
+
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Grammar#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class Grammar extends Fragment {
+public class GrammarActivity extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,21 +26,12 @@ public class Grammar extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Grammar() {
+    public GrammarActivity() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Grammar.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Grammar newInstance(String param1, String param2) {
-        Grammar fragment = new Grammar();
+    public static GrammarActivity newInstance(String param1, String param2) {
+        GrammarActivity fragment = new GrammarActivity();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
