@@ -1,4 +1,5 @@
-package com.example.toeic_adventure;
+package com.example.toeic_adventure.adapter;
+
 
 import android.content.Context;
 import android.util.Log;
@@ -8,14 +9,18 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.toeic_adventure.MiniTestAttributes;
+import com.example.toeic_adventure.R;
+
 import java.util.List;
 
-public class FullTestDetailAdapter  extends BaseAdapter {
-    private List<FullTestDetailAtrributes> listData;
+public class MiniTestAdapter extends BaseAdapter {
+
+    private List<MiniTestAttributes> listData;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public FullTestDetailAdapter(Context aContext,  List<FullTestDetailAtrributes> listData) {
+    public MiniTestAdapter(Context aContext,  List<MiniTestAttributes> listData) {
         this.context = aContext;
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
@@ -37,22 +42,22 @@ public class FullTestDetailAdapter  extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        FullTestDetailAdapter.ViewHolder holder;
+        MiniTestAdapter.ViewHolder holder;
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.full_test_detail_item, null);
-            holder = new FullTestDetailAdapter.ViewHolder();
+            convertView = layoutInflater.inflate(R.layout.mini_test_item, null);
+            holder = new MiniTestAdapter.ViewHolder();
             holder.nameMiniTestView = (TextView) convertView.findViewById(R.id.textView_NameTest);
             holder.stateMiniTestView = (TextView) convertView.findViewById(R.id.textView_StateText);
             convertView.setTag(holder);
         } else {
-            holder = (FullTestDetailAdapter.ViewHolder) convertView.getTag();
+            holder = (MiniTestAdapter.ViewHolder) convertView.getTag();
         }
 
-        FullTestDetailAtrributes FullTestDetailAtrributes = this.listData.get(position);
-        holder.nameMiniTestView.setText(FullTestDetailAtrributes.getNameMiniTest());
-        holder.stateMiniTestView.setText(FullTestDetailAtrributes.getStateMiniTest());
+        MiniTestAttributes miniTestAttributes = this.listData.get(position);
+        holder.nameMiniTestView.setText(miniTestAttributes.getNameMiniTest());
+        holder.stateMiniTestView.setText(miniTestAttributes.getStateMiniTest());
 
-//        int imageId = this.getMipmapResIdByName(FullTestDetailAtrributes.getStateMiniTest());
+//        int imageId = this.getMipmapResIdByName(MiniTestAttributes.getStateMiniTest());
 //
 //        holder.nameMiniTestView.setImageResource(imageId);
 

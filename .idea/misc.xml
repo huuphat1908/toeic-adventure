@@ -59,6 +59,11 @@
         <entry key="..\:/Users/PC/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/vocabulary_item.xml" value="0.264" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/vocalbylar_item.xml" value="0.15443840579710144" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/toeic-adventure/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2495" />
+        <entry key="app/src/main/res/drawable/ic_menu_vocabulary.xml" value="0.274" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1890625" />
+        <entry key="app/src/main/res/layout/activity_login2.xml" value="0.31476449275362317" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.186" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.186" />
       </map>
     </option>
   </component>

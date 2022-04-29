@@ -1,4 +1,4 @@
-package com.example.toeic_adventure;
+package com.example.toeic_adventure.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.toeic_adventure.R;
+import com.example.toeic_adventure.adapter.SkillTestListAdapter;
 import com.example.toeic_adventure.model.SkillTestItem;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.toeic_adventure;
+package com.example.toeic_adventure.activity;
 
 import android.os.Bundle;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.toeic_adventure.R;
+import com.example.toeic_adventure.adapter.VocabularyAdapter;
 import com.example.toeic_adventure.model.Vocabulary;
 
 import java.util.ArrayList;

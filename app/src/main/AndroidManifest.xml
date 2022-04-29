@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Toeicadventure">
         <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".FullTestDetail"
             android:exported="false" />
 
@@ -20,12 +23,12 @@
             android:resource="@xml/shape" />
 
         <activity
-            android:name=".SkillTestListActivity"
+            android:name=".activity.SkillTestListActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true"
-            android:label="@string/title_activity_skill_test">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

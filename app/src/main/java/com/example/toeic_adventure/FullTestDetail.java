@@ -1,7 +1,5 @@
 package com.example.toeic_adventure;
 
-import static java.security.AccessController.getContext;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -14,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.Toolbar;
+
+import com.example.toeic_adventure.adapter.MiniTestAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

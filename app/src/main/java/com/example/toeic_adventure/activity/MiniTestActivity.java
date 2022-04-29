@@ -1,4 +1,4 @@
-package com.example.toeic_adventure;
+package com.example.toeic_adventure.activity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.toeic_adventure.MiniTestAttributes;
+import com.example.toeic_adventure.R;
+import com.example.toeic_adventure.adapter.MiniTestAdapter;
 
 public class MiniTestActivity extends Fragment {
 

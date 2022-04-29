@@ -1,4 +1,4 @@
-package com.example.toeic_adventure;
+package com.example.toeic_adventure.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.toeic_adventure.R;
+import com.example.toeic_adventure.TestType;
 import com.example.toeic_adventure.model.SkillTest;
 
 import java.util.List;

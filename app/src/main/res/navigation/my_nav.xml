@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/skillTest"
-        android:name="com.example.toeic_adventure.SkillTestActivity"
+        android:name="com.example.toeic_adventure.activity.SkillTestActivity"
         android:label="fragment_skill_test"
         tools:layout="@layout/fragment_skill_test" />
     <fragment
         android:id="@+id/fullTest"
-        android:name="com.example.toeic_adventure.FullTestActivity"
+        android:name="com.example.toeic_adventure.activity.FullTestActivity"
         android:label="fragment_full_test"
         tools:layout="@layout/fragment_full_test" />
     <fragment
         android:id="@+id/miniTest"
-        android:name="com.example.toeic_adventure.MiniTestActivity"
+        android:name="com.example.toeic_adventure.activity.MiniTestActivity"
         android:label="fragment_mini_test"
         tools:layout="@layout/fragment_mini_test" />
     <fragment
         android:id="@+id/vocabulary"
-        android:name="com.example.toeic_adventure.VocabularyActivity"
+        android:name="com.example.toeic_adventure.activity.VocabularyActivity"
         android:label="fragment_vocabulary"
         tools:layout="@layout/fragment_vocabulary" />
     <fragment
         android:id="@+id/grammar"
-        android:name="com.example.toeic_adventure.GrammarActivity"
+        android:name="com.example.toeic_adventure.activity.GrammarActivity"
         android:label="fragment_grammar"
         tools:layout="@layout/fragment_grammar" />
 </navigation>

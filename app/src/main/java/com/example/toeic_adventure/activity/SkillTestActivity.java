@@ -1,4 +1,4 @@
-package com.example.toeic_adventure;
+package com.example.toeic_adventure.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.toeic_adventure.R;
+import com.example.toeic_adventure.SkillTestDialog;
+import com.example.toeic_adventure.TestType;
+import com.example.toeic_adventure.adapter.SkillTestAdapter;
 import com.example.toeic_adventure.model.SkillTest;
 
 import java.util.ArrayList;

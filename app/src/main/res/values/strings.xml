@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">toeic-adventure</string>
+    <string name="app_name">Toeic Adventure</string>
     <string name="title_activity_skill_test">Skill Test</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
