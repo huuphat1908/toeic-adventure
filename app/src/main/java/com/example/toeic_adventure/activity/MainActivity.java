@@ -10,7 +10,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.toeic_adventure.LoginActivity;
 import com.example.toeic_adventure.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

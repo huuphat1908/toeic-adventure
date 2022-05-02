@@ -1,8 +1,10 @@
-package com.example.toeic_adventure;
+package com.example.toeic_adventure.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.toeic_adventure.R;
 
 public class LoginActivity extends AppCompatActivity {
 

@@ -5,29 +5,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/blue"
     android:padding="10dp"
-    tools:context=".LoginActivity">
+    tools:context=".activity.LoginActivity">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Toeic Adventure"
-        android:textSize="40dp" />
+        android:textSize="@dimen/font_super_big"
+        android:textColor="@color/pink"
+        android:layout_marginBottom="40dp"
+        android:textStyle="bold"/>
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Username..."
-        android:background="@color/cardview_background"/>
+        android:layout_height="55dp"
+        android:id="@+id/etUsername"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/input"
+        android:textColor="@color/blue"
+        android:padding="17dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="@dimen/padding_left"
+        android:layout_marginRight="@dimen/padding_left"/>
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password..."
-        android:background="@color/cardview_background"/>
+        android:layout_height="55dp"
+        android:id="@+id/etPassword"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:background="@drawable/input"
+        android:textColor="@color/blue"
+        android:padding="17dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="@dimen/padding_left"
+        android:layout_marginRight="@dimen/padding_left"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"/>
-    <Button
+        android:id="@+id/tvForgotPassword"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        android:text="Forgot password?"/>
+    <android.widget.Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/btnLogin"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="@dimen/padding_left"
+        android:layout_marginRight="@dimen/padding_left"
+        android:textSize="@dimen/font_small"
+        android:background="@drawable/button"
+        android:textColor="@color/white"
         android:text="Login" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvRegister"
+        android:text="Create an account"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_small"/>
 </LinearLayout>

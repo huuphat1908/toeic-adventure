@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Toeicadventure">
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".FullTestDetail"
