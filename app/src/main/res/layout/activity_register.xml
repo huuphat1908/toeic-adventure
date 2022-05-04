@@ -8,12 +8,12 @@
     android:gravity="center"
     android:background="@color/blue"
     android:padding="10dp"
-    tools:context=".activity.LoginActivity">
+    tools:context=".activity.RegisterActivity">
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_launcher_round"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,24 +49,31 @@
         android:inputType="textPassword"
         android:background="@drawable/input"
         android:textColor="@color/blue"
-        android:longClickable="false"
-        android:drawableRight="@drawable/et_closing_eye_icon"
         android:paddingLeft="17dp"
         android:paddingRight="17dp"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="@dimen/padding_left"
         android:layout_marginRight="@dimen/padding_left"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvForgotPassword"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        android:text="Forgot password?"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:id="@+id/etPasswordConfirmation"
+        android:hint="Confirm password..."
+        android:textSize="@dimen/font_small"
+        android:textColorHint="@color/blue"
+        android:textCursorDrawable="@null"
+        android:inputType="textPassword"
+        android:background="@drawable/input"
+        android:textColor="@color/blue"
+        android:paddingLeft="17dp"
+        android:paddingRight="17dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="@dimen/padding_left"
+        android:layout_marginRight="@dimen/padding_left"/>
     <android.widget.Button
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnRegister"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="@dimen/padding_left"
@@ -75,12 +82,12 @@
         android:background="@drawable/button"
         android:textColor="@color/white"
         android:textAllCaps="false"
-        android:text="Login" />
+        android:text="Register" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvRegister"
-        android:text="Create an account"
+        android:id="@+id/tvLogin"
+        android:text="Back to login"
         android:textColor="@color/white"
         android:textSize="@dimen/font_med"/>
 </LinearLayout>
