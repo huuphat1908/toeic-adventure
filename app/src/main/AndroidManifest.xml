@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Toeicadventure">
         <activity
+            android:name=".activity.RegisterAuthenticationActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.RegisterActivity"
             android:exported="false" />
         <activity
