@@ -1,9 +1,12 @@
 package com.example.toeic_adventure.activity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
@@ -16,6 +19,8 @@ public class ProfileActivity extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    private Button btnLogout;
 
     public ProfileActivity() {
         // Required empty public constructor
@@ -43,7 +48,19 @@ public class ProfileActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_mini_test, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        btnLogout = (Button) rootView.findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = MainActivity.localStorage.edit();
+                editor.clear();
+                editor.commit();
+                Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(loginIntent);
+            }
+        });
 
         return rootView;
     }

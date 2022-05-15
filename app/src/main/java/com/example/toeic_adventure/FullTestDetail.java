@@ -8,13 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.Toolbar;
-
-import java.util.ArrayList;
-import java.util.List;
 
 //public class FullTestDetail extends AppCompatActivity {
 
@@ -49,7 +43,7 @@ public class FullTestDetail extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             // Inflate the layout for this fragment
-            View rootView = inflater.inflate(R.layout.fragment_mini_test, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
             return rootView;
         }
     }

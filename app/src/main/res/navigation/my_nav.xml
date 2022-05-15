@@ -19,7 +19,7 @@
         android:id="@+id/miniTest"
         android:name="com.example.toeic_adventure.activity.ProfileActivity"
         android:label="fragment_mini_test"
-        tools:layout="@layout/fragment_mini_test" />
+        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/vocabulary"
         android:name="com.example.toeic_adventure.activity.VocabularyActivity"
