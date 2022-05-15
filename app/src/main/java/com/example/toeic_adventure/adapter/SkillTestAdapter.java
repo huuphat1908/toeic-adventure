@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.toeic_adventure.R;
-import com.example.toeic_adventure.TestType;
 import com.example.toeic_adventure.model.SkillTest;
 
 import java.util.List;
@@ -58,7 +57,7 @@ public class SkillTestAdapter extends BaseAdapter {
 
         String type = SkillTestList.get(i).Type.toString();
         TextView skillType = (TextView) view.findViewById(R.id.textViewSkillType);
-        if (TestType.LISTENING.toString().equals(type)) {
+        if (type.equals(type)) {
             skillType.setText("Bài nghe");
         } else {
             skillType.setText("Bài đọc");

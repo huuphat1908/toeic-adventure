@@ -1,5 +1,6 @@
 package com.example.toeic_adventure.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,12 +9,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.toeic_adventure.R;
-import com.example.toeic_adventure.SkillTestDialog;
-import com.example.toeic_adventure.TestType;
 import com.example.toeic_adventure.adapter.SkillTestAdapter;
 import com.example.toeic_adventure.model.SkillTest;
 
@@ -24,6 +24,7 @@ public class SkillTestActivity extends Fragment {
     View view;
     ArrayList<SkillTest> arraySkillTest;
     Button btnLevel;
+    private String level = "EASY";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,49 +44,49 @@ public class SkillTestActivity extends Fragment {
         array.add(new SkillTest(
                 "Phần 1: Hình ảnh",
                 "Tương ứng với mỗi bức ảnh, bạn sẽ được nghe 04 câu mô tả về nó. Nhiệm vụ của bạn là phải chọn câu mô tả đúng nhất cho bức ảnh",
-                TestType.LISTENING,
+                "Bài nghe",
                 75,
                 R.drawable.part1_thumbnail
         ));
         array.add(new SkillTest(
                 "Phần 2: Hỏi đáp",
                 "Bạn sẽ nghe một câu hỏi (hoặc câu nói) và 03 lựa chọn trả lời. Nhiệm vụ của bạn là phải chọn ra câu trả lời đúng nhất trong ba đáp án A-B-C",
-                TestType.LISTENING,
+                "Bài nghe",
                 43,
                 R.drawable.part2_thumbnail
         ));
         array.add(new SkillTest(
                 "Phần 3: Hội thoại ngắn",
                 "Bạn sẽ nghe các đoạn hội thoại ngắn. Mỗi đoạn có 03 câu hỏi. Nhiệm vụ của bạn là chọn ra câu trả lời đúng nhất trong 04 đáp án của đề thi",
-                TestType.LISTENING,
+                "Bài nghe",
                 53,
                 R.drawable.part3_thumbnail
         ));
         array.add(new SkillTest(
                 "Phần 4: Đoạn thông tin ngắn",
                 "Bạn sẽ nghe các đoạn thông tin ngắn. Mỗi đoạn có 03 câu hỏi. Nhiệm vụ của bạn là chọn ra câu trả lời đúng nhất trong số 04 đáp án được cung câos",
-                TestType.LISTENING,
+                "Bài nghe",
                 36,
                 R.drawable.part4_thumbnail
         ));
         array.add(new SkillTest(
                 "Phần 5: Hoàn thành câu",
                 "Bạn sẽ cần phải chọn đáp án đúng nhất trong 04 đáp án A-B-C-D để hoàn thành câu trong đề bài",
-                TestType.READING,
+                "Bài đọc",
                 123,
                 R.drawable.part5_thumbnail
         ));
         array.add(new SkillTest(
                 "Phần 6: Hoàn thành đoạn văn",
                 "Mỗi đoạn văn có 03 chỗ trống. Bạn phải điền từ thích hượp còn thiếu vào mỗi chỗ trống trong đoạn văn đó",
-                TestType.READING,
+                "Bài đọc",
                 16,
                 R.drawable.part6_thumbnail
         ));
         array.add(new SkillTest(
                 "Phần 7: Hoàn thành đoạn văn",
                 "Đọc đoạn văn và trả lời câu hỏi",
-                TestType.READING,
+                "Bài đọc",
                 53,
                 R.drawable.part7_thumbnail
         ));
@@ -141,15 +142,37 @@ public class SkillTestActivity extends Fragment {
         });
         btnLevel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                buttonOpenDialogClicked();
+                showLevelDialog();
             }
         });
         return view;
     }
 
-    private void buttonOpenDialogClicked()  {
-        final SkillTestDialog dialog = new SkillTestDialog(view.getContext());
-
-        dialog.show();
+    private void showLevelDialog()  {
+        Dialog levelDialog = new Dialog(getContext());
+        levelDialog.setContentView(R.layout.skill_test_dialog);
+        Button btnEasy = (Button) levelDialog.findViewById(R.id.btnEasy);
+        Button btnMedium = (Button) levelDialog.findViewById(R.id.btnMedium);
+        Button btnHard = (Button) levelDialog.findViewById(R.id.btnHard);
+        btnEasy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                level = "EASY";
+            }
+        });
+        btnMedium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                level = "MEDIUM";
+            }
+        });
+        btnHard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                level = "HARD";
+            }
+        });
+        levelDialog.setCanceledOnTouchOutside(true);
+        levelDialog.show();
     }
 }
