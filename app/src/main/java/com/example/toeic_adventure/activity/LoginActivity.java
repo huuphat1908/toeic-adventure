@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -19,14 +18,12 @@ import android.widget.Toast;
 
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.api.ApiService;
-import com.example.toeic_adventure.model.User;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.logging.LoggingMXBean;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,6 +32,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     private TextView tvRegister;
+    private TextView tvForgotPassword;
     private Button btnLogin;
     private EditText etEmail;
     private EditText etPassword;
@@ -120,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(LoginActivity.this, message + ". Redirecting to email authentication screen", Toast.LENGTH_SHORT).show();
                                         Intent registerAuthenticationIntent = new Intent(LoginActivity.this, RegisterAuthenticationActivity.class);
                                         registerAuthenticationIntent.putExtra("email", email);
+                                        registerAuthenticationIntent.putExtra("redirectFrom", "Login");
                                         Handler mHandler = new Handler();
                                         mHandler.postDelayed(new Runnable() {
                                             @Override
@@ -142,20 +141,22 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent forgotPasswordIntent =  new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(forgotPasswordIntent);
+            }
+        });
     }
 
     private void initView() {
         tvRegister = (TextView) findViewById(R.id.tvRegister);
+        tvForgotPassword = (TextView) findViewById(R.id.tvForgotPassword);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
-//        alertDialog = new AlertDialog.Builder(LoginActivity.this);
-//        alertDialog.setTitle("Login failed");
-//        alertDialog.setIcon(R.mipmap.ic_launcher);
-//        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) { }
-//        });
-//        alertDialog.setCancelable(true);
     }
+
 }

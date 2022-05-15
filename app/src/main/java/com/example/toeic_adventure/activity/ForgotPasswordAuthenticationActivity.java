@@ -1,15 +1,12 @@
 package com.example.toeic_adventure.activity;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,13 +14,12 @@ import android.widget.Toast;
 
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.api.ApiService;
-import com.example.toeic_adventure.model.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterAuthenticationActivity extends AppCompatActivity {
+public class ForgotPasswordAuthenticationActivity extends AppCompatActivity {
 
     private EditText inputCode1, inputCode2, inputCode3, inputCode4, inputCode5, inputCode6;
     private Button btnVerify;
@@ -31,22 +27,14 @@ public class RegisterAuthenticationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_authentication);
+        setContentView(R.layout.activity_forgot_password_authentication);
 
         initView();
         setUpCodeInput();
 
         Intent intent = getIntent();
         String email = intent.getStringExtra("email");
-        String redirectFrom = intent.getStringExtra("redirectFrom");
-        if (redirectFrom.equals("Login")) {
-            ApiService.apiService.sendVerificationEmail(email).enqueue(new Callback<Boolean>() {
-                @Override
-                public void onResponse(Call<Boolean> call, Response<Boolean> response) { }
-                @Override
-                public void onFailure(Call<Boolean> call, Throwable t) { }
-            });
-        }
+        String newPassword = intent.getStringExtra("newPassword");
 
         btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,12 +46,12 @@ public class RegisterAuthenticationActivity extends AppCompatActivity {
                         + inputCode5.getText().toString()
                         + inputCode6.getText().toString();
 
-                ApiService.apiService.verifyEmail(email, code).enqueue(new Callback<Boolean>() {
+                ApiService.apiService.resetPassword(email, code, newPassword).enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                         if (response.isSuccessful()) {
-                            Toast.makeText(RegisterAuthenticationActivity.this, "Verify successfully", Toast.LENGTH_SHORT).show();
-                            Intent loginActivityIntent = new Intent(RegisterAuthenticationActivity.this, LoginActivity.class);
+                            Toast.makeText(ForgotPasswordAuthenticationActivity.this, "Verify successfully", Toast.LENGTH_SHORT).show();
+                            Intent loginActivityIntent = new Intent(ForgotPasswordAuthenticationActivity.this, LoginActivity.class);
                             Handler mHandler = new Handler();
                             mHandler.postDelayed(new Runnable() {
                                 @Override
@@ -72,16 +60,17 @@ public class RegisterAuthenticationActivity extends AppCompatActivity {
                                 }
                             }, 1000L);
                         } else {
-                           Toast.makeText(RegisterAuthenticationActivity.this, "Unknown error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ForgotPasswordAuthenticationActivity.this, "Unknown error", Toast.LENGTH_SHORT).show();
                         }
                     }
                     @Override
                     public void onFailure(Call<Boolean> call, Throwable t) {
-                        Toast.makeText(RegisterAuthenticationActivity.this, "Unknown error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ForgotPasswordAuthenticationActivity.this, "Unknown error", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
+
     }
 
     private void initView() {
