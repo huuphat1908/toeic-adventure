@@ -1,25 +1,15 @@
 package com.example.toeic_adventure.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.toeic_adventure.FullTestDetail;
 import com.example.toeic_adventure.R;
-import com.example.toeic_adventure.adapter.CustomListAdapter;
-import com.example.toeic_adventure.model.FullTest;
-import com.example.toeic_adventure.model.FullTest;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class FullTestActivity extends Fragment {
+public class ProfileActivity extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -27,12 +17,12 @@ public class FullTestActivity extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public FullTestActivity() {
+    public ProfileActivity() {
         // Required empty public constructor
     }
 
-    public static FullTestActivity newInstance(String param1, String param2) {
-        FullTestActivity fragment = new FullTestActivity();
+    public static ProfileActivity newInstance(String param1, String param2) {
+        ProfileActivity fragment = new ProfileActivity();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -53,7 +43,8 @@ public class FullTestActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_full_test, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_mini_test, container, false);
+
         return rootView;
     }
 }

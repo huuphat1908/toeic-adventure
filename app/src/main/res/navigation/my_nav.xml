@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_full_test" />
     <fragment
         android:id="@+id/miniTest"
-        android:name="com.example.toeic_adventure.activity.MiniTestActivity"
+        android:name="com.example.toeic_adventure.activity.ProfileActivity"
         android:label="fragment_mini_test"
         tools:layout="@layout/fragment_mini_test" />
     <fragment

@@ -27,15 +27,16 @@ public interface ApiService {
             .setDateFormat("yyyy--MM-dd HH:mm:ss")
             .create();
 
-//    OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
-//        @Override
-//        public Response intercept(Chain chain) throws IOException {
-//            Request newRequest  = chain.request().newBuilder()
-//                    .addHeader("Authorization", "Bearer " + MainActivity.getToken())
-//                    .build();
-//            return chain.proceed(newRequest);
-//        }
-//    }).build();
+    SharedPreferences localStorage = MainActivity.localStorage;
+    OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request newRequest  = chain.request().newBuilder()
+                    .addHeader("Authorization", "Bearer " + MainActivity.token)
+                    .build();
+            return chain.proceed(newRequest);
+        }
+    }).build();
 
     ApiService apiService = new Retrofit.Builder()
             .baseUrl("http://20.89.240.175/")

@@ -37,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
     private boolean passwordVisible;
-    public static final String LOCAL_STORAGE = "Local storage";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +44,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         initView();
-        SharedPreferences localStorage = getSharedPreferences(LOCAL_STORAGE, Context.MODE_PRIVATE);
 
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                                 try {
                                     JSONObject resObj = new JSONObject(new Gson().toJson(response.body()));
                                     String token = resObj.getString("token");
-                                    SharedPreferences.Editor editor = localStorage.edit();
+                                    SharedPreferences.Editor editor = MainActivity.localStorage.edit();
                                     editor.putString("token", token);
                                     editor.commit();
                                     Intent mainActivityIntent = new Intent(LoginActivity.this, MainActivity.class);

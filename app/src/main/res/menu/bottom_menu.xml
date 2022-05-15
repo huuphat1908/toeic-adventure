@@ -11,8 +11,8 @@
         android:title="Full Test" />
     <item
         android:id="@+id/miniTest"
-        android:icon="@drawable/ic_menu_mini_test"
-        android:title="Mini Test" />
+        android:icon="@drawable/ic_menu_profile"
+        android:title="Profile" />
     <item
         android:id="@+id/vocabulary"
         android:icon="@drawable/ic_menu_vocabulary"

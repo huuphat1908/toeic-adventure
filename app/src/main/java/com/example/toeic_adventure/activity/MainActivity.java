@@ -16,14 +16,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
     public static final String LOCAL_STORAGE = "Local storage";
+    public static String token;
+    public static SharedPreferences localStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         //check token
-        SharedPreferences localStorage = getSharedPreferences(LOCAL_STORAGE, Context.MODE_PRIVATE);
-        if (localStorage.getString("token", "").isEmpty()) {
+        localStorage = getSharedPreferences(LOCAL_STORAGE, Context.MODE_PRIVATE);
+        token = localStorage.getString("token", "");
+        if (token.isEmpty()) {
             Intent intentLogin = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intentLogin);
         }
