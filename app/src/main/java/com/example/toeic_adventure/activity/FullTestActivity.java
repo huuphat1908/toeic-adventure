@@ -13,7 +13,8 @@ import androidx.fragment.app.Fragment;
 import com.example.toeic_adventure.FullTestDetail;
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.adapter.CustomListAdapter;
-import com.example.toeic_adventure.model.Country;
+import com.example.toeic_adventure.model.FullTest;
+import com.example.toeic_adventure.model.FullTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class FullTestActivity extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_full_test, container, false);
-        List<Country> image_details = getListData();
+        List<FullTest> image_details = getListData();
         final ListView listView = rootView.findViewById(R.id.listView);
         listView.setAdapter(new CustomListAdapter(getContext(), image_details));
 
@@ -63,9 +64,9 @@ public class FullTestActivity extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 Object o = listView.getItemAtPosition(position);
-                Country country = (Country) o;
+                FullTest fullTest = (FullTest) o;
                 Intent intent = new Intent(v.getContext(), FullTestDetail.class);
-                intent.putExtra("nameFullTestDetail", ((Country) o).getCountryName());
+                intent.putExtra("nameFullTestDetail", ((FullTest) o).getFullTestName());
                 startActivity(intent);
 //                Toast.makeText(getContext(), "Selected :" + " " + country, Toast.LENGTH_LONG).show();
             }
@@ -75,16 +76,16 @@ public class FullTestActivity extends Fragment {
         return rootView;
     }
 
-    private List<Country> getListData() {
-        List<Country> list = new ArrayList<Country>();
-        Country exam1 = new Country("Exam 20222", "part1_thumbnail", 98000000);
-        Country exam2 = new Country("Exam 2021", "part2_thumbnail", 320000000);
-        Country exam3 = new Country("Big Step toeic", "part3_thumbnail", 142000000);
-        Country exam4 = new Country("Hacker New Toeic", "part4_thumbnail", 142000000);
-        Country exam5 = new Country("Big Step toeic", "part5_thumbnail", 142000000);
-        Country exam6 = new Country("Hacker New Toeic", "part6_thumbnail", 142000000);
-        Country exam7 = new Country("Big Step toeic", "part7_thumbnail", 142000000);
-        Country exam8 = new Country("Hacker New Toeic", "part1_thumbnail", 142000000);
+    private List<FullTest> getListData() {
+        List<FullTest> list = new ArrayList<FullTest>();
+        FullTest exam1 = new FullTest("Exam 20222", "part1_thumbnail", 98000000);
+        FullTest exam2 = new FullTest("Exam 2021", "part2_thumbnail", 320000000);
+        FullTest exam3 = new FullTest("Big Step toeic", "part3_thumbnail", 142000000);
+        FullTest exam4 = new FullTest("Hacker New Toeic", "part4_thumbnail", 142000000);
+        FullTest exam5 = new FullTest("Big Step toeic", "part5_thumbnail", 142000000);
+        FullTest exam6 = new FullTest("Hacker New Toeic", "part6_thumbnail", 142000000);
+        FullTest exam7 = new FullTest("Big Step toeic", "part7_thumbnail", 142000000);
+        FullTest exam8 = new FullTest("Hacker New Toeic", "part1_thumbnail", 142000000);
 
 
         list.add(exam1);

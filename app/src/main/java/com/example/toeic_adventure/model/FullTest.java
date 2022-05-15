@@ -1,23 +1,23 @@
 package com.example.toeic_adventure.model;
 
-public class Country {
+public class FullTest {
 
-    private String countryName;
+    private String fullTestName;
 
     // Image name (Without extension)
     private String flagName;
 
-    public Country(String countryName, String flagName, int population) {
-        this.countryName= countryName;
+    public FullTest(String fullTestName, String flagName, int population) {
+        this.fullTestName= fullTestName;
         this.flagName= flagName;
     }
 
-    public String getCountryName() {
-        return countryName;
+    public String getFullTestName() {
+        return fullTestName;
     }
 
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
+    public void setFullTestName(String fullTestName) {
+        this.fullTestName = fullTestName;
     }
 
     public String getFlagName() {
@@ -30,6 +30,6 @@ public class Country {
 
     @Override
     public String toString()  {
-        return this.countryName;
+        return this.fullTestName;
     }
 }
