@@ -2,8 +2,10 @@ package com.example.toeic_adventure.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -77,6 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
                 return false;
             }
         });
+
         etPasswordConfirmation.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
@@ -100,22 +103,51 @@ public class RegisterActivity extends AppCompatActivity {
                 return false;
             }
         });
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
-                ApiService.apiService.register(email, password).enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        Toast.makeText(RegisterActivity.this, "Register successfullly!", Toast.LENGTH_SHORT).show();
-                    }
+                String passwordConfirmation = etPasswordConfirmation.getText().toString();
 
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(RegisterActivity.this, "Register failed!", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                if (email.isEmpty()) {
+                    Toast.makeText(RegisterActivity.this, "Email is required", Toast.LENGTH_SHORT).show();
+                } else if (password.isEmpty()) {
+                    Toast.makeText(RegisterActivity.this, "Password is required", Toast.LENGTH_SHORT).show();
+                } else if (passwordConfirmation.isEmpty()) {
+                    Toast.makeText(RegisterActivity.this, "Password confirmation is required", Toast.LENGTH_SHORT).show();
+                } else if (password.length() <= 7) {
+                    Toast.makeText(RegisterActivity.this, "Password must be at least 8 characters", Toast.LENGTH_SHORT).show();
+                } else if (!password.equals(passwordConfirmation)) {
+                    Toast.makeText(RegisterActivity.this, "Password and password confirmation must be the same", Toast.LENGTH_SHORT).show();
+                } else {
+                    ApiService.apiService.register(email, password).enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call, Response<User> response) {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(RegisterActivity.this, "Register successfullly", Toast.LENGTH_SHORT).show();
+                                Intent registerAuthenticationIntent = new Intent(RegisterActivity.this, RegisterAuthenticationActivity.class);
+                                registerAuthenticationIntent.putExtra("email", email);
+                                registerAuthenticationIntent.putExtra("redirectFrom", "Register");
+                                Handler mHandler = new Handler();
+                                mHandler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        startActivity(registerAuthenticationIntent);
+                                    }
+                                }, 1000L);
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "Email is already taken", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
+                            Toast.makeText(RegisterActivity.this, "Register failed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
     }

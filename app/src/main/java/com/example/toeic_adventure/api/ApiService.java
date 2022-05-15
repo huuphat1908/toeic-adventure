@@ -4,10 +4,13 @@ import com.example.toeic_adventure.model.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.json.JSONObject;
+
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 
@@ -23,7 +26,21 @@ public interface ApiService {
             .build()
             .create(ApiService.class);
 
-    @POST("auth/")
-    Call<User> login(@Field("email") String email, @Field("password") String password);
+    @FormUrlEncoded
+    @POST("auth/login")
+    Call<Object> login(@Field("email") String email, @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("auth/register")
     Call<User> register(@Field("email") String email, @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("auth/send-verification-email")
+    Call<Boolean> sendVerificationEmail(@Field("email") String email);
+
+    @FormUrlEncoded
+    @POST("auth/verify-email")
+    Call<Boolean> verifyEmail(@Field("email") String email, @Field("code") String code);
+
+
 }

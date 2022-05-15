@@ -2,8 +2,11 @@ package com.example.toeic_adventure.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -17,6 +20,13 @@ import android.widget.Toast;
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.api.ApiService;
 import com.example.toeic_adventure.model.User;
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.logging.LoggingMXBean;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
     private boolean passwordVisible;
+    public static final String LOCAL_STORAGE = "Local storage";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         initView();
+        SharedPreferences localStorage = getSharedPreferences(LOCAL_STORAGE, Context.MODE_PRIVATE);
+
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intentRegister);
             }
         });
+
         etPassword.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
@@ -66,22 +80,66 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
         });
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
-                ApiService.apiService.login(email, password).enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        Toast.makeText(LoginActivity.this, "Login successfully!", Toast.LENGTH_LONG).show();
-                    }
 
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this, "Login failed!", Toast.LENGTH_LONG).show();
-                    }
-                });
+                if (email.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Email is required", Toast.LENGTH_SHORT).show();
+                } else if (password.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Password is required", Toast.LENGTH_SHORT).show();
+                } else if (password.length() <= 7) {
+                    Toast.makeText(LoginActivity.this, "Password must be at least 8 characters", Toast.LENGTH_SHORT).show();
+                } else {
+                    ApiService.apiService.login(email, password).enqueue(new Callback<Object>() {
+                        @Override
+                        public void onResponse(Call<Object> call, Response<Object> response) {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_LONG).show();
+                                try {
+                                    JSONObject resObj = new JSONObject(new Gson().toJson(response.body()));
+                                    String token = resObj.getString("token");
+                                    SharedPreferences.Editor editor = localStorage.edit();
+                                    editor.putString("token", token);
+                                    editor.commit();
+                                    Intent mainActivityIntent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(mainActivityIntent);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                try {
+                                    JSONObject errorObj = new JSONObject(response.errorBody().string());
+                                    String message = errorObj.getString("message").equals("Email not verified") ? "Email is not validated" : "Wrong email or password";
+                                    if (message.equals("Wrong email or password")) {
+                                        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, message + ". Redirecting to email authentication screen", Toast.LENGTH_SHORT).show();
+                                        Intent registerAuthenticationIntent = new Intent(LoginActivity.this, RegisterAuthenticationActivity.class);
+                                        registerAuthenticationIntent.putExtra("email", email);
+                                        Handler mHandler = new Handler();
+                                        mHandler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                startActivity(registerAuthenticationIntent);
+                                            }
+                                        }, 2000L);
+                                    }
+                                } catch (JSONException | IOException e) {
+                                    Toast.makeText(LoginActivity.this, "Unkown error", Toast.LENGTH_SHORT).show();
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<Object> call, Throwable t) {
+                            Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
             }
         });
     }
@@ -91,5 +149,13 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
+//        alertDialog = new AlertDialog.Builder(LoginActivity.this);
+//        alertDialog.setTitle("Login failed");
+//        alertDialog.setIcon(R.mipmap.ic_launcher);
+//        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) { }
+//        });
+//        alertDialog.setCancelable(true);
     }
 }
