@@ -12,7 +12,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.adapter.CustomListAdapter;
-import com.example.toeic_adventure.model.Country;
+import com.example.toeic_adventure.model.FullTest;
+import com.example.toeic_adventure.model.FullTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class GrammarActivity extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_grammar, container, false);
-        List<Country> image_details = getListData();
+        List<FullTest> image_details = getListData();
         final ListView listView = rootView.findViewById(R.id.listView);
         listView.setAdapter(new CustomListAdapter(getContext(), image_details));
 
@@ -65,23 +66,23 @@ public class GrammarActivity extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 Object o = listView.getItemAtPosition(position);
-                Country country = (Country) o;
-                Toast.makeText(getContext(), "Selected :" + " " + country, Toast.LENGTH_LONG).show();
+                FullTest fullTest = (FullTest) o;
+                Toast.makeText(getContext(), "Selected :" + " " + fullTest, Toast.LENGTH_LONG).show();
             }
         });
         return rootView;
     }
 
-    private List<Country> getListData() {
-        List<Country> list = new ArrayList<Country>();
-        Country exam1 = new Country("Ngữ pháp cơ bản", "part1_thumbnail", 98000000);
-        Country exam2 = new Country("Mẹo thi TOEIC Part 1", "part2_thumbnail", 320000000);
-        Country exam3 = new Country("Mẹo thi TOEIC Part 2", "part3_thumbnail", 142000000);
-        Country exam4 = new Country("Mẹo thi TOEIC Part 3", "part4_thumbnail", 142000000);
-        Country exam5 = new Country("Mẹo thi TOEIC Part 4", "part5_thumbnail", 142000000);
-        Country exam6 = new Country("Mẹo thi TOEIC Part 5", "part6_thumbnail", 142000000);
-        Country exam7 = new Country("Mẹo thi TOEIC Part 6", "part7_thumbnail", 142000000);
-        Country exam8 = new Country("Mẹo thi TOEIC Part 7", "part1_thumbnail", 142000000);
+    private List<FullTest> getListData() {
+        List<FullTest> list = new ArrayList<FullTest>();
+        FullTest exam1 = new FullTest("Ngữ pháp cơ bản", "part1_thumbnail", 98000000);
+        FullTest exam2 = new FullTest("Mẹo thi TOEIC Part 1", "part2_thumbnail", 320000000);
+        FullTest exam3 = new FullTest("Mẹo thi TOEIC Part 2", "part3_thumbnail", 142000000);
+        FullTest exam4 = new FullTest("Mẹo thi TOEIC Part 3", "part4_thumbnail", 142000000);
+        FullTest exam5 = new FullTest("Mẹo thi TOEIC Part 4", "part5_thumbnail", 142000000);
+        FullTest exam6 = new FullTest("Mẹo thi TOEIC Part 5", "part6_thumbnail", 142000000);
+        FullTest exam7 = new FullTest("Mẹo thi TOEIC Part 6", "part7_thumbnail", 142000000);
+        FullTest exam8 = new FullTest("Mẹo thi TOEIC Part 7", "part1_thumbnail", 142000000);
 
 
         list.add(exam1);

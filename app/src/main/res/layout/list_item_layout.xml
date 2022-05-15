@@ -35,7 +35,7 @@
             tools:ignore="VectorDrawableCompat" />
 
         <TextView
-            android:id="@+id/textView_countryName"
+            android:id="@+id/textView_fullTestName"
             android:layout_width="219dp"
             android:layout_height="35dp"
             android:layout_marginStart="8dp"
@@ -43,7 +43,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:paddingLeft="5dp"
-            android:text="Country Name"
+            android:text="Full Test"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="18sp"

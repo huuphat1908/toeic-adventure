@@ -10,17 +10,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.toeic_adventure.R;
-import com.example.toeic_adventure.model.Country;
+import com.example.toeic_adventure.model.FullTest;
+import com.example.toeic_adventure.model.FullTest;
 
 import java.util.List;
 
 public class CustomListAdapter  extends BaseAdapter {
 
-    private List<Country> listData;
+    private List<FullTest> listData;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public CustomListAdapter(Context aContext,  List<Country> listData) {
+    public CustomListAdapter(Context aContext,  List<FullTest> listData) {
         this.context = aContext;
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
@@ -47,16 +48,16 @@ public class CustomListAdapter  extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.list_item_layout, null);
             holder = new ViewHolder();
             holder.flagView = (ImageView) convertView.findViewById(R.id.imageView_flag);
-            holder.countryNameView = (TextView) convertView.findViewById(R.id.textView_countryName);
+            holder.fullTestNameView = (TextView) convertView.findViewById(R.id.textView_fullTestName);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Country country = this.listData.get(position);
-        holder.countryNameView.setText(country.getCountryName());
+        FullTest fullTest = this.listData.get(position);
+        holder.fullTestNameView.setText(fullTest.getFullTestName());
 
-        int imageId = this.getMipmapResIdByName(country.getFlagName());
+        int imageId = this.getMipmapResIdByName(fullTest.getFlagName());
 
         holder.flagView.setImageResource(imageId);
 
@@ -74,7 +75,7 @@ public class CustomListAdapter  extends BaseAdapter {
 
     static class ViewHolder {
         ImageView flagView;
-        TextView countryNameView;
+        TextView fullTestNameView;
     }
 
 }
