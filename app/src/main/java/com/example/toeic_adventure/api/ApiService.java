@@ -22,6 +22,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 
 public interface ApiService {
@@ -69,4 +70,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("auth/reset-password")
     Call<Boolean> resetPassword(@Field("email") String email, @Field("code") String code, @Field("newPassword") String newPassword);
+
+    @GET("skill-tests/count-by-parts")
+    Call<Object> getNumberOfSkillTestList(@Query("difficultyLevel") String level);
 }
