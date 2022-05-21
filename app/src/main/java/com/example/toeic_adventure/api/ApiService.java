@@ -42,35 +42,38 @@ public interface ApiService {
     }).build();
 
     ApiService apiService = new Retrofit.Builder()
-            .baseUrl("http://20.89.240.175/")
+            .baseUrl(Url.baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService.class);
 
     @FormUrlEncoded
-    @POST("auth/login")
+    @POST("/auth/login")
     Call<Object> login(@Field("email") String email, @Field("password") String password);
 
     @FormUrlEncoded
-    @POST("auth/register")
+    @POST("/auth/register")
     Call<User> register(@Field("email") String email, @Field("password") String password);
 
     @FormUrlEncoded
-    @POST("auth/send-verification-email")
+    @POST("/auth/send-verification-email")
     Call<Boolean> sendVerificationEmail(@Field("email") String email);
 
     @FormUrlEncoded
-    @POST("auth/verify-email")
+    @POST("/auth/verify-email")
     Call<Boolean> verifyEmail(@Field("email") String email, @Field("code") String code);
 
     @FormUrlEncoded
-    @POST("auth/forgot-password")
+    @POST("/auth/forgot-password")
     Call<Boolean> forgotPassword(@Field("email") String email);
 
     @FormUrlEncoded
-    @POST("auth/reset-password")
+    @POST("/auth/reset-password")
     Call<Boolean> resetPassword(@Field("email") String email, @Field("code") String code, @Field("newPassword") String newPassword);
 
-    @GET("skill-tests/count-by-parts")
+    @GET("/skill-tests/count-by-parts")
     Call<Object> getNumberOfSkillTestList(@Query("difficultyLevel") String level);
+
+    @GET("/collections")
+    Call<Object> getFullTestCollection();
 }

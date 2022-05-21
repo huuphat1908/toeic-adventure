@@ -188,7 +188,7 @@ public class SkillTestActivity extends Fragment {
                     ));
                     arraySkillTest.add(new SkillTest(
                             "Phần 4: Đoạn thông tin ngắn",
-                            "Bạn sẽ nghe các đoạn thông tin ngắn. Mỗi đoạn có 03 câu hỏi. Nhiệm vụ của bạn là chọn ra câu trả lời đúng nhất trong số 04 đáp án được cung câos",
+                            "Bạn sẽ nghe các đoạn thông tin ngắn. Mỗi đoạn có 03 câu hỏi. Nhiệm vụ của bạn là chọn ra câu trả lời đúng nhất trong số 04 đáp án được cung cấp",
                             "Bài nghe",
                             resObj.getInt("part4"),
                             R.drawable.part4_thumbnail

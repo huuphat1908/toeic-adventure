@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.model.SkillTest;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 

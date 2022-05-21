@@ -72,8 +72,16 @@
         <entry key="app/src/main/res/layout/activity_register_authentication.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/dialog_forgot_password.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/dialog_reset_password.xml" value="0.2653985507246377" />
+        <entry key="app/src/main/res/layout/fragment_full_test.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2653985507246377" />
+        <entry key="app/src/main/res/layout/fulltestcollection_item.xml" value="0.2653985507246377" />
+        <entry key="app/src/main/res/layout/list_item_layout.xml" value="0.2653985507246377" />
+        <entry key="app/src/main/res/layout/main_activity.xml" value="0.2653985507246377" />
+        <entry key="app/src/main/res/layout/mini_test_item.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/skill_test_dialog.xml" value="0.159375" />
+        <entry key="app/src/main/res/layout/skill_test_item.xml" value="0.2653985507246377" />
+        <entry key="app/src/main/res/layout/skill_test_list.xml" value="0.2653985507246377" />
+        <entry key="app/src/main/res/layout/skill_test_list_item.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.33177083333333335" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.186" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.186" />

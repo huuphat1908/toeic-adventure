@@ -24,7 +24,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView_flag"
+            android:id="@+id/ivFullTestCollection"
             android:layout_width="80sp"
             android:layout_height="60sp"
             android:layout_marginStart="4dp"
@@ -35,7 +35,7 @@
             tools:ignore="VectorDrawableCompat" />
 
         <TextView
-            android:id="@+id/textView_fullTestName"
+            android:id="@+id/tvFullTestCollection"
             android:layout_width="219dp"
             android:layout_height="35dp"
             android:layout_marginStart="8dp"

@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_menu_skill_test"
         android:title="Skill Test" />
     <item
-        android:id="@+id/fullTest"
+        android:id="@+id/fullTestCollection"
         android:icon="@drawable/ic_menu_full_test"
         android:title="Full Test" />
     <item
