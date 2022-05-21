@@ -65,15 +65,19 @@
         <entry key="app/src/main/res/layout/activity_email_confirmation.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/activity_forgot_password_authentication.xml" value="0.2653985507246377" />
+        <entry key="app/src/main/res/layout/activity_full_test.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/layout/activity_full_test_list.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1890625" />
         <entry key="app/src/main/res/layout/activity_login2.xml" value="0.31476449275362317" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/activity_register_authentication.xml" value="0.2653985507246377" />
+        <entry key="app/src/main/res/layout/activity_skill_test.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/dialog_forgot_password.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/dialog_reset_password.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/fragment_full_test.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2653985507246377" />
+        <entry key="app/src/main/res/layout/full_test_list_item.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/fulltestcollection_item.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/list_item_layout.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.2653985507246377" />

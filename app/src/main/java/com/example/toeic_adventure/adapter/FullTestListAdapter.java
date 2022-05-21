@@ -9,28 +9,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.toeic_adventure.R;
+import com.example.toeic_adventure.model.SkillTestList;
 
 import java.util.List;
 
-public class SkillTestListAdapter extends BaseAdapter {
+public class FullTestListAdapter extends BaseAdapter {
     Context MyContext;
     int MyLayout;
-    List<com.example.toeic_adventure.model.SkillTestList> SkillTestList;
+    List<com.example.toeic_adventure.model.FullTestList> FullTestList;
 
-    public SkillTestListAdapter(Context context, int layout, List<com.example.toeic_adventure.model.SkillTestList> skillTestList) {
+    public FullTestListAdapter(Context context, int layout, List<com.example.toeic_adventure.model.FullTestList> fullTestList) {
         MyContext = context;
         MyLayout = layout;
-        SkillTestList = skillTestList;
+        FullTestList = fullTestList;
     }
 
     @Override
     public int getCount() {
-        return SkillTestList.size();
+        return FullTestList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return SkillTestList.get(i);
+        return FullTestList.get(i);
     }
 
     @Override
@@ -47,10 +48,10 @@ public class SkillTestListAdapter extends BaseAdapter {
         // Set test information to layout
         TextView tvName = (TextView) view.findViewById(R.id.tvName);
         int number = i + 1;
-        tvName.setText("Tệp câu hỏi số "+ number);
+        tvName.setText("Đề thi số "+ number);
 
         TextView tvStatus = (TextView) view.findViewById(R.id.tvStatus);
-        int score = SkillTestList.get(i).getScore();
+        int score = FullTestList.get(i).score;
         String status = score < 0 ? "Bạn chưa học bài này" : "Điểm: " + score + "/10";
         tvStatus.setText(status);
 

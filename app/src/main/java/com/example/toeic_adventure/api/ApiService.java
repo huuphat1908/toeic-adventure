@@ -2,6 +2,7 @@ package com.example.toeic_adventure.api;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.example.toeic_adventure.activity.MainActivity;
 import com.example.toeic_adventure.model.User;
@@ -22,6 +23,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 
@@ -42,6 +44,7 @@ public interface ApiService {
     }).build();
 
     ApiService apiService = new Retrofit.Builder()
+            .client(client)
             .baseUrl(Url.baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -72,8 +75,27 @@ public interface ApiService {
     Call<Boolean> resetPassword(@Field("email") String email, @Field("code") String code, @Field("newPassword") String newPassword);
 
     @GET("/skill-tests/count-by-parts")
-    Call<Object> getNumberOfSkillTestList(@Query("difficultyLevel") String level);
+    Call<Object> getSkillTestCollection(@Query("difficultyLevel") String level);
+
+    @GET("/skill-tests")
+    Call<Object> getSkillTestList(@Query("part") String part, @Query("difficultyLevel") String level);
+
+    @GET("/skill-tests/{id}")
+    Call<Object> getSkillTest(@Path("id") String id);
+
+    @GET("/{url}")
+    Call<Object> getSkillTestFile(@Path("url") String url);
 
     @GET("/collections")
     Call<Object> getFullTestCollection();
+
+    @GET("/full-tests")
+    Call<Object> getFullTestList(@Query("testCollection") String testCollection);
+
+    @GET("/full-tests/{id}")
+    Call<Object> getFullTest(@Path("id") String id);
+
+    @GET("/{url}")
+    Call<Object> getFullTestFile(@Path("url") String url);
+
 }

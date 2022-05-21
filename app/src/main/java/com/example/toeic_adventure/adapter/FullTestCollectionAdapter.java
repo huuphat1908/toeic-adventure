@@ -1,9 +1,6 @@
 package com.example.toeic_adventure.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +11,9 @@ import android.widget.TextView;
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.api.Url;
 import com.example.toeic_adventure.model.FullTestCollection;
-import com.example.toeic_adventure.model.SkillTest;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 public class FullTestCollectionAdapter extends BaseAdapter {

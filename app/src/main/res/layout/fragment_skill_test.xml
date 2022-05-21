@@ -5,7 +5,7 @@
     android:background="@color/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.SkillTestActivity">
+    tools:context=".activity.SkillTestCollectionActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

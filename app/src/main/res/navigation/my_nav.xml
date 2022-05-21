@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/skillTest"
-        android:name="com.example.toeic_adventure.activity.SkillTestActivity"
+        android:name="com.example.toeic_adventure.activity.SkillTestCollectionActivity"
         android:label="fragment_skill_test"
         tools:layout="@layout/fragment_skill_test" />
     <fragment
         android:id="@+id/fullTestCollection"
-        android:name="com.example.toeic_adventure.activity.FullTestActivity"
+        android:name="com.example.toeic_adventure.activity.FullTestCollectionActivity"
         android:label="fragment_full_test"
         tools:layout="@layout/fragment_full_test" />
     <fragment
