@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -18,23 +22,28 @@ import android.widget.Toast;
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.api.ApiService;
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonWriter;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SkillTestPart1Activity extends AppCompatActivity {
+    String skillTestId;
     JSONArray questions;
     JSONObject question, answer;
-    int index = 1;
+    JSONArray choices;
+    List<String> userAnswer;
+    int index = 0;
+    boolean isSubmitted;
     ImageLoaderConfiguration config;
     ImageLoader imageLoader;
 
@@ -47,6 +56,9 @@ public class SkillTestPart1Activity extends AppCompatActivity {
     TextView tvTotalDuration;
     SeekBar sbAudio;
     ImageView ivPlayPause;
+    RadioButton rbA, rbB, rbC, rbD;
+    TextView tvTranscript;
+    Button btnSubmit;
     private MediaPlayer mediaPlayer;
     private Handler handler = new Handler();
 
@@ -68,6 +80,30 @@ public class SkillTestPart1Activity extends AppCompatActivity {
         initView();
         fetchTest();
 
+        rbA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userAnswer.set(index, "(A)");
+            }
+        });
+        rbB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userAnswer.set(index, "(B)");
+            }
+        });
+        rbC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userAnswer.set(index, "(C)");
+            }
+        });
+        rbD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userAnswer.set(index, "(D)");
+            }
+        });
         ivPlayPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,40 +121,44 @@ public class SkillTestPart1Activity extends AppCompatActivity {
         ivPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                index--;
-                handleNavigateIcon();
-                handleQuestion();
-                mediaPlayer.release();
-                mediaPlayer = new MediaPlayer();
-                prepareMediaPlayer();
-                if (mediaPlayer.isPlaying()) {
-                    handler.removeCallbacks(updater);
-                    mediaPlayer.pause();
-                    ivPlayPause.setImageResource(R.drawable.play_audio);
-                } else {
-                    mediaPlayer.start();
-                    ivPlayPause.setImageResource(R.drawable.pause_audio);
-                    updateSeekBar();
+                if (index != 0) {
+                    index--;
+                    handleNavigateIcon();
+                    handleQuestion();
+                    mediaPlayer.release();
+                    mediaPlayer = new MediaPlayer();
+                    prepareMediaPlayer();
+                    if (mediaPlayer.isPlaying()) {
+                        handler.removeCallbacks(updater);
+                        mediaPlayer.pause();
+                        ivPlayPause.setImageResource(R.drawable.play_audio);
+                    } else {
+                        mediaPlayer.start();
+                        ivPlayPause.setImageResource(R.drawable.pause_audio);
+                        updateSeekBar();
+                    }
                 }
             }
         });
         ivNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                index++;
-                handleNavigateIcon();
-                handleQuestion();
-                mediaPlayer.release();
-                mediaPlayer = new MediaPlayer();
-                prepareMediaPlayer();
-                if (mediaPlayer.isPlaying()) {
-                    handler.removeCallbacks(updater);
-                    mediaPlayer.pause();
-                    ivPlayPause.setImageResource(R.drawable.play_audio);
-                } else {
-                    mediaPlayer.start();
-                    ivPlayPause.setImageResource(R.drawable.pause_audio);
-                    updateSeekBar();
+                if (index != questions.length() - 1) {
+                    index++;
+                    handleNavigateIcon();
+                    handleQuestion();
+                    mediaPlayer.release();
+                    mediaPlayer = new MediaPlayer();
+                    prepareMediaPlayer();
+                    if (mediaPlayer.isPlaying()) {
+                        handler.removeCallbacks(updater);
+                        mediaPlayer.pause();
+                        ivPlayPause.setImageResource(R.drawable.play_audio);
+                    } else {
+                        mediaPlayer.start();
+                        ivPlayPause.setImageResource(R.drawable.pause_audio);
+                        updateSeekBar();
+                    }
                 }
             }
         });
@@ -149,12 +189,43 @@ public class SkillTestPart1Activity extends AppCompatActivity {
                 prepareMediaPlayer();
             }
         });
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!isSubmitted) {
+                    int correctSentences  = 0;
+                    for (int i = 0; i < questions.length(); i++) {
+                        try {
+                            if (questions.getJSONObject(i).getJSONObject("answer").getString("text").equals(userAnswer.get(i))) {
+                                correctSentences++;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    ApiService.apiService.submitSkillTestAnswer(correctSentences, skillTestId).enqueue(new Callback<Object>() {
+                        @Override
+                        public void onResponse(Call<Object> call, Response<Object> response) {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(SkillTestPart1Activity.this, "Submitted answer", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<Object> call, Throwable t) {
+                            Toast.makeText(SkillTestPart1Activity.this, "Unknown error", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    isSubmitted = true;
+                    handleQuestion();
+                }
+            }
+        });
     }
 
     private void fetchTest() {
         Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
-        ApiService.apiService.getSkillTest(id).enqueue(new Callback<Object>() {
+        skillTestId = intent.getStringExtra("id");
+        ApiService.apiService.getSkillTest(skillTestId).enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
                 try {
@@ -167,6 +238,9 @@ public class SkillTestPart1Activity extends AppCompatActivity {
                             try {
                                 JSONObject resObj = new JSONObject(new Gson().toJson(response.body()));
                                 questions = resObj.getJSONArray("questions");
+                                for (int i = 0; i < questions.length(); i++) {
+                                    userAnswer.add("");
+                                }
                                 handleNavigateIcon();
                                 handleQuestion();
                                 prepareMediaPlayer();
@@ -209,17 +283,69 @@ public class SkillTestPart1Activity extends AppCompatActivity {
         tvCurrentTime = (TextView) findViewById(R.id.tvCurrentTime);
         tvTotalDuration = (TextView) findViewById(R.id.tvTotalDuration);
         ivPlayPause = (ImageView) findViewById(R.id.ivPlayPause);
+        tvTranscript = (TextView) findViewById(R.id.tvTranscript);
         sbAudio = (SeekBar) findViewById(R.id.sbAudio);
+        rbA =  (RadioButton) findViewById(R.id.rbA);
+        rbB = (RadioButton) findViewById(R.id.rbB);
+        rbC = (RadioButton) findViewById(R.id.rbC);
+        rbD = (RadioButton) findViewById(R.id.rbD);
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
         mediaPlayer = new MediaPlayer();
         sbAudio.setMax(100);
+        userAnswer = new ArrayList<>();
+        isSubmitted = false;
     }
 
     private void handleQuestion() {
         try {
-            question = questions.getJSONObject(index - 1).getJSONObject("question");
-            answer = questions.getJSONObject(index - 1).getJSONObject("answer");
-            tvIndex.setText(index + "/" + questions.length());
+            question = questions.getJSONObject(index ).getJSONObject("question");
+            answer = questions.getJSONObject(index ).getJSONObject("answer");
+            choices = question.getJSONArray("choices");
+            int indexTitle = index + 1;
+            tvIndex.setText(indexTitle + "/" + questions.length());
             imageLoader.displayImage(question.getJSONArray("image").getJSONObject(0).getString("url"), ivQuestion);
+            rbA.setText(choices.getString(0));
+            rbB.setText(choices.getString(1));
+            rbC.setText(choices.getString(2));
+            rbD.setText(choices.getString(3));
+
+            switch (userAnswer.get(index)) {
+                case "":
+                    rgAnswer.clearCheck();
+                    break;
+                case "(A)":
+                    rbA.setChecked(true);
+                    break;
+                case "(B)":
+                    rbB.setChecked(true);
+                    break;
+                case "(C)":
+                    rbC.setChecked(true);
+                    break;
+                case "(D)":
+                    rbD.setChecked(true);
+                    break;
+            }
+            if (index == questions.length() - 1) {
+                btnSubmit.setVisibility(View.VISIBLE);
+            } else {
+                btnSubmit.setVisibility(View.INVISIBLE);
+            }
+            if (isSubmitted) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    tvTranscript.setText(Html.fromHtml(answer.getString("explanation"), Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    tvTranscript.setText(Html.fromHtml(answer.getString("explanation")));
+                }
+                btnSubmit.setVisibility(View.VISIBLE);
+                btnSubmit.setText("Exit");
+                btnSubmit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        finish();
+                    }
+                });
+            }
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
@@ -227,12 +353,12 @@ public class SkillTestPart1Activity extends AppCompatActivity {
     }
 
     private void handleNavigateIcon() {
-        if (index == 1) {
+        if (index == 0) {
             ivPrev.setImageDrawable(null);
         } else {
             ivPrev.setImageResource(R.drawable.prev_question);
         }
-        if (index == questions.length()) {
+        if (index == questions.length() - 1) {
             ivNext.setImageDrawable(null);
         } else {
             ivNext.setImageResource(R.drawable.next_question);

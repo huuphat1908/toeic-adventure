@@ -86,6 +86,10 @@ public interface ApiService {
     @GET("/{url}")
     Call<Object> getSkillTestFile(@Path("url") String url);
 
+    @FormUrlEncoded
+    @POST("/histories/skill-test")
+    Call<Object> submitSkillTestAnswer(@Field("correctSentences") int correctSentences, @Field("test") String test);
+
     @GET("/collections")
     Call<Object> getFullTestCollection();
 

@@ -91,6 +91,12 @@ public class SkillTestListActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchSkillTestList();
+    }
+
     private void fetchSkillTestList() {
         String part = intent.getStringExtra("part");
         String difficultLevel = intent.getStringExtra("level");
@@ -103,7 +109,7 @@ public class SkillTestListActivity extends AppCompatActivity {
                     JSONArray results = resObj.getJSONArray("results");
                     for (int i = 0; i < results.length(); i++) {
                         JSONObject skillTestList = results.getJSONObject(i);
-                        arraySkillTestList.add(new SkillTestList(1, skillTestList.getString("id")));
+                        arraySkillTestList.add(new SkillTestList(skillTestList.getInt("score"), skillTestList.getString("id")));
                     }
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {

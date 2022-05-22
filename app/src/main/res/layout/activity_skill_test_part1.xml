@@ -57,6 +57,10 @@
             android:id="@+id/rbD"
             android:text="(D):" />
     </RadioGroup>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvTranscript" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -98,18 +102,28 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="24dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/play_audio"
+            android:src="@null"
             android:id="@+id/ivPrev"/>
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="center">
+            <android.widget.Button
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/button"
+                android:textColor="@color/white"
+                android:text="Submit"
+                android:visibility="invisible"
+                android:id="@+id/btnSubmit"/>
+        </LinearLayout>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/play_audio"
+            android:src="@drawable/next_question"
             android:id="@+id/ivNext" />
     </LinearLayout>
 
