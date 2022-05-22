@@ -80,14 +80,29 @@ public class SkillTestListActivity extends AppCompatActivity {
                         startActivity(skillTestPart2Intent);
                         break;
                     case "3":
+                        Intent skillTestPart3Intent = new Intent(v.getContext(), SkillTestPart3Activity.class);
+                        skillTestPart3Intent.putExtra("id", item.id);
+                        startActivity(skillTestPart3Intent);
                         break;
                     case "4":
+                        Intent skillTestPart4Intent = new Intent(v.getContext(), SkillTestPart4Activity.class);
+                        skillTestPart4Intent.putExtra("id", item.id);
+                        startActivity(skillTestPart4Intent);
                         break;
                     case "5":
+                        Intent skillTestPart5Intent = new Intent(v.getContext(), SkillTestPart5Activity.class);
+                        skillTestPart5Intent.putExtra("id", item.id);
+                        startActivity(skillTestPart5Intent);
                         break;
                     case "6":
+                        Intent skillTestPart6Intent = new Intent(v.getContext(), SkillTestPart6Activity.class);
+                        skillTestPart6Intent.putExtra("id", item.id);
+                        startActivity(skillTestPart6Intent);
                         break;
                     case "7":
+                        Intent skillTestPart7Intent = new Intent(v.getContext(), SkillTestPart7Activity.class);
+                        skillTestPart7Intent.putExtra("id", item.id);
+                        startActivity(skillTestPart7Intent);
                         break;
                 }
             }
