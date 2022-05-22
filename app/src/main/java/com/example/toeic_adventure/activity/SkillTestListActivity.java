@@ -2,9 +2,11 @@ package com.example.toeic_adventure.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,9 +67,26 @@ public class SkillTestListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 SkillTestList item = (SkillTestList) parent.getItemAtPosition(position);
-                Intent skillTestIntent = new Intent(v.getContext(), SkillTestActivity.class);
-                skillTestIntent.putExtra("id", item.id);
-                startActivity(skillTestIntent);
+                String part = intent.getStringExtra("part");
+                switch (part) {
+                    case "1":
+                        Intent skillTestPart1Intent = new Intent(v.getContext(), SkillTestPart1Activity.class);
+                        skillTestPart1Intent.putExtra("id", item.id);
+                        startActivity(skillTestPart1Intent);
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    case "4":
+                        break;
+                    case "5":
+                        break;
+                    case "6":
+                        break;
+                    case "7":
+                        break;
+                }
             }
         });
     }
@@ -89,11 +108,12 @@ public class SkillTestListActivity extends AppCompatActivity {
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(SkillTestListActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
-
+                Toast.makeText(SkillTestListActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }

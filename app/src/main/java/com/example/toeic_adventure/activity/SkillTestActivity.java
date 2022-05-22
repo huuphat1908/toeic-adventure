@@ -19,14 +19,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SkillTestActivity extends AppCompatActivity {
-    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skill_test);
 
-        intent = getIntent();
+        fetchTest();
+    }
+
+    private void fetchTest() {
+        Intent intent = getIntent();
         String id = intent.getStringExtra("id");
         ApiService.apiService.getSkillTest(id).enqueue(new Callback<Object>() {
             @Override
@@ -42,11 +45,12 @@ public class SkillTestActivity extends AppCompatActivity {
                                 JSONObject resObj = new JSONObject(new Gson().toJson(response.body()));
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                                Toast.makeText(SkillTestActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                             }
                         }
                         @Override
                         public void onFailure(Call<Object> call, Throwable t) {
-
+                            Toast.makeText(SkillTestActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 } catch (JSONException e) {
