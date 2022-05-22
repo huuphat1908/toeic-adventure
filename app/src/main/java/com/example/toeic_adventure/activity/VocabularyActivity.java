@@ -58,6 +58,41 @@ public class VocabularyActivity  extends Fragment {
                 "Conferences",
                 "Hội nghị"
         ));
+        array.add(new Vocabulary(
+                6,
+                "Conferences",
+                "Hội nghị"
+        ));
+        array.add(new Vocabulary(
+                7,
+                "Conferences",
+                "Hội nghị"
+        ));
+        array.add(new Vocabulary(
+                8,
+                "Conferences",
+                "Hội nghị"
+        ));
+        array.add(new Vocabulary(
+                9,
+                "Conferences",
+                "Hội nghị"
+        ));
+        array.add(new Vocabulary(
+                10,
+                "Conferences",
+                "Hội nghị"
+        ));
+        array.add(new Vocabulary(
+                11,
+                "Conferences",
+                "Hội nghị"
+        ));
+        array.add(new Vocabulary(
+                12,
+                "Conferences",
+                "Hội nghị"
+        ));
 
         return array;
     }
