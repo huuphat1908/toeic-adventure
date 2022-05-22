@@ -18,6 +18,7 @@
             android:orientation="vertical"
             android:gravity="center">
             <ImageView
+                android:id="@+id/imProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher_round"
@@ -27,6 +28,7 @@
                 android:scaleType="fitCenter"
                 />
             <TextView
+                android:id="@+id/txtEmailUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="babyking1st@gmail.com"
@@ -49,6 +51,7 @@
                 android:layout_marginBottom="40dp"
                 android:textStyle="bold"/>
             <TextView
+                android:id="@+id/txtJoinedDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="365 day ago"
@@ -92,6 +95,7 @@
                 android:padding="10dp"
                 />
             <TextView
+                android:id="@+id/txtScoreFullTest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total: 30"
@@ -134,6 +138,7 @@
                 android:textStyle="bold"
                 android:padding="10dp"/>
             <TextView
+                android:id="@+id/txtScoreSkillTest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total: 30"
@@ -176,6 +181,7 @@
                 android:textStyle="bold"
                 android:padding="10dp"/>
             <TextView
+                android:id="@+id/txtPredictedScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Score: 500"

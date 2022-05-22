@@ -102,4 +102,7 @@ public interface ApiService {
     @GET("/{url}")
     Call<Object> getFullTestFile(@Path("url") String url);
 
+    @GET("/users/profile")
+    Call<Object> getProfileUser();
+
 }
