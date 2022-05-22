@@ -1,140 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.VocabularyActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="100">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="6"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:orientation="horizontal">
+    <ListView
+        android:id="@+id/listViewVocabulary"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="58dp"
+        android:background="@color/white"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="1.0" />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="1dp"
-                android:background="@android:color/transparent"
-                android:minWidth="48dp"
-                android:minHeight="0dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:src="@drawable/listening_icon"
-                android:text="@string/title_home"
-                android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:textSize="13sp" />
-        </RelativeLayout>
-
-        <ListView
-            android:id="@+id/listViewVocabulary"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="94"
-            android:footerDividersEnabled="false"
-            android:headerDividersEnabled="false"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="200dp"
-            android:clipToPadding="false"/>
-        <ScrollView
-            android:layout_weight="94"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:background="@drawable/sharp_cardview_bg"
-                    android:orientation="horizontal"
-                    android:weightSum="100"
-                    android:padding="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:layout_weight="92"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="Phần 3: Hội thoại ngắn" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="42dp"
-                            android:padding="0dp"
-                            android:text="@string/part2_description" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="8"
-                        android:paddingStart="0dp"
-                        android:paddingEnd="10dp"
-                        android:src="@drawable/part3_thumbnail"
-                        android:contentDescription="@string/title_home"
-                        tools:ignore="VectorDrawableCompat" />
-                </LinearLayout>
-                <LinearLayout
-                    android:background="@drawable/sharp_cardview_bg"
-                    android:orientation="horizontal"
-                    android:weightSum="100"
-                    android:padding="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:layout_weight="92"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="Phần 4: Đoạn thông tin ngắn" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:padding="0dp"
-                            android:text="@string/part2_description" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="8"
-                        android:paddingRight="10dp"
-                        android:src="@drawable/part4_thumbnail"
-                        tools:ignore="VectorDrawableCompat" />
-                </LinearLayout>
-
-
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
