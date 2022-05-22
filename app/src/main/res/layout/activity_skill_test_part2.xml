@@ -7,7 +7,7 @@
     android:paddingHorizontal="10dp"
     android:paddingVertical="10dp"
     android:orientation="vertical"
-    tools:context=".activity.SkillTestPart1Activity">
+    tools:context=".activity.SkillTestPart2Activity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,14 +23,13 @@
             android:textAlignment="center"
             android:text="1/10"/>
     </LinearLayout>
-    <ImageView
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/ivQuestion"
-        android:src="@drawable/part1_thumbnail"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_height="wrap_content"
+        android:id="@+id/tvGuideline"
+        android:background="@drawable/sharp_cardview_bg"
+        android:textColor="@color/black"
+        android:text="Câu 1: Listen to question and choose a correct"/>
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,11 +50,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/rbC"
             android:text="(C):" />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/rbD"
-            android:text="(D):" />
     </RadioGroup>
     <TextView
         android:layout_width="match_parent"
@@ -64,6 +58,10 @@
         android:textColor="@color/black"
         android:visibility="invisible"
         android:id="@+id/tvTranscript" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -36,7 +36,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SkillTestPart1Activity extends AppCompatActivity {
+public class SkillTestPart2Activity extends AppCompatActivity {
     String skillTestId;
     JSONArray questions;
     JSONObject question, answer;
@@ -44,11 +44,9 @@ public class SkillTestPart1Activity extends AppCompatActivity {
     List<String> userAnswer;
     int index = 0;
     boolean isSubmitted;
-    ImageLoaderConfiguration config;
-    ImageLoader imageLoader;
 
     TextView tvIndex;
-    ImageView ivQuestion;
+    TextView tvGuideline;
     RadioGroup rgAnswer;
     ImageView ivNext;
     ImageView ivPrev;
@@ -56,7 +54,7 @@ public class SkillTestPart1Activity extends AppCompatActivity {
     TextView tvTotalDuration;
     SeekBar sbAudio;
     ImageView ivPlayPause;
-    RadioButton rbA, rbB, rbC, rbD;
+    RadioButton rbA, rbB, rbC;
     TextView tvTranscript;
     Button btnSubmit;
     private MediaPlayer mediaPlayer;
@@ -72,11 +70,8 @@ public class SkillTestPart1Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_skill_test_part1);
+        setContentView(R.layout.activity_skill_test_part2);
 
-        config = new ImageLoaderConfiguration.Builder(this).build();
-        ImageLoader.getInstance().init(config);
-        imageLoader = ImageLoader.getInstance();
         initView();
         fetchTest();
 
@@ -96,12 +91,6 @@ public class SkillTestPart1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 userAnswer.set(index, "(C)");
-            }
-        });
-        rbD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                userAnswer.set(index, "(D)");
             }
         });
         ivPlayPause.setOnClickListener(new View.OnClickListener() {
@@ -207,12 +196,12 @@ public class SkillTestPart1Activity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Object> call, Response<Object> response) {
                             if (response.isSuccessful()) {
-                                Toast.makeText(SkillTestPart1Activity.this, "Submitted answer", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SkillTestPart2Activity.this, "Submitted answer", Toast.LENGTH_SHORT).show();
                             }
                         }
                         @Override
                         public void onFailure(Call<Object> call, Throwable t) {
-                            Toast.makeText(SkillTestPart1Activity.this, "Unknown error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SkillTestPart2Activity.this, "Unknown error", Toast.LENGTH_SHORT).show();
                         }
                     });
                     isSubmitted = true;
@@ -255,12 +244,12 @@ public class SkillTestPart1Activity extends AppCompatActivity {
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Toast.makeText(SkillTestPart1Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SkillTestPart2Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
                             }
                         }
                         @Override
                         public void onFailure(Call<Object> call, Throwable t) {
-                            Toast.makeText(SkillTestPart1Activity.this, t.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SkillTestPart2Activity.this, t.toString(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 } catch (JSONException e) {
@@ -269,14 +258,14 @@ public class SkillTestPart1Activity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
-                Toast.makeText(SkillTestPart1Activity.this, "Unknown error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SkillTestPart2Activity.this, "Unknown error", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void initView() {
         tvIndex = (TextView) findViewById(R.id.tvIndex);
-        ivQuestion = (ImageView) findViewById(R.id.ivQuestion);
+        tvGuideline = (TextView) findViewById(R.id.tvGuideline);
         rgAnswer = (RadioGroup) findViewById(R.id.rgAnswer);
         ivNext = (ImageView) findViewById(R.id.ivNext);
         ivPrev = (ImageView) findViewById(R.id.ivPrev);
@@ -288,7 +277,6 @@ public class SkillTestPart1Activity extends AppCompatActivity {
         rbA =  (RadioButton) findViewById(R.id.rbA);
         rbB = (RadioButton) findViewById(R.id.rbB);
         rbC = (RadioButton) findViewById(R.id.rbC);
-        rbD = (RadioButton) findViewById(R.id.rbD);
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
         mediaPlayer = new MediaPlayer();
         sbAudio.setMax(100);
@@ -303,11 +291,10 @@ public class SkillTestPart1Activity extends AppCompatActivity {
             choices = question.getJSONArray("choices");
             int indexTitle = index + 1;
             tvIndex.setText(indexTitle + "/" + questions.length());
-            imageLoader.displayImage(question.getJSONArray("image").getJSONObject(0).getString("url"), ivQuestion);
+            tvGuideline.setText("Câu " + indexTitle + ": Listen to question and choose a correct");
             rbA.setText(choices.getString(0));
             rbB.setText(choices.getString(1));
             rbC.setText(choices.getString(2));
-            rbD.setText(choices.getString(3));
 
             switch (userAnswer.get(index)) {
                 case "":
@@ -321,9 +308,6 @@ public class SkillTestPart1Activity extends AppCompatActivity {
                     break;
                 case "(C)":
                     rbC.setChecked(true);
-                    break;
-                case "(D)":
-                    rbD.setChecked(true);
                     break;
             }
             if (index == questions.length() - 1) {
@@ -372,7 +356,7 @@ public class SkillTestPart1Activity extends AppCompatActivity {
             mediaPlayer.prepare();
             tvTotalDuration.setText(milliSecondsToTimer(mediaPlayer.getDuration()));
         } catch (Exception e) {
-            Toast.makeText(SkillTestPart1Activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(SkillTestPart2Activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             Log.d("Error", e.getMessage());
         }
     }

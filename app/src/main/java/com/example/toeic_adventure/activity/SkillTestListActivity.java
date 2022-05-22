@@ -75,6 +75,9 @@ public class SkillTestListActivity extends AppCompatActivity {
                         startActivity(skillTestPart1Intent);
                         break;
                     case "2":
+                        Intent skillTestPart2Intent = new Intent(v.getContext(), SkillTestPart2Activity.class);
+                        skillTestPart2Intent.putExtra("id", item.id);
+                        startActivity(skillTestPart2Intent);
                         break;
                     case "3":
                         break;
