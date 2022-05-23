@@ -3,6 +3,7 @@ package com.example.toeic_adventure.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,15 +13,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.api.ApiService;
-import com.example.toeic_adventure.model.ProfileUser;
 import com.google.gson.Gson;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -94,8 +108,37 @@ public class ProfileActivity extends Fragment {
         return rootView;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private long getDaysDiff(String startDateApi) {
+        OffsetDateTime inst = OffsetDateTime.ofInstant(Instant.parse(startDateApi),
+                ZoneId.systemDefault());
+        DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date currentDate = new Date();
+        Date date1 = null;
+        Date date2 = null;
+
+        try {
+            String endDate = simpleDateFormat.format(currentDate);
+            String startDate = simpleDateFormat.format(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(inst));
+
+            date1 = simpleDateFormat.parse(startDate);
+            date2 = simpleDateFormat.parse(endDate);
+
+            long getDiff = date2.getTime() - date1.getTime();
+
+            long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);
+
+            return getDaysDiff;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  1;
+    }
+
     private void fetchProfileUser() {
         ApiService.apiService.getProfileUser().enqueue(new Callback<Object>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
                 try {
@@ -103,7 +146,7 @@ public class ProfileActivity extends Fragment {
                     JSONObject avatar = resObj.getJSONObject("avatar");
                     JSONObject done = resObj.getJSONObject("done");
                     txtEmailUser.setText(resObj.getString("email"));
-                    imProfile.setImageURI(Uri.parse("http://20.89.240.175" + avatar.getString("url")));
+                    Glide.with(ProfileActivity.this).load("http://20.89.240.175" + avatar.getString("url")).into(imProfile);
                     txtJoinedDay.setText(resObj.getString("joinDate"));
                     txtScoreFullTest.setText(done.getString("fullTest"));
                     txtScoreSkillTest.setText(done.getString("skillTest"));
