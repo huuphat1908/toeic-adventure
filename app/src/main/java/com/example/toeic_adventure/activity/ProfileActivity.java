@@ -109,31 +109,15 @@ public class ProfileActivity extends Fragment {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private long getDaysDiff(String startDateApi) {
-        OffsetDateTime inst = OffsetDateTime.ofInstant(Instant.parse(startDateApi),
-                ZoneId.systemDefault());
-        DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private long getDaysDiff(String startDate) {
+        Date today = new Date();
+        java.util.Date endDate = Date.from( Instant.parse(startDate));
 
-        Date currentDate = new Date();
-        Date date1 = null;
-        Date date2 = null;
+        long getDay = today.getTime() - endDate.getTime();
 
-        try {
-            String endDate = simpleDateFormat.format(currentDate);
-            String startDate = simpleDateFormat.format(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(inst));
+        long getDaysDiff = getDay / (24 * 60 * 60 * 1000);
 
-            date1 = simpleDateFormat.parse(startDate);
-            date2 = simpleDateFormat.parse(endDate);
-
-            long getDiff = date2.getTime() - date1.getTime();
-
-            long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);
-
-            return getDaysDiff;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return  1;
+        return getDaysDiff;
     }
 
     private void fetchProfileUser() {
@@ -147,7 +131,7 @@ public class ProfileActivity extends Fragment {
                     JSONObject done = resObj.getJSONObject("done");
                     txtEmailUser.setText(resObj.getString("email"));
                     Glide.with(ProfileActivity.this).load("http://20.89.240.175" + avatar.getString("url")).into(imProfile);
-                    txtJoinedDay.setText(resObj.getString("joinDate"));
+                    txtJoinedDay.setText((int) getDaysDiff(resObj.getString("joinDate")) + " day ago");
                     txtScoreFullTest.setText(done.getString("fullTest"));
                     txtScoreSkillTest.setText(done.getString("skillTest"));
                     txtPredictedScore.setText(resObj.getString("predictedScore"));
