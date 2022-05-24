@@ -27,7 +27,7 @@ public class FullTestCollectionAdapter extends BaseAdapter {
         MyContext = context;
         MyLayout = layout;
         FullTestCollectionList = fullTestCollectionList;
-        config = new ImageLoaderConfiguration.Builder(MyContext).build();
+        config = new ImageLoaderConfiguration.Builder(MyContext.getApplicationContext()).build();
         ImageLoader.getInstance().init(config);
         imageLoader = ImageLoader.getInstance();
     }
