@@ -26,14 +26,15 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0"
         android:id="@+id/ivQuestion"
         android:src="@drawable/part1_thumbnail"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="10dp" />
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,42 +42,109 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/sharp_cardview_bg"
+                android:textColor="@color/black"
+                android:visibility="invisible"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/tvTranscript" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/sharp_cardview_bg"
+                android:textColor="@color/black"
                 android:id="@+id/tvQuestion1"/>
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:id="@+id/rgAnswer">
+                android:id="@+id/rgAnswer1">
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/rbA"
+                    android:id="@+id/rbA1"
                     android:text="(A):" />
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/rbB"
+                    android:id="@+id/rbB1"
                     android:text="(B):" />
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/rbC"
+                    android:id="@+id/rbC1"
                     android:text="(C):" />
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/rbD"
+                    android:id="@+id/rbD1"
+                    android:text="(D):" />
+            </RadioGroup>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/sharp_cardview_bg"
+                android:textColor="@color/black"
+                android:id="@+id/tvQuestion2"/>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/rgAnswer2">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rbA2"
+                    android:text="(A):" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rbB2"
+                    android:text="(B):" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rbC2"
+                    android:text="(C):" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rbD2"
+                    android:text="(D):" />
+            </RadioGroup>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/sharp_cardview_bg"
+                android:textColor="@color/black"
+                android:id="@+id/tvQuestion3"/>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/rgAnswer3">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rbA3"
+                    android:text="(A):" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rbB3"
+                    android:text="(B):" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rbC3"
+                    android:text="(C):" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rbD3"
                     android:text="(D):" />
             </RadioGroup>
         </LinearLayout>
     </ScrollView>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/sharp_cardview_bg"
-        android:textColor="@color/black"
-        android:visibility="invisible"
-        android:id="@+id/tvTranscript" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
