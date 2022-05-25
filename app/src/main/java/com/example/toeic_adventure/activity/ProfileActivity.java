@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -136,8 +137,8 @@ public class ProfileActivity extends Fragment {
                     txtEmailUser.setText(resObj.getString("email"));
                     Glide.with(ProfileActivity.this).load("http://20.89.240.175" + avatar.getString("url")).into(imProfile);
                     txtJoinedDay.setText((int) getDaysDiff(resObj.getString("joinDate")) + " day ago");
-                    txtScoreFullTest.setText(done.getString("fullTest"));
-                    txtScoreSkillTest.setText(done.getString("skillTest"));
+                    txtScoreFullTest.setText(String.valueOf(Math.round(done.getDouble("fullTest"))));
+                    txtScoreSkillTest.setText(String.valueOf(Math.round(done.getDouble("skillTest"))));
                     txtPredictedScore.setText(resObj.getString("predictedScore"));
                 } catch (JSONException e) {
                     e.printStackTrace();
