@@ -1,8 +1,9 @@
 package com.example.toeic_adventure.activity;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,21 +22,13 @@ import com.bumptech.glide.Glide;
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.api.ApiService;
 import com.google.gson.Gson;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
+
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,6 +42,7 @@ public class ProfileActivity extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    View rootView;
     private ImageView imProfile;
     private TextView txtEmailUser;
     private TextView txtJoinedDay;
@@ -55,6 +50,7 @@ public class ProfileActivity extends Fragment {
     private TextView txtScoreSkillTest;
     private TextView txtPredictedScore;
     private Button btnLogout;
+    private LinearLayout linearLayoutBottom;
 
     public ProfileActivity() {
         // Required empty public constructor
@@ -82,7 +78,7 @@ public class ProfileActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+        rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
         imProfile = (ImageView) rootView.findViewById(R.id.imProfile);
         txtEmailUser = (TextView) rootView.findViewById(R.id.txtEmailUser);
@@ -90,10 +86,18 @@ public class ProfileActivity extends Fragment {
         txtScoreFullTest = (TextView) rootView.findViewById(R.id.txtScoreFullTest);
         txtScoreSkillTest = (TextView) rootView.findViewById(R.id.txtScoreSkillTest);
         txtPredictedScore = (TextView) rootView.findViewById(R.id.txtPredictedScore);
+        btnLogout = (Button) rootView.findViewById(R.id.btnLogout);
+        linearLayoutBottom = (LinearLayout) rootView.findViewById(R.id.linearLayoutBottom);
 
         fetchProfileUser();
 
-        btnLogout = (Button) rootView.findViewById(R.id.btnLogout);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                0
+        );
+        params.setMargins(0, 0, 0, getHeightNavigationBar());
+        linearLayoutBottom.setLayoutParams(params);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,5 +150,14 @@ public class ProfileActivity extends Fragment {
                 Toast.makeText(getContext(), "Unknown error", Toast.LENGTH_SHORT).show();
             }
         });
+    };
+
+    private int getHeightNavigationBar() {
+        Resources resources = rootView.getContext().getResources();
+        int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            return resources.getDimensionPixelSize(resourceId);
+        }
+        return 0;
     }
 }
