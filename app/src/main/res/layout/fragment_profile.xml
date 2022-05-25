@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="babyking1st@gmail.com"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:padding="5dp"/>
@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Joined"
-                android:textSize="30dp"
+                android:textSize="25dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"/>
             <TextView
@@ -89,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Number of full tests"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:padding="10dp"
@@ -123,16 +123,17 @@
                 />
         </LinearLayout>
         <LinearLayout
-            android:layout_width="280dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Number of skill tests"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textColor="@color/black"
-                android:layout_marginBottom="40dp"
                 android:textStyle="bold"
                 android:padding="10dp"/>
             <TextView
@@ -166,16 +167,17 @@
                 />
         </LinearLayout>
         <LinearLayout
-            android:layout_width="280dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Average score of all exams"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textColor="@color/black"
-                android:layout_marginBottom="40dp"
                 android:textStyle="bold"
                 android:padding="10dp"/>
             <TextView
@@ -185,7 +187,6 @@
                 android:text="Score: 500"
                 android:textSize="16dp"
                 android:textColor="@color/white"
-                android:layout_marginBottom="40dp"
                 android:textStyle="bold"
                 android:paddingLeft="10dp"/>
         </LinearLayout>
@@ -196,7 +197,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="@dimen/padding_left"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
         android:layout_marginRight="@dimen/padding_left"
         android:layout_marginBottom="10dp"
         android:background="@drawable/button"
