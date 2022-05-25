@@ -11,37 +11,40 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/imProfile"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 android:src="@mipmap/ic_launcher_round"
-                app:civ_border_width="2dp"
-                app:civ_border_color="#FF000000"/>
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp" />
+
             <TextView
                 android:id="@+id/txtEmailUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:text="babyking1st@gmail.com"
-                android:textSize="14dp"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:padding="5dp"/>
+                android:textSize="14dp"
+                android:textStyle="bold" />
         </LinearLayout>
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:paddingHorizontal="20dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -59,21 +62,20 @@
                 android:textStyle="bold"/>
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="10dp">
+        android:layout_marginVertical="10dp">
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
-            android:padding="20dp">
+            android:gravity="center">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher_round"
-                android:layout_marginBottom="10dp"
                 android:cropToPadding="true"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
@@ -84,7 +86,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center">
+            android:paddingLeft="20dp"
+            android:layout_gravity="start"
+            android:gravity="center_vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -92,8 +96,7 @@
                 android:textSize="18dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:padding="10dp"
-                />
+                android:paddingBottom="5dp"/>
             <TextView
                 android:id="@+id/txtScoreFullTest"
                 android:layout_width="wrap_content"
@@ -104,19 +107,20 @@
                 />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp">
         <LinearLayout
-            android:layout_width="120dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher_round"
-                android:layout_marginBottom="10dp"
                 android:cropToPadding="true"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
@@ -127,7 +131,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center">
+            android:layout_gravity="start"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -135,7 +141,7 @@
                 android:textSize="18dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:padding="10dp"/>
+                android:paddingBottom="5dp"/>
             <TextView
                 android:id="@+id/txtScoreSkillTest"
                 android:layout_width="wrap_content"
@@ -143,35 +149,35 @@
                 android:text="Total: 30"
                 android:textSize="16dp"
                 android:textColor="@color/white"
-                android:layout_marginBottom="40dp"
-                android:textStyle="bold"
-                android:paddingLeft="10dp"/>
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp">
         <LinearLayout
-            android:layout_width="120dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher_round"
-                android:layout_marginBottom="10dp"
                 android:cropToPadding="true"
                 android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                />
+                android:scaleType="fitCenter" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center">
+            android:layout_gravity="start"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -179,7 +185,7 @@
                 android:textSize="18dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:padding="10dp"/>
+                android:paddingBottom="5dp"/>
             <TextView
                 android:id="@+id/txtPredictedScore"
                 android:layout_width="wrap_content"
@@ -187,25 +193,31 @@
                 android:text="Score: 500"
                 android:textSize="16dp"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:paddingLeft="10dp"/>
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 
-    <android.widget.Button
-        android:id="@+id/btnLogout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="@dimen/padding_left"
-        android:layout_marginTop="35dp"
-        android:layout_marginRight="@dimen/padding_left"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/button"
-        android:text="Logout"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="@dimen/font_med"
-        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_gravity="bottom">
+        <android.widget.Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding_left"
+            android:layout_marginTop="35dp"
+            android:layout_marginRight="@dimen/padding_left"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button"
+            android:text="Logout"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/font_med"
+            tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+    </LinearLayout>
 
 </LinearLayout>
 
