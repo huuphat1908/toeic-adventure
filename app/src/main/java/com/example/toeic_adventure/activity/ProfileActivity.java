@@ -137,9 +137,9 @@ public class ProfileActivity extends Fragment {
                     txtEmailUser.setText(resObj.getString("email"));
                     Glide.with(ProfileActivity.this).load("http://20.89.240.175" + avatar.getString("url")).into(imProfile);
                     txtJoinedDay.setText((int) getDaysDiff(resObj.getString("joinDate")) + " day ago");
-                    txtScoreFullTest.setText(String.valueOf(Math.round(done.getDouble("fullTest"))));
-                    txtScoreSkillTest.setText(String.valueOf(Math.round(done.getDouble("skillTest"))));
-                    txtPredictedScore.setText(resObj.getString("predictedScore"));
+                    txtScoreFullTest.setText(String.valueOf(done.getInt("fullTest")));
+                    txtScoreSkillTest.setText(String.valueOf(done.getInt("skillTest")));
+                    txtPredictedScore.setText(String.valueOf(resObj.getInt("predictedScore")));
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getContext(), "JSON object error", Toast.LENGTH_SHORT).show();
