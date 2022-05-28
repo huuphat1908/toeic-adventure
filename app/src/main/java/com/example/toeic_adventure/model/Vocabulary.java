@@ -13,6 +13,5 @@ public class Vocabulary {
         No = no;
         Name = name;
         Desc = desc;
-//        Percent = percent;
     }
 }

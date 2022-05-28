@@ -70,6 +70,9 @@
             android:name=".activity.SkillTestListActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.VocabularyDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.MainActivity"
             android:exported="true"
             android:label="@string/app_name">

@@ -1,5 +1,6 @@
 package com.example.toeic_adventure.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,7 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.adapter.VocabularyAdapter;
@@ -139,13 +142,16 @@ public class VocabularyActivity  extends Fragment {
         );
         lvVocabulary.setAdapter(adapter);
 
-        // Add handler for click item event
-//        lvVocabulary.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-//                Toast.makeText(getContext(), "You have click item " + position, Toast.LENGTH_LONG).show();
-//            }
-//        });
+        lvVocabulary.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+//                Vocabulary item = (Vocabulary) parent.getItemAtPosition(position);
+                Intent vocabularyDetailActivity = new Intent(v.getContext(), VocabularyDetailActivity.class);
+                vocabularyDetailActivity.putExtra("title", "Quang");
+                startActivity(vocabularyDetailActivity);
+//                Toast.makeText(getContext(), "You have click item " + position + item.Name, Toast.LENGTH_LONG).show();
+            }
+        });
 
         return view;
     }
