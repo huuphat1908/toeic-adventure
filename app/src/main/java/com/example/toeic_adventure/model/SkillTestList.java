@@ -2,10 +2,12 @@ package com.example.toeic_adventure.model;
 
 public class SkillTestList {
     public int score;
+    public int totalSentences;
     public String id;
 
-    public SkillTestList(int score, String id) {
+    public SkillTestList(int score, int totalSentences, String id) {
         this.score = score;
+        this.totalSentences = totalSentences;
         this.id = id;
     }
 

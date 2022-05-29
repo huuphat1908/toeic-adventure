@@ -51,7 +51,8 @@ public class SkillTestListAdapter extends BaseAdapter {
 
         TextView tvStatus = (TextView) view.findViewById(R.id.tvStatus);
         int score = SkillTestList.get(i).getScore();
-        String status = score < 0 ? "Bạn chưa học bài này" : "Điểm: " + score + "/10";
+        int totalSentences = SkillTestList.get(i).totalSentences;
+        String status = score < 0 ? "Bạn chưa học bài này" : "Điểm: " + score + "/" + totalSentences;
         tvStatus.setText(status);
 
         ImageView ivIcon = (ImageView) view.findViewById(R.id.ivIcon);

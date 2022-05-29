@@ -128,7 +128,7 @@ public class SkillTestPart5Activity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-                    ApiService.apiService.submitSkillTestAnswer(correctSentences, skillTestId).enqueue(new Callback<Object>() {
+                    ApiService.apiService.submitSkillTestAnswer(correctSentences, skillTestId, questions.length()).enqueue(new Callback<Object>() {
                         @Override
                         public void onResponse(Call<Object> call, Response<Object> response) {
                             if (response.isSuccessful()) {

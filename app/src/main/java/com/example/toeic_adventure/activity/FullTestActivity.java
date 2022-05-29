@@ -316,7 +316,7 @@ public class FullTestActivity extends AppCompatActivity {
                         e.printStackTrace();
                         Toast.makeText(FullTestActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                     }
-                    ApiService.apiService.submitSkillTestAnswer(correctSentences, fullTestId).enqueue(new Callback<Object>() {
+                    ApiService.apiService.submitSkillTestAnswer(correctSentences, fullTestId, 0).enqueue(new Callback<Object>() {
                         @Override
                         public void onResponse(Call<Object> call, Response<Object> response) {
                             if (response.isSuccessful()) {

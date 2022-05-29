@@ -127,7 +127,7 @@ public class SkillTestListActivity extends AppCompatActivity {
                     JSONArray results = resObj.getJSONArray("results");
                     for (int i = 0; i < results.length(); i++) {
                         JSONObject skillTestList = results.getJSONObject(i);
-                        arraySkillTestList.add(new SkillTestList(skillTestList.getInt("score"), skillTestList.getString("id")));
+                        arraySkillTestList.add(new SkillTestList(skillTestList.getInt("score"), skillTestList.getInt("totalSentences"), skillTestList.getString("id")));
                     }
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {

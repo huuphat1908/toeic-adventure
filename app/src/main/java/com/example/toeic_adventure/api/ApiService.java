@@ -88,7 +88,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("/histories/skill-test")
-    Call<Object> submitSkillTestAnswer(@Field("correctSentences") int correctSentences, @Field("test") String test);
+    Call<Object> submitSkillTestAnswer(@Field("correctSentences") int correctSentences, @Field("test") String test, @Field("totalSentences") int totalSentences);
 
     @GET("/collections")
     Call<Object> getFullTestCollection();

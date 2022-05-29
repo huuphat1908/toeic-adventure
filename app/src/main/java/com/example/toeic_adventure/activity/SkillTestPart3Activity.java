@@ -306,28 +306,23 @@ public class SkillTestPart3Activity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!isSubmitted) {
                     int correctSentences  = 0;
+                    int totalSentences = 0;
                     try {
                         for (int i = 0; i < questions.length(); i++) {
-                            JSONArray tempAnswer = questions.getJSONObject(i).getJSONArray("childs");
-                            if (tempAnswer.getJSONObject(0).getJSONObject("answer").getString("text")
-                                    .equals(tempAnswer.getJSONObject(0).getJSONObject("answer").getString("userAnswer"))) {
-                                correctSentences++;
-                            }
-                            if (tempAnswer.getJSONObject(1).getJSONObject("answer").getString("text")
-                                    .equals(tempAnswer.getJSONObject(1).getJSONObject("answer").getString("userAnswer"))) {
-                                correctSentences++;
-                            }
-                            if (tempAnswer.getJSONObject(2).getJSONObject("answer").getString("text")
-                                    .equals(tempAnswer.getJSONObject(2).getJSONObject("answer").getString("userAnswer"))) {
-                                correctSentences++;
+                            for (int j = 0; j < questions.getJSONObject(i).getJSONArray("childs").length(); j++) {
+                                JSONObject currAnswer = questions.getJSONObject(i).getJSONArray("childs").getJSONObject(j).getJSONObject("answer");
+                                if (currAnswer.getString("userAnswer").equals(currAnswer.getString("text"))) {
+                                    correctSentences++;
+                                }
+                                totalSentences++;
                             }
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(SkillTestPart3Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
                     }
-                    Log.d("AAA", String.valueOf(correctSentences));
-                    ApiService.apiService.submitSkillTestAnswer(correctSentences, skillTestId).enqueue(new Callback<Object>() {
+
+                    ApiService.apiService.submitSkillTestAnswer(correctSentences, skillTestId, totalSentences).enqueue(new Callback<Object>() {
                         @Override
                         public void onResponse(Call<Object> call, Response<Object> response) {
                             if (response.isSuccessful()) {
@@ -363,9 +358,9 @@ public class SkillTestPart3Activity extends AppCompatActivity {
                                 JSONObject resObj = new JSONObject(new Gson().toJson(response.body()));
                                 questions = resObj.getJSONArray("questions");
                                 for (int i = 0; i < questions.length(); i++) {
-                                    questions.getJSONObject(i).getJSONArray("childs").getJSONObject(0).getJSONObject("answer").put("userAnswer", "");
-                                    questions.getJSONObject(i).getJSONArray("childs").getJSONObject(1).getJSONObject("answer").put("userAnswer", "");
-                                    questions.getJSONObject(i).getJSONArray("childs").getJSONObject(2).getJSONObject("answer").put("userAnswer", "");
+                                    for (int j = 0; j < questions.getJSONObject(i).getJSONArray("childs").length(); j++) {
+                                        questions.getJSONObject(i).getJSONArray("childs").getJSONObject(j).getJSONObject("answer").put("userAnswer", "");
+                                    }
                                 }
                                 handleNavigateIcon();
                                 handleQuestion();
