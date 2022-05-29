@@ -147,7 +147,7 @@ public class VocabularyActivity  extends Fragment {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 //                Vocabulary item = (Vocabulary) parent.getItemAtPosition(position);
                 Intent vocabularyDetailActivity = new Intent(v.getContext(), VocabularyDetailActivity.class);
-                vocabularyDetailActivity.putExtra("title", "Quang");
+                vocabularyDetailActivity.putExtra("title", arrayVocabulary.get(position).Name);
                 startActivity(vocabularyDetailActivity);
 //                Toast.makeText(getContext(), "You have click item " + position + item.Name, Toast.LENGTH_LONG).show();
             }
