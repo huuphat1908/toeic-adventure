@@ -1,6 +1,7 @@
 package com.example.toeic_adventure.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +14,12 @@ import com.example.toeic_adventure.model.SkillTestCollection;
 
 import java.util.List;
 
-public class SkillTestAdapter extends BaseAdapter {
+public class SkillTestCollectionAdapter extends BaseAdapter {
     Context MyContext;
     int MyLayout;
     List<SkillTestCollection> skillTestCollectionList;
 
-    public SkillTestAdapter(Context context, int layout, List<SkillTestCollection> skillTestCollectionList) {
+    public SkillTestCollectionAdapter(Context context, int layout, List<SkillTestCollection> skillTestCollectionList) {
         MyContext = context;
         MyLayout = layout;
         this.skillTestCollectionList = skillTestCollectionList;
@@ -55,11 +56,14 @@ public class SkillTestAdapter extends BaseAdapter {
         TextView numberOfTest = (TextView) view.findViewById(R.id.textViewNumberOfTests);
         numberOfTest.setText(skillTestCollectionList.get(i).NumberOfTest + " bài");
 
-        String type = skillTestCollectionList.get(i).Type.toString();
+        String type = skillTestCollectionList.get(i).Type;
+        ImageView ivIcon = (ImageView) view.findViewById(R.id.ivIcon);
         TextView skillType = (TextView) view.findViewById(R.id.textViewSkillType);
-        if (type.equals(type)) {
+        if (type.equals("Bài nghe")) {
+            ivIcon.setImageResource(R.drawable.skill_test_listening_icon);
             skillType.setText("Bài nghe");
         } else {
+            ivIcon.setImageResource(R.drawable.ic_menu_skill_test);
             skillType.setText("Bài đọc");
         }
 

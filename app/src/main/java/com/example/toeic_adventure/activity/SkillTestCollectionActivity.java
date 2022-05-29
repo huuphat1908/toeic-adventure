@@ -16,7 +16,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.toeic_adventure.R;
-import com.example.toeic_adventure.adapter.SkillTestAdapter;
+import com.example.toeic_adventure.adapter.SkillTestCollectionAdapter;
 import com.example.toeic_adventure.api.ApiService;
 import com.example.toeic_adventure.model.SkillTestCollection;
 import com.google.gson.Gson;
@@ -36,7 +36,7 @@ public class SkillTestCollectionActivity extends Fragment {
     ArrayList<SkillTestCollection> arraySkillTestCollection;
     Button btnLevel;
     private String level = "EASY";
-    SkillTestAdapter adapter;
+    SkillTestCollectionAdapter adapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -79,7 +79,7 @@ public class SkillTestCollectionActivity extends Fragment {
         lvSkillTestCollection = (ListView) view.findViewById(R.id.listViewSkillTest);
         btnLevel = (Button) view.findViewById(R.id.btnLevel);
         lvSkillTestCollection.setDivider(null);
-        adapter = new SkillTestAdapter(
+        adapter = new SkillTestCollectionAdapter(
                 getContext(),
                 R.layout.skill_test_collection_item,
                 arraySkillTestCollection

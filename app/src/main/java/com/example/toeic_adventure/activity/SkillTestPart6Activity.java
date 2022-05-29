@@ -40,49 +40,40 @@ import retrofit2.Response;
 public class SkillTestPart6Activity extends AppCompatActivity {
     String skillTestId;
     JSONArray questions;
-    JSONObject question, childQuestion1, childQuestion2, childQuestion3;
-    JSONObject answer, childAnswer1, childAnswer2, childAnswer3;
-    JSONArray choices1, choices2, choices3;
+    JSONObject question, childQuestion1, childQuestion2, childQuestion3, childQuestion4;
+    JSONObject answer, childAnswer1, childAnswer2, childAnswer3, childAnswer4;
+    JSONArray choices1, choices2, choices3, choices4;
     int index = 0;
     boolean isSubmitted;
-    ImageLoaderConfiguration config;
-    ImageLoader imageLoader;
 
     TextView tvIndex;
-    ImageView ivQuestion;
-    TextView tvQuestion1, tvQuestion2, tvQuestion3;
-    RadioGroup rgAnswer1, rgAnswer2, rgAnswer3;
+    ImageView ivClose;
+    TextView tvQuestion;
+    TextView tvQuestion1, tvQuestion2, tvQuestion3, tvQuestion4;
+    RadioGroup rgAnswer1, rgAnswer2, rgAnswer3, rgAnswer4;
     ImageView ivNext;
     ImageView ivPrev;
-    TextView tvCurrentTime;
-    TextView tvTotalDuration;
-    SeekBar sbAudio;
-    ImageView ivPlayPause;
     RadioButton rbA1, rbB1, rbC1, rbD1;
     RadioButton rbA2, rbB2, rbC2, rbD2;
     RadioButton rbA3, rbB3, rbC3, rbD3;
+    RadioButton rbA4, rbB4, rbC4, rbD4;
     TextView tvTranscript;
     Button btnSubmit;
-    private MediaPlayer mediaPlayer;
-    private Handler handler = new Handler();
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mediaPlayer.release();
-        mediaPlayer = new MediaPlayer();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_skill_test_part3);
+        setContentView(R.layout.activity_skill_test_part6);
 
-        config = new ImageLoaderConfiguration.Builder(this).build();
-        ImageLoader.getInstance().init(config);
-        imageLoader = ImageLoader.getInstance();
         initView();
         fetchTest();
+
+        ivClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         rbA1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,20 +197,6 @@ public class SkillTestPart6Activity extends AppCompatActivity {
                 }
             }
         });
-        ivPlayPause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mediaPlayer.isPlaying()) {
-                    handler.removeCallbacks(updater);
-                    mediaPlayer.pause();
-                    ivPlayPause.setImageResource(R.drawable.play_audio);
-                } else {
-                    mediaPlayer.start();
-                    ivPlayPause.setImageResource(R.drawable.pause_audio);
-                    updateSeekBar();
-                }
-            }
-        });
         ivPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -227,18 +204,6 @@ public class SkillTestPart6Activity extends AppCompatActivity {
                     index--;
                     handleNavigateIcon();
                     handleQuestion();
-                    mediaPlayer.release();
-                    mediaPlayer = new MediaPlayer();
-                    prepareMediaPlayer();
-                    if (mediaPlayer.isPlaying()) {
-                        handler.removeCallbacks(updater);
-                        mediaPlayer.pause();
-                        ivPlayPause.setImageResource(R.drawable.play_audio);
-                    } else {
-                        mediaPlayer.start();
-                        ivPlayPause.setImageResource(R.drawable.pause_audio);
-                        updateSeekBar();
-                    }
                 }
             }
         });
@@ -249,46 +214,7 @@ public class SkillTestPart6Activity extends AppCompatActivity {
                     index++;
                     handleNavigateIcon();
                     handleQuestion();
-                    mediaPlayer.release();
-                    mediaPlayer = new MediaPlayer();
-                    prepareMediaPlayer();
-                    if (mediaPlayer.isPlaying()) {
-                        handler.removeCallbacks(updater);
-                        mediaPlayer.pause();
-                        ivPlayPause.setImageResource(R.drawable.play_audio);
-                    } else {
-                        mediaPlayer.start();
-                        ivPlayPause.setImageResource(R.drawable.pause_audio);
-                        updateSeekBar();
-                    }
                 }
-            }
-        });
-        sbAudio.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                SeekBar seekBar = (SeekBar) view;
-                int playPosition = (mediaPlayer.getDuration() / 100) * seekBar.getProgress();
-                mediaPlayer.seekTo(playPosition);
-                tvCurrentTime.setText(milliSecondsToTimer(mediaPlayer.getCurrentPosition()));
-                return false;
-            }
-        });
-        mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
-            @Override
-            public void onBufferingUpdate(MediaPlayer mediaPlayer, int i) {
-                sbAudio.setSecondaryProgress(i);
-            }
-        });
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                sbAudio.setProgress(0);
-                ivPlayPause.setImageResource(R.drawable.play_audio);
-                tvCurrentTime.setText("0:00");
-                tvTotalDuration.setText("0:00");
-                mediaPlayer.reset();
-                prepareMediaPlayer();
             }
         });
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -311,12 +237,15 @@ public class SkillTestPart6Activity extends AppCompatActivity {
                                     .equals(tempAnswer.getJSONObject(2).getJSONObject("answer").getString("userAnswer"))) {
                                 correctSentences++;
                             }
+                            if (tempAnswer.getJSONObject(3).getJSONObject("answer").getString("text")
+                                    .equals(tempAnswer.getJSONObject(3).getJSONObject("answer").getString("userAnswer"))) {
+                                correctSentences++;
+                            }
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(SkillTestPart6Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
                     }
-                    Log.d("AAA", String.valueOf(correctSentences));
                     ApiService.apiService.submitSkillTestAnswer(correctSentences, skillTestId).enqueue(new Callback<Object>() {
                         @Override
                         public void onResponse(Call<Object> call, Response<Object> response) {
@@ -356,19 +285,10 @@ public class SkillTestPart6Activity extends AppCompatActivity {
                                     questions.getJSONObject(i).getJSONArray("childs").getJSONObject(0).getJSONObject("answer").put("userAnswer", "");
                                     questions.getJSONObject(i).getJSONArray("childs").getJSONObject(1).getJSONObject("answer").put("userAnswer", "");
                                     questions.getJSONObject(i).getJSONArray("childs").getJSONObject(2).getJSONObject("answer").put("userAnswer", "");
+                                    questions.getJSONObject(i).getJSONArray("childs").getJSONObject(3).getJSONObject("answer").put("userAnswer", "");
                                 }
                                 handleNavigateIcon();
                                 handleQuestion();
-                                prepareMediaPlayer();
-                                if (mediaPlayer.isPlaying()) {
-                                    handler.removeCallbacks(updater);
-                                    mediaPlayer.pause();
-                                    ivPlayPause.setImageResource(R.drawable.play_audio);
-                                } else {
-                                    mediaPlayer.start();
-                                    ivPlayPause.setImageResource(R.drawable.pause_audio);
-                                    updateSeekBar();
-                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Toast.makeText(SkillTestPart6Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
@@ -392,20 +312,19 @@ public class SkillTestPart6Activity extends AppCompatActivity {
 
     private void initView() {
         tvIndex = (TextView) findViewById(R.id.tvIndex);
-        ivQuestion = (ImageView) findViewById(R.id.ivQuestion);
+        ivClose = (ImageView) findViewById(R.id.ivClose);
+        tvQuestion = (TextView) findViewById(R.id.tvQuestion);
         tvQuestion1 = (TextView) findViewById(R.id.tvQuestion1);
         tvQuestion2 = (TextView) findViewById(R.id.tvQuestion2);
         tvQuestion3 = (TextView) findViewById(R.id.tvQuestion3);
+        tvQuestion4 = (TextView) findViewById(R.id.tvQuestion4);
         rgAnswer1 = (RadioGroup) findViewById(R.id.rgAnswer1);
         rgAnswer2 = (RadioGroup) findViewById(R.id.rgAnswer2);
         rgAnswer3 = (RadioGroup) findViewById(R.id.rgAnswer3);
+        rgAnswer4 = (RadioGroup) findViewById(R.id.rgAnswer4);
         ivNext = (ImageView) findViewById(R.id.ivNext);
         ivPrev = (ImageView) findViewById(R.id.ivPrev);
-        tvCurrentTime = (TextView) findViewById(R.id.tvCurrentTime);
-        tvTotalDuration = (TextView) findViewById(R.id.tvTotalDuration);
-        ivPlayPause = (ImageView) findViewById(R.id.ivPlayPause);
         tvTranscript = (TextView) findViewById(R.id.tvTranscript);
-        sbAudio = (SeekBar) findViewById(R.id.sbAudio);
         rbA1 =  (RadioButton) findViewById(R.id.rbA1);
         rbB1 = (RadioButton) findViewById(R.id.rbB1);
         rbC1 = (RadioButton) findViewById(R.id.rbC1);
@@ -418,9 +337,11 @@ public class SkillTestPart6Activity extends AppCompatActivity {
         rbB3 = (RadioButton) findViewById(R.id.rbB3);
         rbC3 = (RadioButton) findViewById(R.id.rbC3);
         rbD3 = (RadioButton) findViewById(R.id.rbD3);
+        rbA4 =  (RadioButton) findViewById(R.id.rbA4);
+        rbB4 = (RadioButton) findViewById(R.id.rbB4);
+        rbC4 = (RadioButton) findViewById(R.id.rbC4);
+        rbD4 = (RadioButton) findViewById(R.id.rbD4);
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
-        mediaPlayer = new MediaPlayer();
-        sbAudio.setMax(100);
         isSubmitted = false;
     }
 
@@ -432,50 +353,50 @@ public class SkillTestPart6Activity extends AppCompatActivity {
             childQuestion1 = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(0).getJSONObject("question");
             childQuestion2 = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(1).getJSONObject("question");
             childQuestion3 = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(2).getJSONObject("question");
+            childQuestion4 = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(3).getJSONObject("question");
             childAnswer1 = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(0).getJSONObject("answer");
             childAnswer2 = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(1).getJSONObject("answer");
             childAnswer3 = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(2).getJSONObject("answer");
+            childAnswer4 = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(3).getJSONObject("answer");
 
             choices1 = childQuestion1.getJSONArray("choices");
             choices2 = childQuestion2.getJSONArray("choices");
             choices3 = childQuestion3.getJSONArray("choices");
+            choices4 = childQuestion4.getJSONArray("choices");
             int indexTitle = index + 1;
             tvIndex.setText(indexTitle + "/" + questions.length());
-            imageLoader.displayImage(question.getJSONArray("image").length() != 0 ?
-                    question.getJSONArray("image").getJSONObject(0).getString("url")
-                    : null, ivQuestion);
-            if (question.getJSONArray("image").length() == 0) {
-                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        0,
-                        0.0f
-                );
-                ivQuestion.setLayoutParams(param);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                tvQuestion.setText(Html.fromHtml(question.getString("text"), Html.FROM_HTML_MODE_COMPACT));
+                tvQuestion1.setText(Html.fromHtml("Câu 1: " + childQuestion1.getString("text"), Html.FROM_HTML_MODE_COMPACT));
+                tvQuestion2.setText(Html.fromHtml("Câu 2: " + childQuestion2.getString("text"), Html.FROM_HTML_MODE_COMPACT));
+                tvQuestion3.setText(Html.fromHtml("Câu 3: " + childQuestion3.getString("text"), Html.FROM_HTML_MODE_COMPACT));
+                tvQuestion4.setText(Html.fromHtml("Câu 4: " + childQuestion4.getString("text"), Html.FROM_HTML_MODE_COMPACT));
             } else {
-                LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        0,
-                        1.0f
-                );
-                ivQuestion.setLayoutParams(param);
+                tvQuestion.setText(Html.fromHtml(question.getString("text")));
+                tvQuestion1.setText(Html.fromHtml("Câu 1: " + childQuestion1.getString("text")));
+                tvQuestion2.setText(Html.fromHtml("Câu 2: " + childQuestion2.getString("text")));
+                tvQuestion3.setText(Html.fromHtml("Câu 3: " + childQuestion3.getString("text")));
+                tvQuestion4.setText(Html.fromHtml("Câu 4: " + childQuestion4.getString("text")));
             }
-            tvQuestion1.setText("Câu 1: " + childQuestion1.getString("text"));
             rbA1.setText(choices1.getString(0));
             rbB1.setText(choices1.getString(1));
             rbC1.setText(choices1.getString(2));
             rbD1.setText(choices1.getString(3));
 
-            tvQuestion2.setText("Câu 2: " + childQuestion2.getString("text"));
             rbA2.setText(choices2.getString(0));
             rbB2.setText(choices2.getString(1));
             rbC2.setText(choices2.getString(2));
             rbD2.setText(choices2.getString(3));
 
-            tvQuestion3.setText("Câu 3: " + childQuestion3.getString("text"));
             rbA3.setText(choices3.getString(0));
             rbB3.setText(choices3.getString(1));
             rbC3.setText(choices3.getString(2));
             rbD3.setText(choices3.getString(3));
+
+            rbA4.setText(choices4.getString(0));
+            rbB4.setText(choices4.getString(1));
+            rbC4.setText(choices4.getString(2));
+            rbD4.setText(choices4.getString(3));
 
             switch (childAnswer1.getString("userAnswer").split(" ")[0]) {
                 case "":
@@ -528,6 +449,23 @@ public class SkillTestPart6Activity extends AppCompatActivity {
                     rbD3.setChecked(true);
                     break;
             }
+            switch (childAnswer4.getString("userAnswer").split(" ")[0]) {
+                case "":
+                    rgAnswer4.clearCheck();
+                    break;
+                case "(A)":
+                    rbA4.setChecked(true);
+                    break;
+                case "(B)":
+                    rbB4.setChecked(true);
+                    break;
+                case "(C)":
+                    rbC4.setChecked(true);
+                    break;
+                case "(D)":
+                    rbD4.setChecked(true);
+                    break;
+            }
 
             if (index == questions.length() - 1) {
                 btnSubmit.setVisibility(View.VISIBLE);
@@ -535,10 +473,15 @@ public class SkillTestPart6Activity extends AppCompatActivity {
                 btnSubmit.setVisibility(View.INVISIBLE);
             }
             if (isSubmitted) {
+                String transcript = "<b>Transcript</b><br />" ;
+                transcript += childAnswer1.getString("text") + ": " + childAnswer1.getString("explanation") + "<br />";
+                transcript += childAnswer2.getString("text") + ": " + childAnswer2.getString("explanation") + "<br />";
+                transcript += childAnswer3.getString("text") + ": " + childAnswer3.getString("explanation") + "<br />";
+                transcript += childAnswer4.getString("text") + ": " + childAnswer4.getString("explanation");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    tvTranscript.setText(Html.fromHtml(answer.getString("explanation"), Html.FROM_HTML_MODE_COMPACT));
+                    tvTranscript.setText(Html.fromHtml(transcript, Html.FROM_HTML_MODE_COMPACT));
                 } else {
-                    tvTranscript.setText(Html.fromHtml(answer.getString("explanation")));
+                    tvTranscript.setText(Html.fromHtml(transcript));
                 }
                 btnSubmit.setVisibility(View.VISIBLE);
                 btnSubmit.setText("Exit");
@@ -567,50 +510,5 @@ public class SkillTestPart6Activity extends AppCompatActivity {
         } else {
             ivNext.setImageResource(R.drawable.next_question);
         }
-    }
-
-    private void prepareMediaPlayer() {
-        try {
-            mediaPlayer.setDataSource(question.getJSONArray("sound").getJSONObject(0).getString("url"));
-            mediaPlayer.prepare();
-            tvTotalDuration.setText(milliSecondsToTimer(mediaPlayer.getDuration()));
-        } catch (Exception e) {
-            Toast.makeText(SkillTestPart6Activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d("Error", e.getMessage());
-        }
-    }
-
-    private Runnable updater = new Runnable() {
-        @Override
-        public void run() {
-            updateSeekBar();
-            long currentDuration = mediaPlayer.getCurrentPosition();
-            tvCurrentTime.setText(milliSecondsToTimer(currentDuration));
-        }
-    };
-
-    private void updateSeekBar() {
-        if (mediaPlayer.isPlaying()) {
-            sbAudio.setProgress((int) (((float) mediaPlayer.getCurrentPosition() / mediaPlayer.getDuration()) * 100));
-            handler.postDelayed(updater, 1000);
-        }
-    }
-
-    private String milliSecondsToTimer(long milliSeconds) {
-        String timerString = "";
-        String secondsString;
-        int hours = (int) (milliSeconds / (1000 * 60 * 60));
-        int minutes = (int) (milliSeconds % (1000 * 60 * 60)) / (1000 * 60);
-        int seconds = (int) ((milliSeconds % (1000 * 60 * 60)) % (1000 * 60) / 1000);
-        if (hours > 0) {
-            timerString = hours + ":";
-        }
-        if(seconds < 10) {
-            secondsString = "0" + seconds;
-        } else {
-            secondsString = "" + seconds;
-        }
-        timerString = timerString + minutes + ":" + secondsString;
-        return timerString;
     }
 }

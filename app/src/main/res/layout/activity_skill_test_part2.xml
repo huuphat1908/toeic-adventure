@@ -13,15 +13,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <TextView
+        android:orientation="horizontal">
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@drawable/close"
+            android:visibility="invisible"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:id="@+id/tvIndex"
             android:gravity="center"
             android:textAlignment="center"
             android:text="1/10"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivClose"
+            android:src="@drawable/close" />
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"

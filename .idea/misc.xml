@@ -72,8 +72,13 @@
         <entry key="..\:/Users/PC/AndroidStudioProjects/toeic-adventure/app/src/main/res/layout/vocalbylar_item.xml" value="0.15443840579710144" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/toeic-adventure/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2495" />
         <entry key="app/src/main/res/drawable/button.xml" value="0.247" />
+        <entry key="app/src/main/res/drawable/close.xml" value="0.22" />
+        <entry key="app/src/main/res/drawable/et_closing_eye_icon.xml" value="0.22" />
+        <entry key="app/src/main/res/drawable/ic_menu_skill_test.xml" value="0.125" />
         <entry key="app/src/main/res/drawable/ic_menu_vocabulary.xml" value="0.274" />
         <entry key="app/src/main/res/drawable/input.xml" value="0.247" />
+        <entry key="app/src/main/res/drawable/prev_question.xml" value="0.22" />
+        <entry key="app/src/main/res/drawable/question.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_email_confirmation.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/activity_forgot_password_authentication.xml" value="0.2653985507246377" />
@@ -98,11 +103,13 @@
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/fragment_skill_test.xml" value="0.23641304347826086" />
         <entry key="app/src/main/res/layout/full_test_collection_item.xml" value="0.15260416666666668" />
+        <entry key="app/src/main/res/layout/full_test_detail_item.xml" value="0.16979166666666667" />
         <entry key="app/src/main/res/layout/full_test_list_item.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/fulltestcollection_item.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/list_item_layout.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/mini_test_item.xml" value="0.2653985507246377" />
+        <entry key="app/src/main/res/layout/skill_test_collection_item.xml" value="0.6675191815856778" />
         <entry key="app/src/main/res/layout/skill_test_dialog.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/skill_test_item.xml" value="0.2653985507246377" />
         <entry key="app/src/main/res/layout/skill_test_list.xml" value="0.2653985507246377" />

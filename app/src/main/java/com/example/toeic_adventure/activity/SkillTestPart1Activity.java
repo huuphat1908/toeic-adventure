@@ -48,6 +48,7 @@ public class SkillTestPart1Activity extends AppCompatActivity {
     ImageLoader imageLoader;
 
     TextView tvIndex;
+    ImageView ivClose;
     ImageView ivQuestion;
     RadioGroup rgAnswer;
     ImageView ivNext;
@@ -79,6 +80,15 @@ public class SkillTestPart1Activity extends AppCompatActivity {
         imageLoader = ImageLoader.getInstance();
         initView();
         fetchTest();
+
+        ivClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                mediaPlayer.release();
+                mediaPlayer = new MediaPlayer();
+            }
+        });
 
         rbA.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -276,6 +286,7 @@ public class SkillTestPart1Activity extends AppCompatActivity {
 
     private void initView() {
         tvIndex = (TextView) findViewById(R.id.tvIndex);
+        ivClose = (ImageView) findViewById(R.id.ivClose);
         ivQuestion = (ImageView) findViewById(R.id.ivQuestion);
         rgAnswer = (RadioGroup) findViewById(R.id.rgAnswer);
         ivNext = (ImageView) findViewById(R.id.ivNext);

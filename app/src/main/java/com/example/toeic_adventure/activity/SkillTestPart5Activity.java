@@ -46,6 +46,7 @@ public class SkillTestPart5Activity extends AppCompatActivity {
     boolean isSubmitted;
 
     TextView tvIndex;
+    ImageView ivClose;
     TextView tvQuestion;
     RadioGroup rgAnswer;
     ImageView ivNext;
@@ -61,6 +62,13 @@ public class SkillTestPart5Activity extends AppCompatActivity {
 
         initView();
         fetchTest();
+
+        ivClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         rbA.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,6 +191,7 @@ public class SkillTestPart5Activity extends AppCompatActivity {
 
     private void initView() {
         tvIndex = (TextView) findViewById(R.id.tvIndex);
+        ivClose = (ImageView) findViewById(R.id.ivClose);
         tvQuestion = (TextView) findViewById(R.id.tvQuestion);
         rgAnswer = (RadioGroup) findViewById(R.id.rgAnswer);
         ivNext = (ImageView) findViewById(R.id.ivNext);

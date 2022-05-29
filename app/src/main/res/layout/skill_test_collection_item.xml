@@ -43,25 +43,27 @@
                 android:paddingBottom="7dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
-                    android:id="@+id/image1"
-                    android:layout_height="20dp"
+                    android:id="@+id/ivIcon"
                     android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginEnd="5dp"
-                    android:src="@drawable/listening_icon" />
+                    android:src="@drawable/skill_test_listening_icon" />
+
                 <TextView
                     android:id="@+id/textViewSkillType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/image1"
-                    android:textColor="@color/text_color"
-                    android:text="Bài nghe" />
+                    android:layout_toEndOf="@+id/ivIcon"
+                    android:text="Bài nghe"
+                    android:textColor="@color/text_color" />
                 <ImageView
                     android:layout_toStartOf="@id/textViewNumberOfTests"
                     android:layout_height="20dp"
                     android:layout_width="20dp"
                     android:layout_marginEnd="5dp"
-                    android:src="@drawable/stack_icon" />
+                    android:src="@drawable/skill_test_secondary_icon" />
                 <TextView
                     android:id="@+id/textViewNumberOfTests"
                     android:layout_alignParentEnd="true"

@@ -13,21 +13,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <TextView
+        android:orientation="horizontal">
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@drawable/close"
+            android:visibility="invisible"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:id="@+id/tvIndex"
             android:gravity="center"
             android:textAlignment="center"
             android:text="1/10"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivClose"
+            android:src="@drawable/close" />
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/sharp_cardview_bg"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/black"
         android:id="@+id/tvQuestion"/>
     <ScrollView
         android:layout_width="match_parent"
@@ -37,14 +48,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/sharp_cardview_bg"
-                android:textColor="@color/black"
-                android:visibility="invisible"
-                android:layout_marginBottom="10dp"
-                android:id="@+id/tvTranscript" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -140,45 +143,49 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/rbD3"
                     android:text="(D):" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sharp_cardview_bg"
+                    android:textColor="@color/black"
+                    android:id="@+id/tvQuestion4"/>
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/rgAnswer4">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rbA4"
+                        android:text="(A):" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rbB4"
+                        android:text="(B):" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rbC4"
+                        android:text="(C):" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rbD4"
+                        android:text="(D):" />
+                </RadioGroup>
             </RadioGroup>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/sharp_cardview_bg"
+                android:textColor="@color/black"
+                android:visibility="invisible"
+                android:layout_marginTop="10dp"
+                android:id="@+id/tvTranscript" />
         </LinearLayout>
     </ScrollView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginVertical="20dp"
-        android:gravity="center_vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvCurrentTime"
-            android:text="0:00"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="#212121"/>
-        <SeekBar
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:id="@+id/sbAudio"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvTotalDuration"
-            android:text="4:07"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="#212121"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ivPlayPause"
-            android:src="@drawable/play_audio"
-            android:layout_marginStart="4dp"/>
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
