@@ -58,9 +58,6 @@
         <activity
             android:name=".activity.LoginActivity"
             android:exported="false" />
-        <activity
-            android:name=".FullTestDetail"
-            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.actions"

@@ -11,9 +11,11 @@ import android.text.Html;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
@@ -21,7 +23,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.toeic_adventure.R;
+import com.example.toeic_adventure.adapter.QuestionAdapter;
+import com.example.toeic_adventure.adapter.SkillTestListAdapter;
 import com.example.toeic_adventure.api.ApiService;
+import com.example.toeic_adventure.model.Answer;
+import com.example.toeic_adventure.model.Question;
+import com.example.toeic_adventure.model.SkillTestList;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -51,10 +58,15 @@ public class SkillTestPart7Activity extends AppCompatActivity {
     ImageView ivClose;
     TextView tvQuestion;
     ImageView ivQuestion;
+    ListView lvQuestion;
     ImageView ivNext;
     ImageView ivPrev;
     TextView tvTranscript;
     Button btnSubmit;
+
+    ArrayList<Question> questionList;
+    ArrayList<Answer> answerList;
+    QuestionAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +139,7 @@ public class SkillTestPart7Activity extends AppCompatActivity {
                         }
                     });
                     isSubmitted = true;
+                    adapter.notifyDataSetChanged();
                     handleQuestion();
                 }
             }
@@ -182,6 +195,17 @@ public class SkillTestPart7Activity extends AppCompatActivity {
         ivClose = (ImageView) findViewById(R.id.ivClose);
         tvQuestion = (TextView) findViewById(R.id.tvQuestion);
         ivQuestion = (ImageView) findViewById(R.id.ivQuestion);
+        lvQuestion = (ListView) findViewById(R.id.lvQuestion);
+        questionList = new ArrayList<Question>();
+        answerList = new ArrayList<Answer>();
+        adapter = new QuestionAdapter(
+                SkillTestPart7Activity.this,
+                R.layout.question_layout_item,
+                questionList,
+                answerList,
+                isSubmitted
+        );
+        lvQuestion.setAdapter(adapter);
         ivNext = (ImageView) findViewById(R.id.ivNext);
         ivPrev = (ImageView) findViewById(R.id.ivPrev);
         tvTranscript = (TextView) findViewById(R.id.tvTranscript);
@@ -229,6 +253,21 @@ public class SkillTestPart7Activity extends AppCompatActivity {
                 ivQuestion.setLayoutParams(ivQuestionParam);
                 imageLoader.displayImage(question.getJSONArray("image").getJSONObject(0).getString("url"), ivQuestion);
             }
+
+            questionList.clear();
+            answerList.clear();
+            for (int i = 0; i < questions.getJSONObject(index).getJSONArray("childs").length(); i++) {
+                JSONObject curChildQuestion = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(i).getJSONObject("question");
+                JSONObject curChildAnswer = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(i).getJSONObject("answer");
+                questionList.add(new Question(curChildQuestion.getString("text"),
+                        curChildQuestion.getJSONArray("image"),
+                        curChildQuestion.getJSONArray("sound"),
+                        curChildQuestion.getJSONArray("choices")));
+                answerList.add(new Answer(curChildAnswer.getString("text"),
+                        curChildAnswer.getString("explanation"),
+                        curChildAnswer.getString("userAnswer")));
+            }
+            adapter.notifyDataSetChanged();
 
             if (index == questions.length() - 1) {
                 btnSubmit.setVisibility(View.VISIBLE);
