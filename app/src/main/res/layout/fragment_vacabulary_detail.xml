@@ -11,7 +11,7 @@ tools:context=".activity.VocabularyDetailActivity">
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="4dp"
-    android:title="Hello World" />
+    android:title="Title" />
 
     <ListView
         android:id="@+id/listViewVocabularyDetail"
