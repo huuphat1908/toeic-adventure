@@ -101,7 +101,7 @@ public class QuestionAdapter extends BaseAdapter {
                 AnswerList.get(i).userAnswer = rbA.getText().toString();
             }
         });
-        rbA.setOnClickListener(new View.OnClickListener() {
+        rbB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AnswerList.get(i).userAnswer = rbB.getText().toString();

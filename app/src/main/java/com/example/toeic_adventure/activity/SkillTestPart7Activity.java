@@ -90,6 +90,16 @@ public class SkillTestPart7Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (index != 0) {
+                    if (!answerList.isEmpty()) {
+                        try {
+                            for (int i = 0; i < questions.getJSONObject(index).getJSONArray("childs").length(); i++) {
+                                questions.getJSONObject(index).getJSONArray("childs").getJSONObject(i).getJSONObject("answer")
+                                        .put("userAnswer", answerList.get(i).userAnswer);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     index--;
                     handleNavigateIcon();
                     handleQuestion();
@@ -100,6 +110,16 @@ public class SkillTestPart7Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (index != questions.length() - 1) {
+                    if (!answerList.isEmpty()) {
+                        try {
+                            for (int i = 0; i < questions.getJSONObject(index).getJSONArray("childs").length(); i++) {
+                                questions.getJSONObject(index).getJSONArray("childs").getJSONObject(i).getJSONObject("answer")
+                                        .put("userAnswer", answerList.get(i).userAnswer);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     index++;
                     handleNavigateIcon();
                     handleQuestion();
