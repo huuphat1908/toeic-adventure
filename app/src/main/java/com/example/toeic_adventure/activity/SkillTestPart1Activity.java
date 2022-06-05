@@ -41,7 +41,6 @@ public class SkillTestPart1Activity extends AppCompatActivity {
     JSONArray questions;
     JSONObject question, answer;
     JSONArray choices;
-    List<String> userAnswer;
     int index = 0;
     boolean isSubmitted;
     ImageLoaderConfiguration config;
@@ -93,25 +92,41 @@ public class SkillTestPart1Activity extends AppCompatActivity {
         rbA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userAnswer.set(index, "(A)");
+                try {
+                    answer.put("userAnswer", question.getJSONArray("choices").get(0));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
         rbB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userAnswer.set(index, "(B)");
+                try {
+                    answer.put("userAnswer", question.getJSONArray("choices").get(1));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
         rbC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userAnswer.set(index, "(C)");
+                try {
+                    answer.put("userAnswer", question.getJSONArray("choices").get(2));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
         rbD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userAnswer.set(index, "(D)");
+                try {
+                    answer.put("userAnswer", question.getJSONArray("choices").get(3));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
         ivPlayPause.setOnClickListener(new View.OnClickListener() {
@@ -203,17 +218,24 @@ public class SkillTestPart1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!isSubmitted) {
+                    rbA.setClickable(false);
+                    rbB.setClickable(false);
+                    rbC.setClickable(false);
+                    rbD.setClickable(false);
                     int correctSentences  = 0;
+                    int totalSentences = 0;
                     for (int i = 0; i < questions.length(); i++) {
+                       totalSentences++;
                         try {
-                            if (questions.getJSONObject(i).getJSONObject("answer").getString("text").equals(userAnswer.get(i))) {
+                            if (questions.getJSONObject(i).getJSONObject("answer").getString("userAnswer")
+                                    .equals(questions.getJSONObject(i).getJSONObject("answer").getString("text"))) {
                                 correctSentences++;
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
-                    ApiService.apiService.submitSkillTestAnswer(correctSentences, skillTestId, questions.length()).enqueue(new Callback<Object>() {
+                    ApiService.apiService.submitSkillTestAnswer(correctSentences, skillTestId, totalSentences).enqueue(new Callback<Object>() {
                         @Override
                         public void onResponse(Call<Object> call, Response<Object> response) {
                             if (response.isSuccessful()) {
@@ -248,8 +270,8 @@ public class SkillTestPart1Activity extends AppCompatActivity {
                             try {
                                 JSONObject resObj = new JSONObject(new Gson().toJson(response.body()));
                                 questions = resObj.getJSONArray("questions");
-                                for (int i = 0; i < questions.length(); i++) {
-                                    userAnswer.add("");
+                                for (int i = 0; i <  questions.length(); i++) {
+                                    questions.getJSONObject(i).getJSONObject("answer").put("userAnswer", "");
                                 }
                                 handleNavigateIcon();
                                 handleQuestion();
@@ -303,7 +325,6 @@ public class SkillTestPart1Activity extends AppCompatActivity {
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
         mediaPlayer = new MediaPlayer();
         sbAudio.setMax(100);
-        userAnswer = new ArrayList<>();
         isSubmitted = false;
     }
 
@@ -320,7 +341,7 @@ public class SkillTestPart1Activity extends AppCompatActivity {
             rbC.setText(choices.getString(2));
             rbD.setText(choices.getString(3));
 
-            switch (userAnswer.get(index)) {
+            switch (answer.getString("userAnswer").split(" ")[0]) {
                 case "":
                     rgAnswer.clearCheck();
                     break;
@@ -357,6 +378,57 @@ public class SkillTestPart1Activity extends AppCompatActivity {
                     }
                 });
                 tvTranscript.setVisibility(View.VISIBLE);
+
+                rbA.setTextColor(getResources().getColor(R.color.black));
+                rbB.setTextColor(getResources().getColor(R.color.black));
+                rbC.setTextColor(getResources().getColor(R.color.black));
+                rbD.setTextColor(getResources().getColor(R.color.black));
+                switch (rgAnswer.getCheckedRadioButtonId()) {
+                    case -1:
+                        switch (answer.getString("text").split(" ")[0]) {
+                            case "(A)":
+                                rbA.setTextColor(getResources().getColor(R.color.pink));
+                                break;
+                            case "(B)":
+                                rbB.setTextColor(getResources().getColor(R.color.pink));
+                                break;
+                            case "(C)":
+                                rbC.setTextColor(getResources().getColor(R.color.pink));
+                                break;
+                            case "(D)":
+                                rbD.setTextColor(getResources().getColor(R.color.pink));
+                                break;
+                        }
+                        break;
+                    case R.id.rbA:
+                        if (!answer.getString("text").split(" ")[0].equals("(A)")) {
+                            rbA.setTextColor(getResources().getColor(R.color.pink));
+                        } else {
+                            rbA.setTextColor(getResources().getColor(R.color.green));
+                        }
+                        break;
+                    case R.id.rbB:
+                        if (!answer.getString("text").split(" ")[0].equals("(B)")) {
+                            rbB.setTextColor(getResources().getColor(R.color.pink));
+                        } else {
+                            rbB.setTextColor(getResources().getColor(R.color.green));
+                        }
+                        break;
+                    case R.id.rbC:
+                        if (!answer.getString("text").split(" ")[0].equals("(C)")) {
+                            rbC.setTextColor(getResources().getColor(R.color.pink));
+                        } else {
+                            rbC.setTextColor(getResources().getColor(R.color.green));
+                        }
+                        break;
+                    case R.id.rbD:
+                        if (!answer.getString("text").split(" ")[0].equals("(D)")) {
+                            rbD.setTextColor(getResources().getColor(R.color.pink));
+                        } else {
+                            rbD.setTextColor(getResources().getColor(R.color.green));
+                        }
+                        break;
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
