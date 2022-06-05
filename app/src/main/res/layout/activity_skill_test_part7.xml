@@ -73,15 +73,7 @@
             android:id="@+id/lvQuestion"
             android:divider="@null"
             android:dividerHeight="0dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/sharp_cardview_bg"
-            android:textColor="@color/black"
-            android:visibility="invisible"
-            android:layout_marginTop="10dp"
-            android:id="@+id/tvTranscript" />
-        </LinearLayout>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
