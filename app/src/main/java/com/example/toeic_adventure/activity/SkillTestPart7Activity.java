@@ -79,7 +79,6 @@ public class SkillTestPart7Activity extends AppCompatActivity {
                 finish();
             }
         });
-
         ivPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
