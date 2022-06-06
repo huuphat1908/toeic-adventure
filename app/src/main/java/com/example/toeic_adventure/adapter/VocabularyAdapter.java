@@ -30,7 +30,7 @@ public class VocabularyAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return VocabularyList.get(i);
     }
 
     @Override
