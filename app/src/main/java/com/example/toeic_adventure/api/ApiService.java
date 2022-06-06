@@ -105,4 +105,6 @@ public interface ApiService {
     @GET("/users/profile")
     Call<Object> getProfileUser();
 
+    @GET("/vocabulary-themes")
+    Call<Object> getVocabularyTheme();
 }

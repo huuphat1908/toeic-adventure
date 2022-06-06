@@ -14,14 +14,27 @@ import android.widget.Toast;
 
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.adapter.VocabularyAdapter;
+import com.example.toeic_adventure.api.ApiService;
+import com.example.toeic_adventure.model.FullTestCollection;
 import com.example.toeic_adventure.model.Vocabulary;
+import com.example.toeic_adventure.model.VocabularyDetail;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class VocabularyActivity  extends Fragment {
     ListView lvVocabulary;
     View view;
-    ArrayList<Vocabulary> arrayVocabulary;
+    ArrayList<Vocabulary> arrayVocabularyTheme;
+    VocabularyAdapter adapter;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -30,75 +43,6 @@ public class VocabularyActivity  extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public VocabularyActivity() {
-
-    }
-
-    private ArrayList<Vocabulary> initArrayVocabulary() {
-        ArrayList<Vocabulary> array = new ArrayList<Vocabulary>();
-        array.add(new Vocabulary(
-                1,
-                "Contract",
-                "Hợp đồng"
-        ));
-        array.add(new Vocabulary(
-                2,
-                "Marketing",
-                "Tiếp thị"
-        ));
-        array.add(new Vocabulary(
-                3,
-                "Warranties",
-                "Bảo hiểm, đảm bảo"
-        ));
-        array.add(new Vocabulary(
-                4,
-                "Business Planning",
-                "Chiến lược kinh doanh"
-        ));
-        array.add(new Vocabulary(
-                5,
-                "Conferences",
-                "Hội nghị"
-        ));
-        array.add(new Vocabulary(
-                6,
-                "Conferences",
-                "Hội nghị"
-        ));
-        array.add(new Vocabulary(
-                7,
-                "Conferences",
-                "Hội nghị"
-        ));
-        array.add(new Vocabulary(
-                8,
-                "Conferences",
-                "Hội nghị"
-        ));
-        array.add(new Vocabulary(
-                9,
-                "Conferences",
-                "Hội nghị"
-        ));
-        array.add(new Vocabulary(
-                10,
-                "Conferences",
-                "Hội nghị"
-        ));
-        array.add(new Vocabulary(
-                11,
-                "Conferences",
-                "Hội nghị"
-        ));
-        array.add(new Vocabulary(
-                12,
-                "Conferences",
-                "Hội nghị"
-        ));
-
-        return array;
-    }
 
     public static VocabularyActivity newInstance(String param1, String param2) {
         VocabularyActivity fragment = new VocabularyActivity();
@@ -131,28 +75,55 @@ public class VocabularyActivity  extends Fragment {
             parent.removeView(view);
         }
 
-        // Init adapter and set it to Skill Test List View
-        arrayVocabulary = initArrayVocabulary();
+        arrayVocabularyTheme = new ArrayList<Vocabulary>();
+        fetchFullTestCollection();
         lvVocabulary = (ListView) view.findViewById(R.id.listViewVocabulary);
         lvVocabulary.setDivider(null);
-        VocabularyAdapter adapter = new VocabularyAdapter(
+        adapter = new VocabularyAdapter(
                 getContext(),
                 R.layout.vocabulary_item,
-                arrayVocabulary
+                arrayVocabularyTheme
         );
         lvVocabulary.setAdapter(adapter);
 
         lvVocabulary.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-//                Vocabulary item = (Vocabulary) parent.getItemAtPosition(position);
                 Intent vocabularyDetailActivity = new Intent(v.getContext(), VocabularyDetailActivity.class);
-                vocabularyDetailActivity.putExtra("title", arrayVocabulary.get(position).Name);
+                vocabularyDetailActivity.putExtra("title", arrayVocabularyTheme.get(position).Name);
                 startActivity(vocabularyDetailActivity);
-//                Toast.makeText(getContext(), "You have click item " + position + item.Name, Toast.LENGTH_LONG).show();
             }
         });
 
         return view;
+    }
+
+    private void fetchFullTestCollection() {
+        ApiService.apiService.getVocabularyTheme().enqueue(new Callback<Object>() {
+            @Override
+            public void onResponse(Call<Object> call, Response<Object> response) {
+                try {
+                    JSONObject resObj = new JSONObject(new Gson().toJson(response.body()));
+                    arrayVocabularyTheme.clear();
+                    JSONArray results = resObj.getJSONArray("results");
+                    for (int i = 0; i < results.length(); i++) {
+                        JSONObject arrayVocabularyThemeItem = results.getJSONObject(i);
+                        arrayVocabularyTheme.add(new Vocabulary(
+                                i+1,
+                                arrayVocabularyThemeItem.getString("enName"),
+                                arrayVocabularyThemeItem.getString("vnName")
+                        ));
+                    }
+                    adapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), "JSON object error", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Object> call, Throwable t) {
+                Toast.makeText(getContext(), "Unknown error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
