@@ -53,36 +53,12 @@ public class FullTestCollectionAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) MyContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(MyLayout, null);
 
-        // Set test information to layout
         TextView tvFullTestCollection = (TextView) view.findViewById(R.id.tvFullTestCollection);
         tvFullTestCollection.setText(FullTestCollectionList.get(i).name);
 
         ImageView ivFullTestCollection = (ImageView) view.findViewById(R.id.ivFullTestCollection);
         imageLoader.displayImage(Url.baseUrl + FullTestCollectionList.get(i).imageUrl, ivFullTestCollection);
-//        new LoadImage().execute("http://20.89.240.175/" + FullTestCollectionList.get(i).imageUrl);
 
         return view;
     }
-
-//    private class LoadImage extends AsyncTask<String, Void, Bitmap>{
-//        Bitmap bitmapImg = null;
-//        @Override
-//        protected Bitmap doInBackground(String... strings) {
-//            try {
-//                URL url = new URL(strings[0]);
-//                InputStream inputStream = url.openConnection().getInputStream();
-//                bitmapImg = BitmapFactory.decodeStream(inputStream);
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            return bitmapImg;
-//        }
-//        @Override
-//        protected void onPostExecute(Bitmap bitmap) {
-//            super.onPostExecute(bitmap);
-//            ivFullTestCollection.setImageBitmap(bitmap);
-//        }
-//    }
 }
