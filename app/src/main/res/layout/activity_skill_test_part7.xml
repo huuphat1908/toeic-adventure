@@ -37,6 +37,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:id="@+id/svQuestion"
+        android:fillViewport="true"
         android:layout_marginBottom="15dp">
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,34 +53,27 @@
                 android:id="@+id/tvQuestion"/>
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
                 android:id="@+id/ivQuestion"
                 android:layout_marginBottom="15dp"
                 android:src="@drawable/part1_thumbnail"/>
         </LinearLayout>
     </ScrollView>
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-        <LinearLayout
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/lvQuestion"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/sharp_cardview_bg"
-                android:textColor="@color/black"
-                android:visibility="invisible"
-                android:layout_marginTop="10dp"
-                android:id="@+id/tvTranscript" />
-        </LinearLayout>
-    </ScrollView>
+            android:id="@+id/lvQuestion"
+            android:divider="@null"
+            android:dividerHeight="0dp"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

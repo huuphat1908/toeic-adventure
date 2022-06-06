@@ -1,34 +1,26 @@
 package com.example.toeic_adventure.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Html;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.SeekBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.adapter.QuestionAdapter;
-import com.example.toeic_adventure.adapter.SkillTestListAdapter;
 import com.example.toeic_adventure.api.ApiService;
 import com.example.toeic_adventure.model.Answer;
 import com.example.toeic_adventure.model.Question;
-import com.example.toeic_adventure.model.SkillTestList;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -51,6 +43,7 @@ public class SkillTestPart7Activity extends AppCompatActivity {
     JSONObject answer;
     int index = 0;
     boolean isSubmitted;
+    List<Boolean> isSubmittedList;
     ImageLoaderConfiguration config;
     ImageLoader imageLoader;
 
@@ -63,6 +56,7 @@ public class SkillTestPart7Activity extends AppCompatActivity {
     ImageView ivPrev;
     TextView tvTranscript;
     Button btnSubmit;
+    ScrollView svQuestion;
 
     ArrayList<Question> questionList;
     ArrayList<Answer> answerList;
@@ -133,6 +127,10 @@ public class SkillTestPart7Activity extends AppCompatActivity {
                     int correctSentences  = 0;
                     int totalSentences = 0;
                     try {
+                        for (int i = 0; i < questions.getJSONObject(index).getJSONArray("childs").length(); i++) {
+                            questions.getJSONObject(index).getJSONArray("childs").getJSONObject(i).getJSONObject("answer")
+                                    .put("userAnswer", answerList.get(i).userAnswer);
+                        }
                         for (int i = 0; i < questions.length(); i++) {
                             for (int j = 0; j < questions.getJSONObject(i).getJSONArray("childs").length(); j++) {
                                 JSONObject currAnswer = questions.getJSONObject(i).getJSONArray("childs").getJSONObject(j).getJSONObject("answer");
@@ -159,7 +157,6 @@ public class SkillTestPart7Activity extends AppCompatActivity {
                         }
                     });
                     isSubmitted = true;
-                    adapter.notifyDataSetChanged();
                     handleQuestion();
                 }
             }
@@ -218,17 +215,30 @@ public class SkillTestPart7Activity extends AppCompatActivity {
         lvQuestion = (ListView) findViewById(R.id.lvQuestion);
         questionList = new ArrayList<Question>();
         answerList = new ArrayList<Answer>();
+        isSubmittedList = new ArrayList<Boolean>();
         adapter = new QuestionAdapter(
                 SkillTestPart7Activity.this,
                 R.layout.question_layout_item,
                 questionList,
                 answerList,
-                isSubmitted
+                isSubmittedList
         );
         lvQuestion.setAdapter(adapter);
         ivNext = (ImageView) findViewById(R.id.ivNext);
         ivPrev = (ImageView) findViewById(R.id.ivPrev);
-        tvTranscript = (TextView) findViewById(R.id.tvTranscript);
+        svQuestion = (ScrollView) findViewById(R.id.svQuestion);
+        tvTranscript = new TextView(this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0,10,0,0);
+        tvTranscript.setLayoutParams(params);
+        tvTranscript.setBackground(ContextCompat.getDrawable(SkillTestPart7Activity.this, R.drawable.sharp_cardview_bg));
+        tvTranscript.setTextColor(getResources().getColor(R.color.black));
+        tvTranscript.setVisibility(View.INVISIBLE);
+        if (tvTranscript != null) {
+            lvQuestion.addFooterView(tvTranscript);
+        } else {
+            throw new NullPointerException("tvTranscript is null");
+        }
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
         isSubmitted = false;
     }
@@ -237,6 +247,9 @@ public class SkillTestPart7Activity extends AppCompatActivity {
         try {
             question = questions.getJSONObject(index).getJSONObject("question");
             answer = questions.getJSONObject(index).getJSONObject("answer");
+
+            svQuestion.smoothScrollTo(0, 0);
+            lvQuestion.smoothScrollToPosition(0);
 
             int indexTitle = index + 1;
             tvIndex.setText(indexTitle + "/" + questions.length());
@@ -276,7 +289,9 @@ public class SkillTestPart7Activity extends AppCompatActivity {
 
             questionList.clear();
             answerList.clear();
+            isSubmittedList.clear();
             for (int i = 0; i < questions.getJSONObject(index).getJSONArray("childs").length(); i++) {
+                isSubmittedList.add(isSubmitted);
                 JSONObject curChildQuestion = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(i).getJSONObject("question");
                 JSONObject curChildAnswer = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(i).getJSONObject("answer");
                 questionList.add(new Question(curChildQuestion.getString("text"),
@@ -296,6 +311,9 @@ public class SkillTestPart7Activity extends AppCompatActivity {
             }
             if (isSubmitted) {
                 String transcript = "<b>Transcript</b><br />" ;
+                for (int i = 0; i < questionList.size(); i++) {
+                    transcript += "<b>" + answerList.get(i).text + ":</b> " + answerList.get(i).explanation + "<br />";
+                }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     tvTranscript.setText(Html.fromHtml(transcript, Html.FROM_HTML_MODE_COMPACT));
                 } else {

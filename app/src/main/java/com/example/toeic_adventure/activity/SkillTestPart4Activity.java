@@ -1,6 +1,7 @@
 package com.example.toeic_adventure.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
@@ -21,7 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.toeic_adventure.R;
+import com.example.toeic_adventure.adapter.QuestionAdapter;
 import com.example.toeic_adventure.api.ApiService;
+import com.example.toeic_adventure.model.Answer;
+import com.example.toeic_adventure.model.Question;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -40,30 +45,30 @@ import retrofit2.Response;
 public class SkillTestPart4Activity extends AppCompatActivity {
     String skillTestId;
     JSONArray questions;
-    JSONObject question, childQuestion1, childQuestion2, childQuestion3;
-    JSONObject answer, childAnswer1, childAnswer2, childAnswer3;
-    JSONArray choices1, choices2, choices3;
+    JSONObject question;
+    JSONObject answer;
     int index = 0;
     boolean isSubmitted;
+    List<Boolean> isSubmittedList;
     ImageLoaderConfiguration config;
     ImageLoader imageLoader;
 
     TextView tvIndex;
     ImageView ivClose;
     ImageView ivQuestion;
-    TextView tvQuestion1, tvQuestion2, tvQuestion3;
-    RadioGroup rgAnswer1, rgAnswer2, rgAnswer3;
+    ListView lvQuestion;
     ImageView ivNext;
     ImageView ivPrev;
     TextView tvCurrentTime;
     TextView tvTotalDuration;
     SeekBar sbAudio;
     ImageView ivPlayPause;
-    RadioButton rbA1, rbB1, rbC1, rbD1;
-    RadioButton rbA2, rbB2, rbC2, rbD2;
-    RadioButton rbA3, rbB3, rbC3, rbD3;
     TextView tvTranscript;
     Button btnSubmit;
+
+    ArrayList<Question> questionList;
+    ArrayList<Answer> answerList;
+    QuestionAdapter adapter;
     private MediaPlayer mediaPlayer;
     private Handler handler = new Handler();
 
@@ -93,129 +98,6 @@ public class SkillTestPart4Activity extends AppCompatActivity {
                 mediaPlayer = new MediaPlayer();
             }
         });
-
-        rbA1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    childAnswer1.put("userAnswer", rbA1.getText().toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        rbB1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    childAnswer1.put("userAnswer", rbB1.getText().toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        rbC1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    childAnswer1.put("userAnswer", rbC1.getText().toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        rbD1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    childAnswer1.put("userAnswer", rbD1.getText().toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        rbA2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    childAnswer2.put("userAnswer", rbA2.getText().toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        rbB2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    childAnswer2.put("userAnswer", rbB2.getText().toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        rbC2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    childAnswer2.put("userAnswer", rbC2.getText().toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        rbD2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    childAnswer2.put("userAnswer", rbD2.getText().toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        rbA3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    childAnswer3.put("userAnswer", rbA3.getText().toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        rbB3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    childAnswer3.put("userAnswer", rbB3.getText().toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        rbC3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    childAnswer3.put("userAnswer", rbC3.getText().toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        rbD3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    childAnswer3.put("userAnswer", rbD3.getText().toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
         ivPlayPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -234,6 +116,16 @@ public class SkillTestPart4Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (index != 0) {
+                    if (!answerList.isEmpty()) {
+                        try {
+                            for (int i = 0; i < questions.getJSONObject(index).getJSONArray("childs").length(); i++) {
+                                questions.getJSONObject(index).getJSONArray("childs").getJSONObject(i).getJSONObject("answer")
+                                        .put("userAnswer", answerList.get(i).userAnswer);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     index--;
                     handleNavigateIcon();
                     handleQuestion();
@@ -256,6 +148,16 @@ public class SkillTestPart4Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (index != questions.length() - 1) {
+                    if (!answerList.isEmpty()) {
+                        try {
+                            for (int i = 0; i < questions.getJSONObject(index).getJSONArray("childs").length(); i++) {
+                                questions.getJSONObject(index).getJSONArray("childs").getJSONObject(i).getJSONObject("answer")
+                                        .put("userAnswer", answerList.get(i).userAnswer);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     index++;
                     handleNavigateIcon();
                     handleQuestion();
@@ -308,6 +210,10 @@ public class SkillTestPart4Activity extends AppCompatActivity {
                     int correctSentences  = 0;
                     int totalSentences = 0;
                     try {
+                        for (int i = 0; i < questions.getJSONObject(index).getJSONArray("childs").length(); i++) {
+                            questions.getJSONObject(index).getJSONArray("childs").getJSONObject(i).getJSONObject("answer")
+                                    .put("userAnswer", answerList.get(i).userAnswer);
+                        }
                         for (int i = 0; i < questions.length(); i++) {
                             for (int j = 0; j < questions.getJSONObject(i).getJSONArray("childs").length(); j++) {
                                 JSONObject currAnswer = questions.getJSONObject(i).getJSONArray("childs").getJSONObject(j).getJSONObject("answer");
@@ -398,34 +304,39 @@ public class SkillTestPart4Activity extends AppCompatActivity {
         tvIndex = (TextView) findViewById(R.id.tvIndex);
         ivClose = (ImageView) findViewById(R.id.ivClose);
         ivQuestion = (ImageView) findViewById(R.id.ivQuestion);
-        tvQuestion1 = (TextView) findViewById(R.id.tvQuestion1);
-        tvQuestion2 = (TextView) findViewById(R.id.tvQuestion2);
-        tvQuestion3 = (TextView) findViewById(R.id.tvQuestion3);
-        rgAnswer1 = (RadioGroup) findViewById(R.id.rgAnswer1);
-        rgAnswer2 = (RadioGroup) findViewById(R.id.rgAnswer2);
-        rgAnswer3 = (RadioGroup) findViewById(R.id.rgAnswer3);
+        lvQuestion = (ListView) findViewById(R.id.lvQuestion);
+        questionList = new ArrayList<Question>();
+        answerList = new ArrayList<Answer>();
+        isSubmittedList = new ArrayList<Boolean>();
+        adapter = new QuestionAdapter(
+                SkillTestPart4Activity.this,
+                R.layout.question_layout_item,
+                questionList,
+                answerList,
+                isSubmittedList
+        );
+        lvQuestion.setAdapter(adapter);
         ivNext = (ImageView) findViewById(R.id.ivNext);
         ivPrev = (ImageView) findViewById(R.id.ivPrev);
         tvCurrentTime = (TextView) findViewById(R.id.tvCurrentTime);
         tvTotalDuration = (TextView) findViewById(R.id.tvTotalDuration);
         ivPlayPause = (ImageView) findViewById(R.id.ivPlayPause);
-        tvTranscript = (TextView) findViewById(R.id.tvTranscript);
         sbAudio = (SeekBar) findViewById(R.id.sbAudio);
-        rbA1 =  (RadioButton) findViewById(R.id.rbA1);
-        rbB1 = (RadioButton) findViewById(R.id.rbB1);
-        rbC1 = (RadioButton) findViewById(R.id.rbC1);
-        rbD1 = (RadioButton) findViewById(R.id.rbD1);
-        rbA2 =  (RadioButton) findViewById(R.id.rbA2);
-        rbB2 = (RadioButton) findViewById(R.id.rbB2);
-        rbC2 = (RadioButton) findViewById(R.id.rbC2);
-        rbD2 = (RadioButton) findViewById(R.id.rbD2);
-        rbA3 =  (RadioButton) findViewById(R.id.rbA3);
-        rbB3 = (RadioButton) findViewById(R.id.rbB3);
-        rbC3 = (RadioButton) findViewById(R.id.rbC3);
-        rbD3 = (RadioButton) findViewById(R.id.rbD3);
-        btnSubmit = (Button) findViewById(R.id.btnSubmit);
         mediaPlayer = new MediaPlayer();
         sbAudio.setMax(100);
+        tvTranscript = new TextView(this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0,10,0,0);
+        tvTranscript.setLayoutParams(params);
+        tvTranscript.setBackground(ContextCompat.getDrawable(SkillTestPart4Activity.this, R.drawable.sharp_cardview_bg));
+        tvTranscript.setTextColor(getResources().getColor(R.color.black));
+        tvTranscript.setVisibility(View.INVISIBLE);
+        if (tvTranscript != null) {
+            lvQuestion.addFooterView(tvTranscript);
+        } else {
+            throw new NullPointerException("tvTranscript is null");
+        }
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
         isSubmitted = false;
     }
 
@@ -434,16 +345,8 @@ public class SkillTestPart4Activity extends AppCompatActivity {
             question = questions.getJSONObject(index).getJSONObject("question");
             answer = questions.getJSONObject(index).getJSONObject("answer");
 
-            childQuestion1 = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(0).getJSONObject("question");
-            childQuestion2 = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(1).getJSONObject("question");
-            childQuestion3 = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(2).getJSONObject("question");
-            childAnswer1 = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(0).getJSONObject("answer");
-            childAnswer2 = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(1).getJSONObject("answer");
-            childAnswer3 = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(2).getJSONObject("answer");
+            lvQuestion.smoothScrollToPosition(0);
 
-            choices1 = childQuestion1.getJSONArray("choices");
-            choices2 = childQuestion2.getJSONArray("choices");
-            choices3 = childQuestion3.getJSONArray("choices");
             int indexTitle = index + 1;
             tvIndex.setText(indexTitle + "/" + questions.length());
             imageLoader.displayImage(question.getJSONArray("image").length() != 0 ?
@@ -464,75 +367,23 @@ public class SkillTestPart4Activity extends AppCompatActivity {
                 );
                 ivQuestion.setLayoutParams(param);
             }
-            tvQuestion1.setText("Câu 1: " + childQuestion1.getString("text"));
-            rbA1.setText(choices1.getString(0));
-            rbB1.setText(choices1.getString(1));
-            rbC1.setText(choices1.getString(2));
-            rbD1.setText(choices1.getString(3));
 
-            tvQuestion2.setText("Câu 2: " + childQuestion2.getString("text"));
-            rbA2.setText(choices2.getString(0));
-            rbB2.setText(choices2.getString(1));
-            rbC2.setText(choices2.getString(2));
-            rbD2.setText(choices2.getString(3));
-
-            tvQuestion3.setText("Câu 3: " + childQuestion3.getString("text"));
-            rbA3.setText(choices3.getString(0));
-            rbB3.setText(choices3.getString(1));
-            rbC3.setText(choices3.getString(2));
-            rbD3.setText(choices3.getString(3));
-
-            switch (childAnswer1.getString("userAnswer").split(" ")[0]) {
-                case "":
-                    rgAnswer1.clearCheck();
-                    break;
-                case "(A)":
-                    rbA1.setChecked(true);
-                    break;
-                case "(B)":
-                    rbB1.setChecked(true);
-                    break;
-                case "(C)":
-                    rbC1.setChecked(true);
-                    break;
-                case "(D)":
-                    rbD1.setChecked(true);
-                    break;
+            questionList.clear();
+            answerList.clear();
+            isSubmittedList.clear();
+            for (int i = 0; i < questions.getJSONObject(index).getJSONArray("childs").length(); i++) {
+                isSubmittedList.add(isSubmitted);
+                JSONObject curChildQuestion = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(i).getJSONObject("question");
+                JSONObject curChildAnswer = questions.getJSONObject(index).getJSONArray("childs").getJSONObject(i).getJSONObject("answer");
+                questionList.add(new Question(curChildQuestion.getString("text"),
+                        curChildQuestion.getJSONArray("image"),
+                        curChildQuestion.getJSONArray("sound"),
+                        curChildQuestion.getJSONArray("choices")));
+                answerList.add(new Answer(curChildAnswer.getString("text"),
+                        curChildAnswer.getString("explanation"),
+                        curChildAnswer.getString("userAnswer")));
             }
-            switch (childAnswer2.getString("userAnswer").split(" ")[0]) {
-                case "":
-                    rgAnswer2.clearCheck();
-                    break;
-                case "(A)":
-                    rbA2.setChecked(true);
-                    break;
-                case "(B)":
-                    rbB2.setChecked(true);
-                    break;
-                case "(C)":
-                    rbC2.setChecked(true);
-                    break;
-                case "(D)":
-                    rbD2.setChecked(true);
-                    break;
-            }
-            switch (childAnswer3.getString("userAnswer").split(" ")[0]) {
-                case "":
-                    rgAnswer3.clearCheck();
-                    break;
-                case "(A)":
-                    rbA3.setChecked(true);
-                    break;
-                case "(B)":
-                    rbB3.setChecked(true);
-                    break;
-                case "(C)":
-                    rbC3.setChecked(true);
-                    break;
-                case "(D)":
-                    rbD3.setChecked(true);
-                    break;
-            }
+            adapter.notifyDataSetChanged();
 
             if (index == questions.length() - 1) {
                 btnSubmit.setVisibility(View.VISIBLE);
