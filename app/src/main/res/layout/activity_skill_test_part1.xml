@@ -37,43 +37,23 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:scaleType="fitXY"
         android:id="@+id/ivQuestion"
         android:src="@drawable/part1_thumbnail"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="10dp" />
-    <RadioGroup
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/rgAnswer">
-        <RadioButton
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rbA"
-            android:text="(A):" />
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rbB"
-            android:text="(B):" />
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rbC"
-            android:text="(C):" />
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rbD"
-            android:text="(D):" />
-    </RadioGroup>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/sharp_cardview_bg"
-        android:textColor="@color/black"
-        android:visibility="invisible"
-        android:id="@+id/tvTranscript" />
+            android:id="@+id/lvQuestion"
+            android:divider="@null"
+            android:dividerHeight="0dp"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,6 +1,7 @@
 package com.example.toeic_adventure.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -13,6 +14,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
@@ -20,7 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.toeic_adventure.R;
+import com.example.toeic_adventure.adapter.QuestionAdapter;
 import com.example.toeic_adventure.api.ApiService;
+import com.example.toeic_adventure.model.Answer;
+import com.example.toeic_adventure.model.Question;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -40,27 +46,30 @@ public class SkillTestPart1Activity extends AppCompatActivity {
     String skillTestId;
     JSONArray questions;
     JSONObject question, answer;
-    JSONArray choices;
     int index = 0;
     boolean isSubmitted;
+    List<Boolean> isSubmittedList;
     ImageLoaderConfiguration config;
     ImageLoader imageLoader;
 
     TextView tvIndex;
     ImageView ivClose;
     ImageView ivQuestion;
-    RadioGroup rgAnswer;
+    ListView lvQuestion;
     ImageView ivNext;
     ImageView ivPrev;
     TextView tvCurrentTime;
     TextView tvTotalDuration;
     SeekBar sbAudio;
     ImageView ivPlayPause;
-    RadioButton rbA, rbB, rbC, rbD;
     TextView tvTranscript;
     Button btnSubmit;
     private MediaPlayer mediaPlayer;
     private Handler handler = new Handler();
+
+    ArrayList<Question> questionList;
+    ArrayList<Answer> answerList;
+    QuestionAdapter adapter;
 
     @Override
     protected void onDestroy() {
@@ -88,47 +97,6 @@ public class SkillTestPart1Activity extends AppCompatActivity {
                 mediaPlayer = new MediaPlayer();
             }
         });
-
-        rbA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    answer.put("userAnswer", question.getJSONArray("choices").get(0));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        rbB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    answer.put("userAnswer", question.getJSONArray("choices").get(1));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        rbC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    answer.put("userAnswer", question.getJSONArray("choices").get(2));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        rbD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    answer.put("userAnswer", question.getJSONArray("choices").get(3));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
         ivPlayPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,6 +115,13 @@ public class SkillTestPart1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (index != 0) {
+                    if (!answerList.isEmpty()) {
+                        try {
+                            questions.getJSONObject(index).getJSONObject("answer").put("userAnswer", answerList.get(0).userAnswer);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     index--;
                     handleNavigateIcon();
                     handleQuestion();
@@ -169,6 +144,13 @@ public class SkillTestPart1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (index != questions.length() - 1) {
+                    if (!answerList.isEmpty()) {
+                        try {
+                            questions.getJSONObject(index).getJSONObject("answer").put("userAnswer", answerList.get(0).userAnswer);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     index++;
                     handleNavigateIcon();
                     handleQuestion();
@@ -218,10 +200,11 @@ public class SkillTestPart1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!isSubmitted) {
-                    rbA.setClickable(false);
-                    rbB.setClickable(false);
-                    rbC.setClickable(false);
-                    rbD.setClickable(false);
+                    try {
+                        questions.getJSONObject(index).getJSONObject("answer").put("userAnswer", answerList.get(0).userAnswer);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     int correctSentences  = 0;
                     int totalSentences = 0;
                     for (int i = 0; i < questions.length(); i++) {
@@ -270,7 +253,7 @@ public class SkillTestPart1Activity extends AppCompatActivity {
                             try {
                                 JSONObject resObj = new JSONObject(new Gson().toJson(response.body()));
                                 questions = resObj.getJSONArray("questions");
-                                for (int i = 0; i <  questions.length(); i++) {
+                                for (int i = 0; i < questions.length(); i++) {
                                     questions.getJSONObject(i).getJSONObject("answer").put("userAnswer", "");
                                 }
                                 handleNavigateIcon();
@@ -310,54 +293,63 @@ public class SkillTestPart1Activity extends AppCompatActivity {
         tvIndex = (TextView) findViewById(R.id.tvIndex);
         ivClose = (ImageView) findViewById(R.id.ivClose);
         ivQuestion = (ImageView) findViewById(R.id.ivQuestion);
-        rgAnswer = (RadioGroup) findViewById(R.id.rgAnswer);
+        lvQuestion = (ListView) findViewById(R.id.lvQuestion);
+        questionList = new ArrayList<Question>();
+        answerList = new ArrayList<Answer>();
+        isSubmittedList = new ArrayList<Boolean>();
+        adapter = new QuestionAdapter(
+                SkillTestPart1Activity.this,
+                R.layout.question_layout_item,
+                questionList,
+                answerList,
+                isSubmittedList
+        );
+        lvQuestion.setAdapter(adapter);
         ivNext = (ImageView) findViewById(R.id.ivNext);
         ivPrev = (ImageView) findViewById(R.id.ivPrev);
         tvCurrentTime = (TextView) findViewById(R.id.tvCurrentTime);
         tvTotalDuration = (TextView) findViewById(R.id.tvTotalDuration);
         ivPlayPause = (ImageView) findViewById(R.id.ivPlayPause);
-        tvTranscript = (TextView) findViewById(R.id.tvTranscript);
         sbAudio = (SeekBar) findViewById(R.id.sbAudio);
-        rbA =  (RadioButton) findViewById(R.id.rbA);
-        rbB = (RadioButton) findViewById(R.id.rbB);
-        rbC = (RadioButton) findViewById(R.id.rbC);
-        rbD = (RadioButton) findViewById(R.id.rbD);
-        btnSubmit = (Button) findViewById(R.id.btnSubmit);
         mediaPlayer = new MediaPlayer();
         sbAudio.setMax(100);
+        tvTranscript = new TextView(this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0,10,0,0);
+        tvTranscript.setLayoutParams(params);
+        tvTranscript.setBackground(ContextCompat.getDrawable(SkillTestPart1Activity.this, R.drawable.sharp_cardview_bg));
+        tvTranscript.setTextColor(getResources().getColor(R.color.black));
+        tvTranscript.setVisibility(View.INVISIBLE);
+        if (tvTranscript != null) {
+            lvQuestion.addFooterView(tvTranscript);
+        } else {
+            throw new NullPointerException("tvTranscript is null");
+        }
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
         isSubmitted = false;
     }
 
     private void handleQuestion() {
         try {
-            question = questions.getJSONObject(index ).getJSONObject("question");
-            answer = questions.getJSONObject(index ).getJSONObject("answer");
-            choices = question.getJSONArray("choices");
+            question = questions.getJSONObject(index).getJSONObject("question");
+            answer = questions.getJSONObject(index).getJSONObject("answer");
             int indexTitle = index + 1;
             tvIndex.setText(indexTitle + "/" + questions.length());
             imageLoader.displayImage(question.getJSONArray("image").getJSONObject(0).getString("url"), ivQuestion);
-            rbA.setText(choices.getString(0));
-            rbB.setText(choices.getString(1));
-            rbC.setText(choices.getString(2));
-            rbD.setText(choices.getString(3));
 
-            switch (answer.getString("userAnswer").split(" ")[0]) {
-                case "":
-                    rgAnswer.clearCheck();
-                    break;
-                case "(A)":
-                    rbA.setChecked(true);
-                    break;
-                case "(B)":
-                    rbB.setChecked(true);
-                    break;
-                case "(C)":
-                    rbC.setChecked(true);
-                    break;
-                case "(D)":
-                    rbD.setChecked(true);
-                    break;
-            }
+            questionList.clear();
+            answerList.clear();
+            isSubmittedList.clear();
+            questionList.add(new Question(question.getString("text"),
+                    question.getJSONArray("image"),
+                    question.getJSONArray("sound"),
+                    question.getJSONArray("choices")));
+            answerList.add(new Answer(answer.getString("text"),
+                    answer.getString("explanation"),
+                    answer.getString("userAnswer")));
+            isSubmittedList.add(isSubmitted);
+            adapter.notifyDataSetChanged();
+
             if (index == questions.length() - 1) {
                 btnSubmit.setVisibility(View.VISIBLE);
             } else {
@@ -378,57 +370,6 @@ public class SkillTestPart1Activity extends AppCompatActivity {
                     }
                 });
                 tvTranscript.setVisibility(View.VISIBLE);
-
-                rbA.setTextColor(getResources().getColor(R.color.black));
-                rbB.setTextColor(getResources().getColor(R.color.black));
-                rbC.setTextColor(getResources().getColor(R.color.black));
-                rbD.setTextColor(getResources().getColor(R.color.black));
-                switch (rgAnswer.getCheckedRadioButtonId()) {
-                    case -1:
-                        switch (answer.getString("text").split(" ")[0]) {
-                            case "(A)":
-                                rbA.setTextColor(getResources().getColor(R.color.pink));
-                                break;
-                            case "(B)":
-                                rbB.setTextColor(getResources().getColor(R.color.pink));
-                                break;
-                            case "(C)":
-                                rbC.setTextColor(getResources().getColor(R.color.pink));
-                                break;
-                            case "(D)":
-                                rbD.setTextColor(getResources().getColor(R.color.pink));
-                                break;
-                        }
-                        break;
-                    case R.id.rbA:
-                        if (!answer.getString("text").split(" ")[0].equals("(A)")) {
-                            rbA.setTextColor(getResources().getColor(R.color.pink));
-                        } else {
-                            rbA.setTextColor(getResources().getColor(R.color.green));
-                        }
-                        break;
-                    case R.id.rbB:
-                        if (!answer.getString("text").split(" ")[0].equals("(B)")) {
-                            rbB.setTextColor(getResources().getColor(R.color.pink));
-                        } else {
-                            rbB.setTextColor(getResources().getColor(R.color.green));
-                        }
-                        break;
-                    case R.id.rbC:
-                        if (!answer.getString("text").split(" ")[0].equals("(C)")) {
-                            rbC.setTextColor(getResources().getColor(R.color.pink));
-                        } else {
-                            rbC.setTextColor(getResources().getColor(R.color.green));
-                        }
-                        break;
-                    case R.id.rbD:
-                        if (!answer.getString("text").split(" ")[0].equals("(D)")) {
-                            rbD.setTextColor(getResources().getColor(R.color.pink));
-                        } else {
-                            rbD.setTextColor(getResources().getColor(R.color.green));
-                        }
-                        break;
-                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
