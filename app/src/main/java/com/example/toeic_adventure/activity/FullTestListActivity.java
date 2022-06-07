@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -13,10 +12,8 @@ import android.widget.Toolbar;
 
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.adapter.FullTestListAdapter;
-import com.example.toeic_adventure.adapter.SkillTestListAdapter;
 import com.example.toeic_adventure.api.ApiService;
 import com.example.toeic_adventure.model.FullTestList;
-import com.example.toeic_adventure.model.SkillTestList;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -68,6 +65,8 @@ public class FullTestListActivity extends AppCompatActivity {
                 FullTestList item = (FullTestList) parent.getItemAtPosition(position);
                 Intent fullTestIntent = new Intent(v.getContext(), FullTestActivity.class);
                 fullTestIntent.putExtra("id", item.id);
+                fullTestIntent.putExtra("listeningScore", item.listeningScore);
+                fullTestIntent.putExtra("readingScore", item.readingScore);
                 startActivity(fullTestIntent);
             }
         });
@@ -84,7 +83,12 @@ public class FullTestListActivity extends AppCompatActivity {
                     JSONArray results = resObj.getJSONArray("results");
                     for (int i = 0; i < results.length(); i++) {
                         JSONObject fullTestList = results.getJSONObject(i);
-                        arrayFullTestList.add(new FullTestList(1, fullTestList.getString("id")));
+                        arrayFullTestList.add(new FullTestList(
+                                fullTestList.getInt("score"),
+                                fullTestList.getString("id"),
+                                fullTestList.getJSONObject("detailScore").getInt("listening"),
+                                fullTestList.getJSONObject("detailScore").getInt("reading")
+                        ));
                     }
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {

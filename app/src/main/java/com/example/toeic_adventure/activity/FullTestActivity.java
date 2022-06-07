@@ -3,35 +3,19 @@ package com.example.toeic_adventure.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.Html;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.api.ApiService;
 import com.google.gson.Gson;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,9 +23,9 @@ import retrofit2.Response;
 
 public class FullTestActivity extends AppCompatActivity {
     String fullTestId;
+    Toolbar myToolbar;
+    TextView tvPart1, tvPart2, tvPart3, tvPart4, tvPart5, tvPart6, tvPart7;
     JSONArray questions;
-    JSONObject question, answer;
-    int index = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +34,13 @@ public class FullTestActivity extends AppCompatActivity {
 
         initView();
         fetchTest();
+
+        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void fetchTest() {
@@ -68,13 +59,6 @@ public class FullTestActivity extends AppCompatActivity {
                             try {
                                 JSONObject resObj = new JSONObject(new Gson().toJson(response.body()));
                                 questions = resObj.getJSONArray("questions");
-                                for (int i = 0; i < questions.length(); i++) {
-                                    questions.getJSONObject(i).getJSONArray("childs").getJSONObject(0).getJSONObject("answer").put("userAnswer", "");
-                                    questions.getJSONObject(i).getJSONArray("childs").getJSONObject(1).getJSONObject("answer").put("userAnswer", "");
-                                    questions.getJSONObject(i).getJSONArray("childs").getJSONObject(2).getJSONObject("answer").put("userAnswer", "");
-                                }
-                                handleNavigateIcon();
-                                handleQuestion();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Toast.makeText(FullTestActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
@@ -97,20 +81,15 @@ public class FullTestActivity extends AppCompatActivity {
     }
 
     private void initView() {
-    }
-
-    private void handleQuestion() {
-        try {
-            question = questions.getJSONObject(index).getJSONObject("question");
-            answer = questions.getJSONObject(index).getJSONObject("answer");
-            int indexTitle = index + 1;
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void handleNavigateIcon() {
-
+        myToolbar = findViewById(R.id.toolbar);
+        setActionBar(myToolbar);
+        myToolbar.setNavigationIcon(R.drawable.back_icon);
+        tvPart1 = (TextView) findViewById(R.id.tvPart1);
+        tvPart2 = (TextView) findViewById(R.id.tvPart2);
+        tvPart3 = (TextView) findViewById(R.id.tvPart3);
+        tvPart4 = (TextView) findViewById(R.id.tvPart4);
+        tvPart5 = (TextView) findViewById(R.id.tvPart5);
+        tvPart6 = (TextView) findViewById(R.id.tvPart6);
+        tvPart7 = (TextView) findViewById(R.id.tvPart7);
     }
 }

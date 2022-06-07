@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.toeic_adventure.R;
@@ -47,16 +48,37 @@ public class FullTestListAdapter extends BaseAdapter {
 
         // Set test information to layout
         TextView tvName = (TextView) view.findViewById(R.id.tvName);
+        TextView tvStatus = (TextView) view.findViewById(R.id.tvStatus);
+        ImageView ivIcon = (ImageView) view.findViewById(R.id.ivIcon);
+        LinearLayout llListening = (LinearLayout) view.findViewById(R.id.llListening);
+        LinearLayout llReading = (LinearLayout) view.findViewById(R.id.llReading);
+        TextView tvListeningScore = (TextView) view.findViewById(R.id.tvListeningScore);
+        TextView tvReadingScore = (TextView) view.findViewById(R.id.tvReadingScore);
+
         int number = i + 1;
         tvName.setText("Đề thi số "+ number);
-
-        TextView tvStatus = (TextView) view.findViewById(R.id.tvStatus);
         int score = FullTestList.get(i).score;
-        String status = score < 0 ? "Bạn chưa học bài này" : "Điểm: " + score + "/10";
+        String status = score < 0 ? "Bạn chưa học bài này" : "Điểm: " + score + "/990";
         tvStatus.setText(status);
-
-        ImageView ivIcon = (ImageView) view.findViewById(R.id.ivIcon);
-        ivIcon.setImageResource(score < 0 ? R.drawable.question : R.drawable.ic_menu_skill_test);
+        ivIcon.setImageResource(score < 0 ? R.drawable.question : R.drawable.skill_test_secondary_icon);
+        if (score < 0) {
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    0
+            );
+            llListening.setLayoutParams(param);
+            llReading.setLayoutParams(param);
+        } else {
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            param.setMargins(0, 18, 0, 0);
+            llListening.setLayoutParams(param);
+            llReading.setLayoutParams(param);
+            tvListeningScore.setText("Listening: " + String.valueOf(FullTestList.get(i).listeningScore));
+            tvReadingScore.setText("Reading: " + String.valueOf(FullTestList.get(i).readingScore));
+        }
 
         return view;
     }

@@ -41,9 +41,6 @@
             android:name=".activity.FullTestListActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SkillTestActivity"
-            android:exported="false" />
-        <activity
             android:name=".activity.ForgotPasswordActivity"
             android:exported="false" />
         <activity

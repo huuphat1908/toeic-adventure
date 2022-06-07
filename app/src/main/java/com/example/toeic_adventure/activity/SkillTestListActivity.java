@@ -2,7 +2,6 @@ package com.example.toeic_adventure.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.adapter.SkillTestListAdapter;
 import com.example.toeic_adventure.api.ApiService;
-import com.example.toeic_adventure.model.SkillTestCollection;
 import com.example.toeic_adventure.model.SkillTestList;
 import com.google.gson.Gson;
 
