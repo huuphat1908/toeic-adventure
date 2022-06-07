@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.ProfileActivity"
     android:orientation="vertical"
-    android:background="@color/blue"
+    android:background="@color/white"
     android:padding="10dp">
 
     <LinearLayout
@@ -15,9 +15,8 @@
         android:layout_marginBottom="10dp">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -25,7 +24,7 @@
                 android:id="@+id/imProfile"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
-                android:src="@mipmap/ic_launcher_round"
+                android:src="@null"
                 app:civ_border_color="#FF000000"
                 app:civ_border_width="2dp" />
 
@@ -34,11 +33,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="babyking1st@gmail.com"
-                android:textColor="@color/white"
+                android:text=""
+                android:textColor="@color/blue"
                 android:textSize="14dp"
                 android:textStyle="bold" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -50,15 +54,15 @@
                 android:layout_height="wrap_content"
                 android:text="Joined"
                 android:textSize="25dp"
-                android:textColor="@color/black"
+                android:textColor="@color/blue"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/txtJoinedDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="365 day ago"
+                android:text=""
                 android:textSize="16dp"
-                android:textColor="@color/white"
+                android:textColor="@color/blue"
                 android:textStyle="bold"/>
         </LinearLayout>
     </LinearLayout>
@@ -66,20 +70,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp">
+        android:background="@drawable/profile_card"
+        android:layout_marginVertical="10dp"
+        android:paddingLeft="10dp"
+        android:paddingVertical="10dp">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"
-                android:cropToPadding="true"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:src="@drawable/profile_full_test"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:cropToPadding="true" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -94,14 +98,14 @@
                 android:layout_height="wrap_content"
                 android:text="Number of full tests"
                 android:textSize="18dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:paddingBottom="5dp"/>
             <TextView
                 android:id="@+id/txtScoreFullTest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total: 30"
+                android:text=""
                 android:textSize="16dp"
                 android:textColor="@color/white"
                 />
@@ -111,20 +115,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp">
+        android:background="@drawable/profile_card"
+        android:layout_marginVertical="10dp"
+        android:paddingLeft="10dp"
+        android:paddingVertical="10dp">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"
-                android:cropToPadding="true"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:src="@drawable/profile_skill_test"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:cropToPadding="true" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -139,36 +143,36 @@
                 android:layout_height="wrap_content"
                 android:text="Number of skill tests"
                 android:textSize="18dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:paddingBottom="5dp"/>
             <TextView
                 android:id="@+id/txtScoreSkillTest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total: 30"
+                android:text=""
                 android:textSize="16dp"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp">
+        android:background="@drawable/profile_card"
+        android:layout_marginVertical="10dp"
+        android:paddingLeft="10dp"
+        android:paddingVertical="10dp">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"
-                android:cropToPadding="true"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:src="@drawable/profile_avg_score"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:cropToPadding="true" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -183,17 +187,16 @@
                 android:layout_height="wrap_content"
                 android:text="Average score of all exams"
                 android:textSize="18dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:paddingBottom="5dp"/>
             <TextView
                 android:id="@+id/txtPredictedScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Score: 500"
+                android:text=""
                 android:textSize="16dp"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>
 
