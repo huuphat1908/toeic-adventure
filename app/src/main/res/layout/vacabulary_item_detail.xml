@@ -35,41 +35,52 @@
             android:background="@color/green" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_weight="92"
-            android:orientation="vertical"
-            android:layout_marginLeft="10dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textViewNameDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="category"
                 android:textColor="@color/text_color"
-                android:textStyle="bold"
                 android:textSize="20dp"
-                android:layout_marginTop="5dp"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewDescDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:padding="0dp"
                 android:text="['kategori]"
-                android:textSize="18dp"
                 android:textColor="@color/text_color"
-                android:layout_marginTop="5dp"/>
+                android:textSize="18dp" />
+
             <TextView
                 android:id="@+id/textViewMean"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:padding="0dp"
                 android:text="Loại , hạng"
-                android:textSize="18dp"
                 android:textColor="@color/text_color"
-                android:layout_marginTop="5dp"/>
+                android:textSize="18dp" />
         </LinearLayout>
-
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/audioVocabulary"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_audio"></ImageView>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

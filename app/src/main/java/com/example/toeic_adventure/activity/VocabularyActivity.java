@@ -76,7 +76,7 @@ public class VocabularyActivity  extends Fragment {
         }
 
         arrayVocabularyTheme = new ArrayList<Vocabulary>();
-        fetchFullTestCollection();
+        fetchVocabularyTheme();
         lvVocabulary = (ListView) view.findViewById(R.id.listViewVocabulary);
         lvVocabulary.setDivider(null);
         adapter = new VocabularyAdapter(
@@ -91,6 +91,7 @@ public class VocabularyActivity  extends Fragment {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Intent vocabularyDetailActivity = new Intent(v.getContext(), VocabularyDetailActivity.class);
                 vocabularyDetailActivity.putExtra("title", arrayVocabularyTheme.get(position).Name);
+                vocabularyDetailActivity.putExtra("id", arrayVocabularyTheme.get(position).Id);
                 startActivity(vocabularyDetailActivity);
             }
         });
@@ -98,7 +99,7 @@ public class VocabularyActivity  extends Fragment {
         return view;
     }
 
-    private void fetchFullTestCollection() {
+    private void fetchVocabularyTheme() {
         ApiService.apiService.getVocabularyTheme().enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
@@ -111,7 +112,8 @@ public class VocabularyActivity  extends Fragment {
                         arrayVocabularyTheme.add(new Vocabulary(
                                 i+1,
                                 arrayVocabularyThemeItem.getString("enName"),
-                                arrayVocabularyThemeItem.getString("vnName")
+                                arrayVocabularyThemeItem.getString("vnName"),
+                                arrayVocabularyThemeItem.getString("id")
                         ));
                     }
                     adapter.notifyDataSetChanged();

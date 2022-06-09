@@ -105,6 +105,9 @@ public interface ApiService {
     @GET("/users/profile")
     Call<Object> getProfileUser();
 
-    @GET("/vocabulary-themes")
+    @GET("/vocabulary-themes?page=1&pageSize=20")
     Call<Object> getVocabularyTheme();
+
+    @GET("/vocabulary")
+    Call<Object> getVocabularyDetail(@Query("theme") String theme);
 }
