@@ -31,7 +31,7 @@ public class VocabularyDetailAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return VocabularyDetailList.get(i);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class VocabularyDetailAdapter extends BaseAdapter {
         testDesc.setText(VocabularyDetailList.get(i).Desc);
 
         TextView testMean = (TextView) view.findViewById(R.id.textViewMean);
-        testDesc.setText(VocabularyDetailList.get(i).Mean);
+        testMean.setText(VocabularyDetailList.get(i).Mean);
 
         TextView no = (TextView) view.findViewById(R.id.textViewNoDetail);
         no.setText(Integer.toString(VocabularyDetailList.get(i).No));
