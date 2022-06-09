@@ -1,11 +1,16 @@
 package com.example.toeic_adventure.activity;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -34,6 +39,61 @@ public class FullTestActivity extends AppCompatActivity {
     JSONArray part5 = new JSONArray();
     JSONArray part6 = new JSONArray();
     JSONArray part7 = new JSONArray();
+    Button btnSubmit;
+    int score = 0;
+
+    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+      new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getResultCode() == 1) {
+                    Intent intent = result.getData();
+                    if (intent != null) {
+                        try {
+                            switch (intent.getIntExtra("part", 0)) {
+                                case 1:
+                                    score += intent.getIntExtra("correctSentences", 0);
+                                    part1 = new JSONArray(intent.getStringExtra("questions"));
+                                    tvPart1.append("\nCompleted: " + String.valueOf(intent.getIntExtra("correctSentences", 0))
+                                            + "/" + String.valueOf(intent.getIntExtra("totalSentences", 0)));
+                                    tvPart1.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                        }
+                                    });
+                                    break;
+                                case 2:
+                                    part2 = new JSONArray(intent.getStringExtra("questions"));
+                                    break;
+                                case 3:
+                                    part3 = new JSONArray(intent.getStringExtra("questions"));
+                                    break;
+                                case 4:
+                                    part4 = new JSONArray(intent.getStringExtra("questions"));
+                                    break;
+                                case 5:
+                                    part5 = new JSONArray(intent.getStringExtra("questions"));
+                                    break;
+                                case 6:
+                                    part6 = new JSONArray(intent.getStringExtra("questions"));
+                                    break;
+                                case 7:
+                                    part7 = new JSONArray(intent.getStringExtra("questions"));
+                                    break;
+                                default:
+                                    Toast.makeText(FullTestActivity.this, "Arsenal", Toast.LENGTH_SHORT).show();
+                                    break;
+                            }
+                        } catch (JSONException e) {
+                            Toast.makeText(FullTestActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            }
+        }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,45 +115,15 @@ public class FullTestActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent fullTestPart1Intent = new Intent(FullTestActivity.this, FullTestPart1Activity.class);
                 fullTestPart1Intent.putExtra("questions", part1.toString());
-                startActivityForResult(fullTestPart1Intent, 1);
+                activityResultLauncher.launch(fullTestPart1Intent);
             }
         });
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        int part = getIntent().getIntExtra("part", 0);
-        try {
-            switch (part) {
-                case 1:
-                    part1 = new JSONArray(getIntent().getStringExtra("questions"));
-                    break;
-                case 2:
-                    part2 = new JSONArray(getIntent().getStringExtra("questions"));
-                    break;
-                case 3:
-                    part3 = new JSONArray(getIntent().getStringExtra("questions"));
-                    break;
-                case 4:
-                    part4 = new JSONArray(getIntent().getStringExtra("questions"));
-                    break;
-                case 5:
-                    part5 = new JSONArray(getIntent().getStringExtra("questions"));
-                    break;
-                case 6:
-                    part6 = new JSONArray(getIntent().getStringExtra("questions"));
-                    break;
-                case 7:
-                    part7 = new JSONArray(getIntent().getStringExtra("questions"));
-                    break;
-                default:
-                    Toast.makeText(this, "Arsenal", Toast.LENGTH_SHORT).show();
-                    break;
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(FullTestActivity.this, "Implementing", Toast.LENGTH_SHORT).show();
             }
-        } catch (JSONException e) {
-            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
-        }
+        });
     }
 
     private void initView() {
@@ -107,6 +137,7 @@ public class FullTestActivity extends AppCompatActivity {
         tvPart5 = (TextView) findViewById(R.id.tvPart5);
         tvPart6 = (TextView) findViewById(R.id.tvPart6);
         tvPart7 = (TextView) findViewById(R.id.tvPart7);
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
     }
 
     private void fetchTest() {

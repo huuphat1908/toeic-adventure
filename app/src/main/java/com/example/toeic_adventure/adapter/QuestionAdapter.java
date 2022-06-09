@@ -63,8 +63,11 @@ public class QuestionAdapter extends BaseAdapter {
         RadioButton rbC = (RadioButton) view.findViewById(R.id.rbC);
         RadioButton rbD = (RadioButton) view.findViewById(R.id.rbD);
 
-        int index = i + 1;
-        tvQuestion.setText("Câu " + index + ": " + QuestionList.get(i).text);
+        if (QuestionList.get(i).text.equals("")) {
+            tvQuestion.setVisibility(View.INVISIBLE);
+        } else {
+            tvQuestion.setText(QuestionList.get(i).text);
+        }
         try {
             rbA.setText(QuestionList.get(i).choices.getString(0));
             rbB.setText(QuestionList.get(i).choices.getString(1));

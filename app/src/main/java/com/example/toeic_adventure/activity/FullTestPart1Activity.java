@@ -43,7 +43,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FullTestPart1Activity extends AppCompatActivity {
-    String skillTestId;
     JSONArray questions;
     JSONObject question, answer;
     int index = 0;
@@ -71,6 +70,9 @@ public class FullTestPart1Activity extends AppCompatActivity {
     ArrayList<Answer> answerList;
     QuestionAdapter adapter;
 
+    int totalSentences = 0;
+    int correctSentences = 0;
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -81,7 +83,7 @@ public class FullTestPart1Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_skill_test_part1);
+        setContentView(R.layout.activity_full_test_part1);
 
         config = new ImageLoaderConfiguration.Builder(this).build();
         ImageLoader.getInstance().init(config);
@@ -92,7 +94,7 @@ public class FullTestPart1Activity extends AppCompatActivity {
         ivClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                FullTestPart1Activity.super.onBackPressed();
                 mediaPlayer.release();
                 mediaPlayer = new MediaPlayer();
             }
@@ -199,42 +201,32 @@ public class FullTestPart1Activity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!isSubmitted) {
-                    try {
-                        questions.getJSONObject(index).getJSONObject("answer").put("userAnswer", answerList.get(0).userAnswer);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    int correctSentences  = 0;
-                    int totalSentences = 0;
-                    for (int i = 0; i < questions.length(); i++) {
-                        totalSentences++;
-                        try {
-                            if (questions.getJSONObject(i).getJSONObject("answer").getString("userAnswer")
-                                    .equals(questions.getJSONObject(i).getJSONObject("answer").getString("text"))) {
-                                correctSentences++;
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    ApiService.apiService.submitSkillTestAnswer(correctSentences, skillTestId, totalSentences).enqueue(new Callback<Object>() {
-                        @Override
-                        public void onResponse(Call<Object> call, Response<Object> response) {
-                            if (response.isSuccessful()) {
-                                Toast.makeText(FullTestPart1Activity.this, "Submitted answer", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        @Override
-                        public void onFailure(Call<Object> call, Throwable t) {
-                            Toast.makeText(FullTestPart1Activity.this, "Unknown error", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    isSubmitted = true;
-                    handleQuestion();
-                }
+                onSubmit();
             }
         });
+    }
+
+    private void onSubmit() {
+        if (!isSubmitted) {
+            try {
+                questions.getJSONObject(index).getJSONObject("answer").put("userAnswer", answerList.get(0).userAnswer);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            for (int i = 0; i < questions.length(); i++) {
+                totalSentences++;
+                try {
+                    if (questions.getJSONObject(i).getJSONObject("answer").getString("userAnswer")
+                            .equals(questions.getJSONObject(i).getJSONObject("answer").getString("text"))) {
+                        correctSentences++;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            isSubmitted = true;
+            handleQuestion();
+        }
     }
 
     private void fetchTest() {
@@ -318,23 +310,23 @@ public class FullTestPart1Activity extends AppCompatActivity {
             isSubmittedList.add(isSubmitted);
             adapter.notifyDataSetChanged();
 
-            if (index == questions.length() - 1) {
-                btnSubmit.setVisibility(View.VISIBLE);
-            } else {
-                btnSubmit.setVisibility(View.INVISIBLE);
-            }
             if (isSubmitted) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     tvTranscript.setText(Html.fromHtml(answer.getString("explanation"), Html.FROM_HTML_MODE_COMPACT));
                 } else {
                     tvTranscript.setText(Html.fromHtml(answer.getString("explanation")));
                 }
-                btnSubmit.setVisibility(View.VISIBLE);
                 btnSubmit.setText("Exit");
                 btnSubmit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        finish();
+                        Intent intent = new Intent();
+                        intent.putExtra("part", 1);
+                        intent.putExtra("questions", questions.toString());
+                        intent.putExtra("totalSentences", totalSentences);
+                        intent.putExtra("correctSentences", correctSentences);
+                        setResult(1, intent);
+                        FullTestPart1Activity.super.onBackPressed();
                     }
                 });
                 tvTranscript.setVisibility(View.VISIBLE);
