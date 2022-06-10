@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,21 @@ public class VocabularyDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        lvVocabularyDetail.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                try {
+                    mediaPlayer = new MediaPlayer();
+                    mediaPlayer.setDataSource("http://20.89.240.175" + arrayVocabularyDetail.get(position).Audio);
+                    mediaPlayer.prepare();
+                    mediaPlayer.start();
+                } catch (Exception e) {
+                    Toast.makeText(VocabularyDetailActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d("Error", e.getMessage());
+                }
             }
         });
     }
