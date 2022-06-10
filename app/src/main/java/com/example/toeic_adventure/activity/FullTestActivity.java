@@ -75,7 +75,6 @@ public class FullTestActivity extends AppCompatActivity {
                         try {
                             switch (intent.getIntExtra("part", 0)) {
                                 case 1:
-                                    score += intent.getIntExtra("correctSentences", 0);
                                     completedSentencesPart1 = intent.getIntExtra("completedSentences", 0);
                                     correctSentencesPart1 = intent.getIntExtra("correctSentences", 0);
                                     part1 = new JSONArray(intent.getStringExtra("questions"));
@@ -83,22 +82,46 @@ public class FullTestActivity extends AppCompatActivity {
                                             + "/" + String.valueOf(totalSentencesPart1));
                                     break;
                                 case 2:
+                                    completedSentencesPart2 = intent.getIntExtra("completedSentences", 0);
+                                    correctSentencesPart2 = intent.getIntExtra("correctSentences", 0);
                                     part2 = new JSONArray(intent.getStringExtra("questions"));
+                                    tvPart2.setText("Part 2\nCompleted: " + String.valueOf(completedSentencesPart2)
+                                            + "/" + String.valueOf(totalSentencesPart2));
                                     break;
                                 case 3:
+                                    completedSentencesPart3 = intent.getIntExtra("completedSentences", 0);
+                                    correctSentencesPart3 = intent.getIntExtra("correctSentences", 0);
                                     part3 = new JSONArray(intent.getStringExtra("questions"));
+                                    tvPart3.setText("Part 3\nCompleted: " + String.valueOf(completedSentencesPart3)
+                                            + "/" + String.valueOf(totalSentencesPart3));
                                     break;
                                 case 4:
+                                    completedSentencesPart4 = intent.getIntExtra("completedSentences", 0);
+                                    correctSentencesPart4 = intent.getIntExtra("correctSentences", 0);
                                     part4 = new JSONArray(intent.getStringExtra("questions"));
+                                    tvPart4.setText("Part 4\nCompleted: " + String.valueOf(completedSentencesPart4)
+                                            + "/" + String.valueOf(totalSentencesPart4));
                                     break;
                                 case 5:
+                                    completedSentencesPart5 = intent.getIntExtra("completedSentences", 0);
+                                    correctSentencesPart5 = intent.getIntExtra("correctSentences", 0);
                                     part5 = new JSONArray(intent.getStringExtra("questions"));
+                                    tvPart5.setText("Part 5\nCompleted: " + String.valueOf(completedSentencesPart5)
+                                            + "/" + String.valueOf(totalSentencesPart5));
                                     break;
                                 case 6:
+                                    completedSentencesPart6 = intent.getIntExtra("completedSentences", 0);
+                                    correctSentencesPart6 = intent.getIntExtra("correctSentences", 0);
                                     part6 = new JSONArray(intent.getStringExtra("questions"));
+                                    tvPart6.setText("Part 6\nCompleted: " + String.valueOf(completedSentencesPart6)
+                                            + "/" + String.valueOf(totalSentencesPart6));
                                     break;
                                 case 7:
+                                    completedSentencesPart7 = intent.getIntExtra("completedSentences", 0);
+                                    correctSentencesPart7 = intent.getIntExtra("correctSentences", 0);
                                     part7 = new JSONArray(intent.getStringExtra("questions"));
+                                    tvPart7.setText("Part 7\nCompleted: " + String.valueOf(completedSentencesPart7)
+                                            + "/" + String.valueOf(totalSentencesPart7));
                                     break;
                                 default:
                                     Toast.makeText(FullTestActivity.this, "Arsenal", Toast.LENGTH_SHORT).show();
@@ -137,12 +160,26 @@ public class FullTestActivity extends AppCompatActivity {
                 activityResultLauncher.launch(fullTestPart1Intent);
             }
         });
+        tvPart2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent fullTestPart2Intent = new Intent(FullTestActivity.this, FullTestPart2Activity.class);
+                fullTestPart2Intent.putExtra("questions", part2.toString());
+                fullTestPart2Intent.putExtra("isSubmitted", isSubmitted);
+                activityResultLauncher.launch(fullTestPart2Intent);
+            }
+        });
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 isSubmitted = true;
-                tvPart1.setText("Part 1\nScore: " + String.valueOf(correctSentencesPart1)
-                        + "/" + String.valueOf(totalSentencesPart1));
+                tvPart1.setText("Part 1\nScore: " + String.valueOf(correctSentencesPart1) + "/" + String.valueOf(totalSentencesPart1));
+                tvPart2.setText("Part 2\nScore: " + String.valueOf(correctSentencesPart2) + "/" + String.valueOf(totalSentencesPart2));
+                tvPart3.setText("Part 3\nScore: " + String.valueOf(correctSentencesPart3) + "/" + String.valueOf(totalSentencesPart3));
+                tvPart4.setText("Part 4\nScore: " + String.valueOf(correctSentencesPart4) + "/" + String.valueOf(totalSentencesPart4));
+                tvPart5.setText("Part 5\nScore: " + String.valueOf(correctSentencesPart5) + "/" + String.valueOf(totalSentencesPart5));
+                tvPart6.setText("Part 6\nScore: " + String.valueOf(correctSentencesPart6) + "/" + String.valueOf(totalSentencesPart6));
+                tvPart7.setText("Part 7\nScore: " + String.valueOf(correctSentencesPart7) + "/" + String.valueOf(totalSentencesPart7));
             }
         });
     }
