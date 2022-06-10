@@ -13,25 +13,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
         android:background="@drawable/sharp_cardview_bg"
         android:orientation="horizontal"
         android:gravity="center"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:weightSum="100"
         >
         <TextView
             android:id="@+id/textViewNo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
             android:baselineAligned="false"
-            android:padding="5dp"
+            android:paddingLeft="13dp"
+            android:paddingTop="3dp"
             android:text="1"
-            android:textColor="@color/text_color"
-            android:background="@color/green" />
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@drawable/round" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,7 +48,7 @@
                 android:layout_marginBottom="15dp"
                 android:textColor="@color/text_color"
                 android:textStyle="bold"
-                android:textSize="20dp"/>
+                android:textSize="22dp"/>
 
             <TextView
                 android:id="@+id/textViewDesc"
