@@ -70,8 +70,8 @@ public class FullTestPart1Activity extends AppCompatActivity {
     ArrayList<Answer> answerList;
     QuestionAdapter adapter;
 
-    int totalSentences = 0;
     int correctSentences = 0;
+    int completedSentences = 0;
 
     @Override
     protected void onDestroy() {
@@ -94,9 +94,7 @@ public class FullTestPart1Activity extends AppCompatActivity {
         ivClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FullTestPart1Activity.super.onBackPressed();
-                mediaPlayer.release();
-                mediaPlayer = new MediaPlayer();
+                onSubmit();
             }
         });
         ivPlayPause.setOnClickListener(new View.OnClickListener() {
@@ -206,27 +204,39 @@ public class FullTestPart1Activity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        onSubmit();
+        super.onBackPressed();
+    }
+
     private void onSubmit() {
-        if (!isSubmitted) {
+        try {
+            questions.getJSONObject(index).getJSONObject("answer").put("userAnswer", answerList.get(0).userAnswer);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < questions.length(); i++) {
             try {
-                questions.getJSONObject(index).getJSONObject("answer").put("userAnswer", answerList.get(0).userAnswer);
+                if (questions.getJSONObject(i).getJSONObject("answer").getString("userAnswer")
+                        .equals(questions.getJSONObject(i).getJSONObject("answer").getString("text"))) {
+                    correctSentences++;
+                }
+                if (!questions.getJSONObject(i).getJSONObject("answer").getString("userAnswer")
+                        .equals("")) {
+                    completedSentences++;
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            for (int i = 0; i < questions.length(); i++) {
-                totalSentences++;
-                try {
-                    if (questions.getJSONObject(i).getJSONObject("answer").getString("userAnswer")
-                            .equals(questions.getJSONObject(i).getJSONObject("answer").getString("text"))) {
-                        correctSentences++;
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-            isSubmitted = true;
-            handleQuestion();
         }
+        Intent intent = new Intent();
+        intent.putExtra("part", 1);
+        intent.putExtra("questions", questions.toString());
+        intent.putExtra("completedSentences", completedSentences);
+        intent.putExtra("correctSentences", correctSentences);
+        setResult(1, intent);
+        finish();
     }
 
     private void fetchTest() {
@@ -286,7 +296,7 @@ public class FullTestPart1Activity extends AppCompatActivity {
             throw new NullPointerException("tvTranscript is null");
         }
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
-        isSubmitted = false;
+        isSubmitted = getIntent().getBooleanExtra("isSubmitted", false);
     }
 
     private void handleQuestion() {
@@ -316,19 +326,6 @@ public class FullTestPart1Activity extends AppCompatActivity {
                 } else {
                     tvTranscript.setText(Html.fromHtml(answer.getString("explanation")));
                 }
-                btnSubmit.setText("Exit");
-                btnSubmit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent();
-                        intent.putExtra("part", 1);
-                        intent.putExtra("questions", questions.toString());
-                        intent.putExtra("totalSentences", totalSentences);
-                        intent.putExtra("correctSentences", correctSentences);
-                        setResult(1, intent);
-                        FullTestPart1Activity.super.onBackPressed();
-                    }
-                });
                 tvTranscript.setVisibility(View.VISIBLE);
             }
         } catch (JSONException e) {
