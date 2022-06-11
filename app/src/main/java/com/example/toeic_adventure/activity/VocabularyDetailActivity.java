@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -19,7 +17,6 @@ import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.adapter.VocabularyDetailAdapter;
 import com.example.toeic_adventure.api.ApiService;
 import com.example.toeic_adventure.api.Url;
-import com.example.toeic_adventure.model.Vocabulary;
 import com.example.toeic_adventure.model.VocabularyDetail;
 import com.google.gson.Gson;
 
@@ -38,7 +35,6 @@ public class VocabularyDetailActivity extends AppCompatActivity {
     ListView lvVocabularyDetail;
     ArrayList<VocabularyDetail> arrayVocabularyDetail;
     VocabularyDetailAdapter adapter;
-    Intent intent;
     private MediaPlayer mediaPlayer;
 
     @Override

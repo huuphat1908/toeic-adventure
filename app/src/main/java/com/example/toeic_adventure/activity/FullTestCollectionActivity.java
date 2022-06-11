@@ -15,7 +15,6 @@ import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.adapter.FullTestCollectionAdapter;
 import com.example.toeic_adventure.api.ApiService;
 import com.example.toeic_adventure.model.FullTestCollection;
-import com.example.toeic_adventure.model.SkillTestCollection;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;

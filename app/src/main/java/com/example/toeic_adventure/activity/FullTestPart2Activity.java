@@ -20,21 +20,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.toeic_adventure.R;
-import com.example.toeic_adventure.api.ApiService;
-import com.google.gson.Gson;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class FullTestPart2Activity extends AppCompatActivity {
     JSONArray questions;

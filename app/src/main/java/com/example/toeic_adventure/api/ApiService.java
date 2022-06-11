@@ -1,19 +1,14 @@
 package com.example.toeic_adventure.api;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.example.toeic_adventure.activity.MainActivity;
-import com.example.toeic_adventure.model.FullTestAnswer;
+import com.example.toeic_adventure.model.FullTestBody;
 import com.example.toeic_adventure.model.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.json.JSONObject;
-
 import java.io.IOException;
-import java.util.List;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -22,6 +17,7 @@ import okhttp3.Response;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -105,9 +101,8 @@ public interface ApiService {
     @GET("/{url}")
     Call<Object> getFullTestFile(@Path("url") String url);
 
-    @FormUrlEncoded
     @POST("/histories/full-test")
-    Call<Object> submitFullTestAnswer(@Field("correctSentences") Object correctSentences, @Field("test") String test);
+    Call<Object> submitFullTestAnswer(@Body FullTestBody fullTestBody);
 
     @GET("/users/profile")
     Call<Object> getProfileUser();

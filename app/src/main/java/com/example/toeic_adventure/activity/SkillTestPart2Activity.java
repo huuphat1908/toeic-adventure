@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -22,15 +21,11 @@ import android.widget.Toast;
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.api.ApiService;
 import com.google.gson.Gson;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -424,7 +419,6 @@ public class SkillTestPart2Activity extends AppCompatActivity {
             tvTotalDuration.setText(milliSecondsToTimer(mediaPlayer.getDuration()));
         } catch (Exception e) {
             Toast.makeText(SkillTestPart2Activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d("Error", e.getMessage());
         }
     }
 

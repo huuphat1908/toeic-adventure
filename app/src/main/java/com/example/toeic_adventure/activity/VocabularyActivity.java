@@ -15,9 +15,7 @@ import android.widget.Toast;
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.adapter.VocabularyAdapter;
 import com.example.toeic_adventure.api.ApiService;
-import com.example.toeic_adventure.model.FullTestCollection;
 import com.example.toeic_adventure.model.Vocabulary;
-import com.example.toeic_adventure.model.VocabularyDetail;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -39,7 +37,6 @@ public class VocabularyActivity  extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -65,7 +62,6 @@ public class VocabularyActivity  extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Init view from fragment_skill_test layout
         if (view == null)
         {
             view = inflater.inflate(R.layout.fragment_vocabulary, container,false);

@@ -18,10 +18,8 @@ import android.widget.Toast;
 
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.adapter.QuestionAdapter;
-import com.example.toeic_adventure.api.ApiService;
 import com.example.toeic_adventure.model.Answer;
 import com.example.toeic_adventure.model.Question;
-import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -32,9 +30,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class FullTestPart7Activity extends AppCompatActivity {
     JSONArray questions;

@@ -9,15 +9,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -432,7 +429,6 @@ public class SkillTestPart4Activity extends AppCompatActivity {
             tvTotalDuration.setText(milliSecondsToTimer(mediaPlayer.getDuration()));
         } catch (Exception e) {
             Toast.makeText(SkillTestPart4Activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d("Error", e.getMessage());
         }
     }
 

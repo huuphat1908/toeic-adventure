@@ -13,10 +13,8 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.toeic_adventure.R;
-import com.example.toeic_adventure.adapter.FullTestCollectionAdapter;
 import com.example.toeic_adventure.adapter.GrammarListAdapter;
 import com.example.toeic_adventure.api.ApiService;
-import com.example.toeic_adventure.model.FullTestCollection;
 import com.example.toeic_adventure.model.GrammarList;
 import com.google.gson.Gson;
 

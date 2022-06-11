@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,14 +16,13 @@ import android.widget.Toolbar;
 
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.api.ApiService;
-import com.example.toeic_adventure.model.FullTestAnswer;
+import com.example.toeic_adventure.model.CorrectSentencesFullTest;
+import com.example.toeic_adventure.model.FullTestBody;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -228,37 +226,25 @@ public class FullTestActivity extends AppCompatActivity {
                 tvPart5.setText("Part 5\nCorrect sentences: " + String.valueOf(correctSentencesPart5) + "/" + String.valueOf(totalSentencesPart5));
                 tvPart6.setText("Part 6\nCorrect sentences: " + String.valueOf(correctSentencesPart6) + "/" + String.valueOf(totalSentencesPart6));
                 tvPart7.setText("Part 7\nCorrect sentences: " + String.valueOf(correctSentencesPart7) + "/" + String.valueOf(totalSentencesPart7));
-                try {
-                    JSONObject correctSentences = new JSONObject();
-                    correctSentences.put("reading", correctSentencesPart1 + correctSentencesPart2 + correctSentencesPart3 + correctSentencesPart4);
-                    correctSentences.put("listening", correctSentencesPart5 + correctSentencesPart6 + correctSentencesPart7);
+                CorrectSentencesFullTest correctSentences = new CorrectSentencesFullTest(correctSentencesPart1 + correctSentencesPart2 + correctSentencesPart3 + correctSentencesPart4,
+                        correctSentencesPart5 + correctSentencesPart6 + correctSentencesPart7);
 
-                    ApiService.apiService.submitFullTestAnswer(correctSentences, fullTestId).enqueue(new Callback<Object>() {
-                        @Override
-                        public void onResponse(Call<Object> call, Response<Object> response) {
-                            if (response.isSuccessful()) {
-                                Toast.makeText(FullTestActivity.this, "Submitted answer", Toast.LENGTH_SHORT).show();
-                            } else {
-                                JSONObject errorObj = null;
-                                try {
-                                    errorObj = new JSONObject(response.errorBody().string());
-                                    Log.d("AAA", "Error" + errorObj.getString("message"));
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
+                ApiService.apiService.submitFullTestAnswer(new FullTestBody(correctSentences, fullTestId)).enqueue(new Callback<Object>() {
+                    @Override
+                    public void onResponse(Call<Object> call, Response<Object> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(FullTestActivity.this, "Submitted answer", Toast.LENGTH_SHORT).show();
+                            btnSubmit.setVisibility(View.INVISIBLE);
+                        } else {
+                            Toast.makeText(FullTestActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
-                        @Override
-                        public void onFailure(Call<Object> call, Throwable t) {
-                            Toast.makeText(FullTestActivity.this, "Failed to submit answer", Toast.LENGTH_SHORT).show();
-                            Log.d("AAA", "Failure: " + t.toString());
-                        }
-                    });
-                } catch (JSONException e) {
-                    Toast.makeText(FullTestActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
-                }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Object> call, Throwable t) {
+                        Toast.makeText(FullTestActivity.this, "Failed to submit answer", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
