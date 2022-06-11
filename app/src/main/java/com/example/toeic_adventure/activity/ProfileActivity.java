@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.api.ApiService;
+import com.example.toeic_adventure.api.Url;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -135,7 +136,7 @@ public class ProfileActivity extends Fragment {
                     JSONObject avatar = resObj.getJSONObject("avatar");
                     JSONObject done = resObj.getJSONObject("done");
                     txtEmailUser.setText(resObj.getString("email"));
-                    Glide.with(ProfileActivity.this).load("http://20.89.240.175" + avatar.getString("url")).into(imProfile);
+                    Glide.with(ProfileActivity.this).load(Url.baseUrl + avatar.getString("url")).into(imProfile);
                     txtJoinedDay.setText((int) getDaysDiff(resObj.getString("joinDate")) + " day ago");
                     txtScoreFullTest.setText(String.valueOf(done.getInt("fullTest")));
                     txtScoreSkillTest.setText(String.valueOf(done.getInt("skillTest")));
