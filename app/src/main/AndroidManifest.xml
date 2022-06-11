@@ -14,6 +14,21 @@
         android:theme="@style/Theme.Toeicadventure"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.FullTestPart7Activity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.FullTestPart6Activity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.FullTestPart5Activity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.FullTestPart4Activity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.FullTestPart3Activity"
+            android:exported="false" />
+        <activity
             android:name=".activity.FullTestPart2Activity"
             android:exported="false" />
         <activity

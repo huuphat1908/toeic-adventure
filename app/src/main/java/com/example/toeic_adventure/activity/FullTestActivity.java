@@ -169,6 +169,51 @@ public class FullTestActivity extends AppCompatActivity {
                 activityResultLauncher.launch(fullTestPart2Intent);
             }
         });
+        tvPart3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent fullTestPart3Intent = new Intent(FullTestActivity.this, FullTestPart3Activity.class);
+                fullTestPart3Intent.putExtra("questions", part3.toString());
+                fullTestPart3Intent.putExtra("isSubmitted", isSubmitted);
+                activityResultLauncher.launch(fullTestPart3Intent);
+            }
+        });
+        tvPart4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent fullTestPart4Intent = new Intent(FullTestActivity.this, FullTestPart4Activity.class);
+                fullTestPart4Intent.putExtra("questions", part4.toString());
+                fullTestPart4Intent.putExtra("isSubmitted", isSubmitted);
+                activityResultLauncher.launch(fullTestPart4Intent);
+            }
+        });
+        tvPart5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent fullTestPart5Intent = new Intent(FullTestActivity.this, FullTestPart5Activity.class);
+                fullTestPart5Intent.putExtra("questions", part5.toString());
+                fullTestPart5Intent.putExtra("isSubmitted", isSubmitted);
+                activityResultLauncher.launch(fullTestPart5Intent);
+            }
+        });
+        tvPart6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent fullTestPart6Intent = new Intent(FullTestActivity.this, FullTestPart6Activity.class);
+                fullTestPart6Intent.putExtra("questions", part6.toString());
+                fullTestPart6Intent.putExtra("isSubmitted", isSubmitted);
+                activityResultLauncher.launch(fullTestPart6Intent);
+            }
+        });
+        tvPart7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent fullTestPart7Intent = new Intent(FullTestActivity.this, FullTestPart7Activity.class);
+                fullTestPart7Intent.putExtra("questions", part7.toString());
+                fullTestPart7Intent.putExtra("isSubmitted", isSubmitted);
+                activityResultLauncher.launch(fullTestPart7Intent);
+            }
+        });
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
