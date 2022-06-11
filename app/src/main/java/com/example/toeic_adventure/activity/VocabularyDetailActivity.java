@@ -18,6 +18,7 @@ import android.widget.Toolbar;
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.adapter.VocabularyDetailAdapter;
 import com.example.toeic_adventure.api.ApiService;
+import com.example.toeic_adventure.api.Url;
 import com.example.toeic_adventure.model.Vocabulary;
 import com.example.toeic_adventure.model.VocabularyDetail;
 import com.google.gson.Gson;
@@ -76,7 +77,7 @@ public class VocabularyDetailActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 try {
                     mediaPlayer = new MediaPlayer();
-                    mediaPlayer.setDataSource("http://20.89.240.175" + arrayVocabularyDetail.get(position).Audio);
+                    mediaPlayer.setDataSource(Url.baseUrl + arrayVocabularyDetail.get(position).Audio);
                     mediaPlayer.prepare();
                     mediaPlayer.start();
                 } catch (Exception e) {
