@@ -218,13 +218,13 @@ public class FullTestActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 isSubmitted = true;
-                tvPart1.setText("Part 1\nScore: " + String.valueOf(correctSentencesPart1) + "/" + String.valueOf(totalSentencesPart1));
-                tvPart2.setText("Part 2\nScore: " + String.valueOf(correctSentencesPart2) + "/" + String.valueOf(totalSentencesPart2));
-                tvPart3.setText("Part 3\nScore: " + String.valueOf(correctSentencesPart3) + "/" + String.valueOf(totalSentencesPart3));
-                tvPart4.setText("Part 4\nScore: " + String.valueOf(correctSentencesPart4) + "/" + String.valueOf(totalSentencesPart4));
-                tvPart5.setText("Part 5\nScore: " + String.valueOf(correctSentencesPart5) + "/" + String.valueOf(totalSentencesPart5));
-                tvPart6.setText("Part 6\nScore: " + String.valueOf(correctSentencesPart6) + "/" + String.valueOf(totalSentencesPart6));
-                tvPart7.setText("Part 7\nScore: " + String.valueOf(correctSentencesPart7) + "/" + String.valueOf(totalSentencesPart7));
+                tvPart1.setText("Part 1\nCorrect sentences: " + String.valueOf(correctSentencesPart1) + "/" + String.valueOf(totalSentencesPart1));
+                tvPart2.setText("Part 2\nCorrect sentences: " + String.valueOf(correctSentencesPart2) + "/" + String.valueOf(totalSentencesPart2));
+                tvPart3.setText("Part 3\nCorrect sentences: " + String.valueOf(correctSentencesPart3) + "/" + String.valueOf(totalSentencesPart3));
+                tvPart4.setText("Part 4\nCorrect sentences: " + String.valueOf(correctSentencesPart4) + "/" + String.valueOf(totalSentencesPart4));
+                tvPart5.setText("Part 5\nCorrect sentences: " + String.valueOf(correctSentencesPart5) + "/" + String.valueOf(totalSentencesPart5));
+                tvPart6.setText("Part 6\nCorrect sentences: " + String.valueOf(correctSentencesPart6) + "/" + String.valueOf(totalSentencesPart6));
+                tvPart7.setText("Part 7\nCorrect sentences: " + String.valueOf(correctSentencesPart7) + "/" + String.valueOf(totalSentencesPart7));
             }
         });
     }

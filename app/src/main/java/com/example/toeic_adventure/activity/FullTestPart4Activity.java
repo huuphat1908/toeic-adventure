@@ -270,7 +270,7 @@ public class FullTestPart4Activity extends AppCompatActivity {
         answerList = new ArrayList<Answer>();
         isSubmittedList = new ArrayList<Boolean>();
         adapter = new QuestionAdapter(
-                getApplicationContext(),
+                FullTestPart4Activity.this,
                 R.layout.question_layout_item,
                 questionList,
                 answerList,
@@ -286,9 +286,6 @@ public class FullTestPart4Activity extends AppCompatActivity {
         mediaPlayer = new MediaPlayer();
         sbAudio.setMax(100);
         tvTranscript = new TextView(this);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(0,10,0,0);
-        tvTranscript.setLayoutParams(params);
         tvTranscript.setBackground(ContextCompat.getDrawable(FullTestPart4Activity.this, R.drawable.sharp_cardview_bg));
         tvTranscript.setTextColor(getResources().getColor(R.color.black));
         tvTranscript.setVisibility(View.INVISIBLE);
