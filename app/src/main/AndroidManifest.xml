@@ -14,6 +14,9 @@
         android:theme="@style/Theme.Toeicadventure"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.GrammarDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.FullTestPart7Activity"
             android:exported="false" />
         <activity

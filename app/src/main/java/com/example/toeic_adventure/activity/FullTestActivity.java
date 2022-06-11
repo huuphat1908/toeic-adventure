@@ -242,7 +242,7 @@ public class FullTestActivity extends AppCompatActivity {
                                 JSONObject errorObj = null;
                                 try {
                                     errorObj = new JSONObject(response.errorBody().string());
-                                    Log.d("AAA", errorObj.getString("message"));
+                                    Log.d("AAA", "Error" + errorObj.getString("message"));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 } catch (IOException e) {
@@ -250,11 +250,10 @@ public class FullTestActivity extends AppCompatActivity {
                                 }
                             }
                         }
-
                         @Override
                         public void onFailure(Call<Object> call, Throwable t) {
                             Toast.makeText(FullTestActivity.this, "Failed to submit answer", Toast.LENGTH_SHORT).show();
-                            Log.d("AAA", t.toString());
+                            Log.d("AAA", "Failure: " + t.toString());
                         }
                     });
                 } catch (JSONException e) {

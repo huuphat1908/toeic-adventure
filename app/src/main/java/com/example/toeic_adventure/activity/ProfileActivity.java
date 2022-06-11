@@ -107,6 +107,7 @@ public class ProfileActivity extends Fragment {
                 editor.clear();
                 editor.commit();
                 Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+                loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(loginIntent);
             }
         });

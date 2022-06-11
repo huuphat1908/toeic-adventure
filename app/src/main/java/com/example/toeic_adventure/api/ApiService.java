@@ -117,4 +117,7 @@ public interface ApiService {
 
     @GET("/vocabulary")
     Call<Object> getVocabularyDetail(@Query("theme") String theme);
+
+    @GET("/lesson-topics")
+    Call<Object> getGrammarList();
 }

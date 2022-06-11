@@ -102,8 +102,8 @@ public class LoginActivity extends AppCompatActivity {
                                     editor.putString("token", token);
                                     editor.commit();
                                     Intent mainActivityIntent = new Intent(LoginActivity.this, MainActivity.class);
+                                    mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(mainActivityIntent);
-                                    finish();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }

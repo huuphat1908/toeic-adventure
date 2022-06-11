@@ -115,7 +115,7 @@ public class FullTestCollectionActivity extends Fragment {
             }
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
-                Toast.makeText(getContext(), "Unknown error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Failed to call API", Toast.LENGTH_SHORT).show();
             }
         });
     }
