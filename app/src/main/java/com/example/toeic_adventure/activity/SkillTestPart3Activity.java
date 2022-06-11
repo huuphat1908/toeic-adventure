@@ -91,8 +91,6 @@ public class SkillTestPart3Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-                mediaPlayer.release();
-                mediaPlayer = new MediaPlayer();
             }
         });
         ivPlayPause.setOnClickListener(new View.OnClickListener() {

@@ -268,7 +268,7 @@ public class FullTestPart3Activity extends AppCompatActivity {
         answerList = new ArrayList<Answer>();
         isSubmittedList = new ArrayList<Boolean>();
         adapter = new QuestionAdapter(
-                FullTestPart3Activity.this,
+                getApplicationContext(),
                 R.layout.question_layout_item,
                 questionList,
                 answerList,
