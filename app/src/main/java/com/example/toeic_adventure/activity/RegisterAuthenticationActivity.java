@@ -72,12 +72,12 @@ public class RegisterAuthenticationActivity extends AppCompatActivity {
                                 }
                             }, 1000L);
                         } else {
-                           Toast.makeText(RegisterAuthenticationActivity.this, "Unknown error", Toast.LENGTH_SHORT).show();
+                           Toast.makeText(RegisterAuthenticationActivity.this, "Failed to register", Toast.LENGTH_SHORT).show();
                         }
                     }
                     @Override
                     public void onFailure(Call<Boolean> call, Throwable t) {
-                        Toast.makeText(RegisterAuthenticationActivity.this, "Unknown error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterAuthenticationActivity.this, "Failed to call API", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

@@ -17,11 +17,14 @@ import android.widget.Toolbar;
 
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.api.ApiService;
+import com.example.toeic_adventure.model.FullTestAnswer;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,75 +68,75 @@ public class FullTestActivity extends AppCompatActivity {
     int correctSentencesPart7 = 0;
 
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
-      new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
-            @Override
-            public void onActivityResult(ActivityResult result) {
-                if (result.getResultCode() == 1) {
-                    Intent intent = result.getData();
-                    if (intent != null) {
-                        try {
-                            switch (intent.getIntExtra("part", 0)) {
-                                case 1:
-                                    completedSentencesPart1 = intent.getIntExtra("completedSentences", 0);
-                                    correctSentencesPart1 = intent.getIntExtra("correctSentences", 0);
-                                    part1 = new JSONArray(intent.getStringExtra("questions"));
-                                    tvPart1.setText("Part 1\nCompleted: " + String.valueOf(completedSentencesPart1)
-                                            + "/" + String.valueOf(totalSentencesPart1));
-                                    break;
-                                case 2:
-                                    completedSentencesPart2 = intent.getIntExtra("completedSentences", 0);
-                                    correctSentencesPart2 = intent.getIntExtra("correctSentences", 0);
-                                    part2 = new JSONArray(intent.getStringExtra("questions"));
-                                    tvPart2.setText("Part 2\nCompleted: " + String.valueOf(completedSentencesPart2)
-                                            + "/" + String.valueOf(totalSentencesPart2));
-                                    break;
-                                case 3:
-                                    completedSentencesPart3 = intent.getIntExtra("completedSentences", 0);
-                                    correctSentencesPart3 = intent.getIntExtra("correctSentences", 0);
-                                    part3 = new JSONArray(intent.getStringExtra("questions"));
-                                    tvPart3.setText("Part 3\nCompleted: " + String.valueOf(completedSentencesPart3)
-                                            + "/" + String.valueOf(totalSentencesPart3));
-                                    break;
-                                case 4:
-                                    completedSentencesPart4 = intent.getIntExtra("completedSentences", 0);
-                                    correctSentencesPart4 = intent.getIntExtra("correctSentences", 0);
-                                    part4 = new JSONArray(intent.getStringExtra("questions"));
-                                    tvPart4.setText("Part 4\nCompleted: " + String.valueOf(completedSentencesPart4)
-                                            + "/" + String.valueOf(totalSentencesPart4));
-                                    break;
-                                case 5:
-                                    completedSentencesPart5 = intent.getIntExtra("completedSentences", 0);
-                                    correctSentencesPart5 = intent.getIntExtra("correctSentences", 0);
-                                    part5 = new JSONArray(intent.getStringExtra("questions"));
-                                    tvPart5.setText("Part 5\nCompleted: " + String.valueOf(completedSentencesPart5)
-                                            + "/" + String.valueOf(totalSentencesPart5));
-                                    break;
-                                case 6:
-                                    completedSentencesPart6 = intent.getIntExtra("completedSentences", 0);
-                                    correctSentencesPart6 = intent.getIntExtra("correctSentences", 0);
-                                    part6 = new JSONArray(intent.getStringExtra("questions"));
-                                    tvPart6.setText("Part 6\nCompleted: " + String.valueOf(completedSentencesPart6)
-                                            + "/" + String.valueOf(totalSentencesPart6));
-                                    break;
-                                case 7:
-                                    completedSentencesPart7 = intent.getIntExtra("completedSentences", 0);
-                                    correctSentencesPart7 = intent.getIntExtra("correctSentences", 0);
-                                    part7 = new JSONArray(intent.getStringExtra("questions"));
-                                    tvPart7.setText("Part 7\nCompleted: " + String.valueOf(completedSentencesPart7)
-                                            + "/" + String.valueOf(totalSentencesPart7));
-                                    break;
-                                default:
-                                    Toast.makeText(FullTestActivity.this, "Arsenal", Toast.LENGTH_SHORT).show();
-                                    break;
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == 1) {
+                        Intent intent = result.getData();
+                        if (intent != null) {
+                            try {
+                                switch (intent.getIntExtra("part", 0)) {
+                                    case 1:
+                                        completedSentencesPart1 = intent.getIntExtra("completedSentences", 0);
+                                        correctSentencesPart1 = intent.getIntExtra("correctSentences", 0);
+                                        part1 = new JSONArray(intent.getStringExtra("questions"));
+                                        tvPart1.setText("Part 1\nCompleted: " + String.valueOf(completedSentencesPart1)
+                                                + "/" + String.valueOf(totalSentencesPart1));
+                                        break;
+                                    case 2:
+                                        completedSentencesPart2 = intent.getIntExtra("completedSentences", 0);
+                                        correctSentencesPart2 = intent.getIntExtra("correctSentences", 0);
+                                        part2 = new JSONArray(intent.getStringExtra("questions"));
+                                        tvPart2.setText("Part 2\nCompleted: " + String.valueOf(completedSentencesPart2)
+                                                + "/" + String.valueOf(totalSentencesPart2));
+                                        break;
+                                    case 3:
+                                        completedSentencesPart3 = intent.getIntExtra("completedSentences", 0);
+                                        correctSentencesPart3 = intent.getIntExtra("correctSentences", 0);
+                                        part3 = new JSONArray(intent.getStringExtra("questions"));
+                                        tvPart3.setText("Part 3\nCompleted: " + String.valueOf(completedSentencesPart3)
+                                                + "/" + String.valueOf(totalSentencesPart3));
+                                        break;
+                                    case 4:
+                                        completedSentencesPart4 = intent.getIntExtra("completedSentences", 0);
+                                        correctSentencesPart4 = intent.getIntExtra("correctSentences", 0);
+                                        part4 = new JSONArray(intent.getStringExtra("questions"));
+                                        tvPart4.setText("Part 4\nCompleted: " + String.valueOf(completedSentencesPart4)
+                                                + "/" + String.valueOf(totalSentencesPart4));
+                                        break;
+                                    case 5:
+                                        completedSentencesPart5 = intent.getIntExtra("completedSentences", 0);
+                                        correctSentencesPart5 = intent.getIntExtra("correctSentences", 0);
+                                        part5 = new JSONArray(intent.getStringExtra("questions"));
+                                        tvPart5.setText("Part 5\nCompleted: " + String.valueOf(completedSentencesPart5)
+                                                + "/" + String.valueOf(totalSentencesPart5));
+                                        break;
+                                    case 6:
+                                        completedSentencesPart6 = intent.getIntExtra("completedSentences", 0);
+                                        correctSentencesPart6 = intent.getIntExtra("correctSentences", 0);
+                                        part6 = new JSONArray(intent.getStringExtra("questions"));
+                                        tvPart6.setText("Part 6\nCompleted: " + String.valueOf(completedSentencesPart6)
+                                                + "/" + String.valueOf(totalSentencesPart6));
+                                        break;
+                                    case 7:
+                                        completedSentencesPart7 = intent.getIntExtra("completedSentences", 0);
+                                        correctSentencesPart7 = intent.getIntExtra("correctSentences", 0);
+                                        part7 = new JSONArray(intent.getStringExtra("questions"));
+                                        tvPart7.setText("Part 7\nCompleted: " + String.valueOf(completedSentencesPart7)
+                                                + "/" + String.valueOf(totalSentencesPart7));
+                                        break;
+                                    default:
+                                        Toast.makeText(FullTestActivity.this, "Arsenal", Toast.LENGTH_SHORT).show();
+                                        break;
+                                }
+                            } catch (JSONException e) {
+                                Toast.makeText(FullTestActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                             }
-                        } catch (JSONException e) {
-                            Toast.makeText(FullTestActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
             }
-        }
     );
 
     @Override
@@ -225,6 +228,38 @@ public class FullTestActivity extends AppCompatActivity {
                 tvPart5.setText("Part 5\nCorrect sentences: " + String.valueOf(correctSentencesPart5) + "/" + String.valueOf(totalSentencesPart5));
                 tvPart6.setText("Part 6\nCorrect sentences: " + String.valueOf(correctSentencesPart6) + "/" + String.valueOf(totalSentencesPart6));
                 tvPart7.setText("Part 7\nCorrect sentences: " + String.valueOf(correctSentencesPart7) + "/" + String.valueOf(totalSentencesPart7));
+                try {
+                    JSONObject correctSentences = new JSONObject();
+                    correctSentences.put("reading", correctSentencesPart1 + correctSentencesPart2 + correctSentencesPart3 + correctSentencesPart4);
+                    correctSentences.put("listening", correctSentencesPart5 + correctSentencesPart6 + correctSentencesPart7);
+
+                    ApiService.apiService.submitFullTestAnswer(correctSentences, fullTestId).enqueue(new Callback<Object>() {
+                        @Override
+                        public void onResponse(Call<Object> call, Response<Object> response) {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(FullTestActivity.this, "Submitted answer", Toast.LENGTH_SHORT).show();
+                            } else {
+                                JSONObject errorObj = null;
+                                try {
+                                    errorObj = new JSONObject(response.errorBody().string());
+                                    Log.d("AAA", errorObj.getString("message"));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Object> call, Throwable t) {
+                            Toast.makeText(FullTestActivity.this, "Failed to submit answer", Toast.LENGTH_SHORT).show();
+                            Log.d("AAA", t.toString());
+                        }
+                    });
+                } catch (JSONException e) {
+                    Toast.makeText(FullTestActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -265,6 +300,7 @@ public class FullTestActivity extends AppCompatActivity {
                                 Toast.makeText(FullTestActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                             }
                         }
+
                         @Override
                         public void onFailure(Call<Object> call, Throwable t) {
                             Toast.makeText(FullTestActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
@@ -274,6 +310,7 @@ public class FullTestActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
                 Toast.makeText(FullTestActivity.this, "Call API failed", Toast.LENGTH_SHORT).show();

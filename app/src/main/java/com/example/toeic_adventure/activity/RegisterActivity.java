@@ -2,13 +2,11 @@ package com.example.toeic_adventure.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -46,14 +44,6 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intentLogin = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intentLogin);
-            }
-        });
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = etEmail.getText().toString();
-                String password = etPassword.getText().toString();
-                Log.d("Register", email + " " + password);
             }
         });
         etPassword.setOnTouchListener(new View.OnTouchListener() {

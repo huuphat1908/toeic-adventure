@@ -225,7 +225,7 @@ public class SkillTestPart1Activity extends AppCompatActivity {
                         }
                         @Override
                         public void onFailure(Call<Object> call, Throwable t) {
-                            Toast.makeText(SkillTestPart1Activity.this, "Unknown error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SkillTestPart1Activity.this, "Failed to submit answer", Toast.LENGTH_SHORT).show();
                         }
                     });
                     isSubmitted = true;

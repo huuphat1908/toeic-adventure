@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -70,6 +71,12 @@ public class FullTestListActivity extends AppCompatActivity {
                 startActivity(fullTestIntent);
             }
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        fetchFullTestList();
     }
 
     private void fetchFullTestList() {
