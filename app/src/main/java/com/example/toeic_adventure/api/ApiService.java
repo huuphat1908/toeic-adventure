@@ -1,7 +1,5 @@
 package com.example.toeic_adventure.api;
 
-import android.content.SharedPreferences;
-
 import com.example.toeic_adventure.activity.MainActivity;
 import com.example.toeic_adventure.model.FullTestBody;
 import com.example.toeic_adventure.model.User;
@@ -31,7 +29,6 @@ public interface ApiService {
             .setDateFormat("yyyy--MM-dd HH:mm:ss")
             .create();
 
-    SharedPreferences localStorage = MainActivity.localStorage;
     OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
         @Override
         public Response intercept(Chain chain) throws IOException {
@@ -115,4 +112,7 @@ public interface ApiService {
 
     @GET("/lesson-topics")
     Call<Object> getGrammarList();
+
+    @GET("/lessons")
+    Call<Object> getGrammarDetail(@Query("topic") String id);
 }

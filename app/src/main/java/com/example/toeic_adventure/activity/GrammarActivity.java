@@ -2,7 +2,6 @@ package com.example.toeic_adventure.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,7 +96,6 @@ public class GrammarActivity extends Fragment {
             public void onResponse(Call<Object> call, Response<Object> response) {
                 try {
                     JSONObject resObj = new JSONObject(new Gson().toJson(response.body()));
-                    Log.d("AAA", resObj.toString());
                     arrayGrammarList.clear();
                     JSONArray results = resObj.getJSONArray("results");
                     for (int i = 0; i < results.length(); i++) {

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity.GrammarDetailActivity">
 
     <android.widget.Toolbar
@@ -12,4 +13,17 @@
         android:layout_height="wrap_content"
         android:elevation="4dp"
         android:title="Arsenal" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+<!--        <WebView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/wvContent" />-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvContent"
+            android:textColor="@color/black"/>
+    </ScrollView>
 </LinearLayout>
