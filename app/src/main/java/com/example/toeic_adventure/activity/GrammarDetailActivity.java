@@ -24,6 +24,12 @@ public class GrammarDetailActivity extends AppCompatActivity {
     WebView wvContent;
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        wvContent.destroy();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grammar_detail);

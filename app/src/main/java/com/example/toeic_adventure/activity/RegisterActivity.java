@@ -3,10 +3,12 @@ package com.example.toeic_adventure.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +19,10 @@ import android.widget.Toast;
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.api.ApiService;
 import com.example.toeic_adventure.model.User;
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -112,11 +118,20 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if (!password.equals(passwordConfirmation)) {
                     Toast.makeText(RegisterActivity.this, "Password and password confirmation must be the same", Toast.LENGTH_SHORT).show();
                 } else {
-                    ApiService.apiService.register(email, password).enqueue(new Callback<User>() {
+                    ApiService.apiService.register(email, password).enqueue(new Callback<Object>() {
                         @Override
-                        public void onResponse(Call<User> call, Response<User> response) {
+                        public void onResponse(Call<Object> call, Response<Object> response) {
                             if (response.isSuccessful()) {
                                 Toast.makeText(RegisterActivity.this, "Register successfullly", Toast.LENGTH_SHORT).show();
+                                try {
+                                    JSONObject resObj = new JSONObject(new Gson().toJson(response.body()));
+                                    String token = resObj.getString("token");
+                                    SharedPreferences.Editor editor = MainActivity.localStorage.edit();
+                                    editor.putString("token", token);
+                                    editor.commit();
+                                } catch (JSONException e) {
+                                    Toast.makeText(RegisterActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                }
                                 Intent registerAuthenticationIntent = new Intent(RegisterActivity.this, RegisterAuthenticationActivity.class);
                                 registerAuthenticationIntent.putExtra("email", email);
                                 registerAuthenticationIntent.putExtra("redirectFrom", "Register");
@@ -126,14 +141,14 @@ public class RegisterActivity extends AppCompatActivity {
                                     public void run() {
                                         startActivity(registerAuthenticationIntent);
                                     }
-                                }, 1000L);
+                                }, 750L);
                             } else {
                                 Toast.makeText(RegisterActivity.this, "Email is already taken", Toast.LENGTH_SHORT).show();
                             }
 
                         }
                         @Override
-                        public void onFailure(Call<User> call, Throwable t) {
+                        public void onFailure(Call<Object> call, Throwable t) {
                             Toast.makeText(RegisterActivity.this, "Register failed", Toast.LENGTH_SHORT).show();
                         }
                     });

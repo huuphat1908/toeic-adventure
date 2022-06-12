@@ -19,7 +19,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterAuthenticationActivity extends AppCompatActivity {
-
     private EditText inputCode1, inputCode2, inputCode3, inputCode4, inputCode5, inputCode6;
     private Button btnVerify;
 
@@ -58,16 +57,17 @@ public class RegisterAuthenticationActivity extends AppCompatActivity {
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                         if (response.isSuccessful()) {
                             Toast.makeText(RegisterAuthenticationActivity.this, "Verify successfully", Toast.LENGTH_SHORT).show();
-                            Intent loginActivityIntent = new Intent(RegisterAuthenticationActivity.this, LoginActivity.class);
+                            Intent mainActivityIntent = new Intent(RegisterAuthenticationActivity.this, MainActivity.class);
+                            mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             Handler mHandler = new Handler();
                             mHandler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    startActivity(loginActivityIntent);
+                                    startActivity(mainActivityIntent);
                                 }
                             }, 1000L);
                         } else {
-                           Toast.makeText(RegisterAuthenticationActivity.this, "Failed to register", Toast.LENGTH_SHORT).show();
+                           Toast.makeText(RegisterAuthenticationActivity.this, "Wrong code", Toast.LENGTH_SHORT).show();
                         }
                     }
                     @Override
@@ -95,14 +95,12 @@ public class RegisterAuthenticationActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence s, int i, int i1, int i2) {
                 if (!s.toString().trim().isEmpty()) {
                     inputCode2.requestFocus();
                 }
             }
-
             @Override
             public void afterTextChanged(Editable s) {
 
@@ -113,14 +111,12 @@ public class RegisterAuthenticationActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence s, int i, int i1, int i2) {
                 if (!s.toString().trim().isEmpty()) {
                     inputCode3.requestFocus();
                 }
             }
-
             @Override
             public void afterTextChanged(Editable s) {
 
@@ -131,14 +127,12 @@ public class RegisterAuthenticationActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence s, int i, int i1, int i2) {
                 if (!s.toString().trim().isEmpty()) {
                     inputCode4.requestFocus();
                 }
             }
-
             @Override
             public void afterTextChanged(Editable s) {
 
@@ -149,17 +143,14 @@ public class RegisterAuthenticationActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence s, int i, int i1, int i2) {
                 if (!s.toString().trim().isEmpty()) {
                     inputCode5.requestFocus();
                 }
             }
-
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
         inputCode5.addTextChangedListener(new TextWatcher() {
@@ -167,14 +158,12 @@ public class RegisterAuthenticationActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence s, int i, int i1, int i2) {
                 if (!s.toString().trim().isEmpty()) {
                     inputCode6.requestFocus();
                 }
             }
-
             @Override
             public void afterTextChanged(Editable s) {
 

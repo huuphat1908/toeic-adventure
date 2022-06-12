@@ -52,7 +52,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("/auth/register")
-    Call<User> register(@Field("email") String email, @Field("password") String password);
+    Call<Object> register(@Field("email") String email, @Field("password") String password);
 
     @FormUrlEncoded
     @POST("/auth/send-verification-email")
