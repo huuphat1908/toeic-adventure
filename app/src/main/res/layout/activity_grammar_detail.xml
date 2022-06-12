@@ -15,11 +15,10 @@
         android:title="Arsenal" />
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <org.sufficientlysecure.htmltextview.HtmlTextView
-            android:id="@+id/html_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAppearance="@android:style/TextAppearance.Small" />
+        android:layout_height="match_parent">
+        <WebView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/wvContent"/>
     </ScrollView>
 </LinearLayout>

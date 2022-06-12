@@ -2,12 +2,9 @@ package com.example.toeic_adventure.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -24,6 +21,7 @@ import retrofit2.Response;
 
 public class GrammarDetailActivity extends AppCompatActivity {
     Toolbar myToolbar;
+    WebView wvContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +39,7 @@ public class GrammarDetailActivity extends AppCompatActivity {
 
     private void initView() {
         myToolbar = findViewById(R.id.toolbar);
+        wvContent = (WebView) findViewById(R.id.wvContent);
         setActionBar(myToolbar);
         myToolbar.setNavigationIcon(R.drawable.back_icon);
         myToolbar.setTitle(getIntent().getStringExtra("name"));
@@ -53,7 +52,8 @@ public class GrammarDetailActivity extends AppCompatActivity {
                 try {
                     if (response.isSuccessful()) {
                         JSONObject resObj = new JSONObject(new Gson().toJson(response.body()));
-
+                        wvContent.loadData(resObj.getJSONArray("results").getJSONObject(0).getString("content"),
+                                "text/html; charset=utf-8", "UTF-8");
                     } else {
                         Toast.makeText(GrammarDetailActivity.this, "Bad request", Toast.LENGTH_SHORT).show();
                     }
