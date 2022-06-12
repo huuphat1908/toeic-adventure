@@ -19,14 +19,14 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionAdapter extends BaseAdapter {
+public class QuestionPart5Adapter extends BaseAdapter {
     Context MyContext;
     int MyLayout;
     List<com.example.toeic_adventure.model.Question> QuestionList;
     List<com.example.toeic_adventure.model.Answer> AnswerList;
     List<Boolean> IsSubmittedList;
 
-    public QuestionAdapter(Context context,
+    public QuestionPart5Adapter(Context context,
                            int layout,
                            List<com.example.toeic_adventure.model.Question> questionList,
                            List<com.example.toeic_adventure.model.Answer> answerList,

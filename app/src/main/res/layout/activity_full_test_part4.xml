@@ -108,7 +108,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/button"
                 android:textColor="@color/white"
-                android:text="Next part"
+                android:text="Save"
                 android:id="@+id/btnSubmit"/>
         </LinearLayout>
         <ImageView

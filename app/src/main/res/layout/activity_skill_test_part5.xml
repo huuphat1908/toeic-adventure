@@ -33,38 +33,18 @@
             android:id="@+id/ivClose"
             android:src="@drawable/close" />
     </LinearLayout>
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvQuestion"
-        android:background="@drawable/sharp_cardview_bg"
-        android:textColor="@color/black"/>
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/rgAnswer">
-        <RadioButton
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rbA"
-            android:text="(A):" />
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rbB"
-            android:text="(B):" />
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rbC"
-            android:text="(C):" />
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rbD"
-            android:text="(D):" />
-    </RadioGroup>
+            android:layout_height="match_parent"
+            android:id="@+id/lvQuestion"
+            android:divider="@null"
+            android:dividerHeight="0dp"/>
+    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,6 +55,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/blue"
         android:layout_weight="1"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -95,8 +76,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/button"
                 android:textColor="@color/white"
-                android:text="Submit"
-                android:visibility="invisible"
+                android:text="Save"
                 android:id="@+id/btnSubmit"/>
         </LinearLayout>
         <ImageView
