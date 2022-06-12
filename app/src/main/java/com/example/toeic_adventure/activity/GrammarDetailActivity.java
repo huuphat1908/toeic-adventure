@@ -24,8 +24,6 @@ import retrofit2.Response;
 
 public class GrammarDetailActivity extends AppCompatActivity {
     Toolbar myToolbar;
-    TextView tvContent;
-    WebView wvContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +44,6 @@ public class GrammarDetailActivity extends AppCompatActivity {
         setActionBar(myToolbar);
         myToolbar.setNavigationIcon(R.drawable.back_icon);
         myToolbar.setTitle(getIntent().getStringExtra("name"));
-        tvContent = (TextView) findViewById(R.id.tvContent);
-//        wvContent = (WebView) findViewById(R.id.wvContent);
     }
 
     private void fetchGrammarDetail() {
@@ -57,13 +53,7 @@ public class GrammarDetailActivity extends AppCompatActivity {
                 try {
                     if (response.isSuccessful()) {
                         JSONObject resObj = new JSONObject(new Gson().toJson(response.body()));
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                            tvContent.setText(Html.fromHtml(resObj.getJSONArray("results").getJSONObject(0).getString("content"),
-                                    Html.FROM_HTML_MODE_COMPACT));
-                        } else {
-                            tvContent.setText(Html.fromHtml(resObj.getJSONArray("results").getJSONObject(0).getString("content")));
-                        }
-//                        wvContent.loadData(resObj.getJSONArray("results").getJSONObject(0).getString("content"), "text/html", "UTF-8");
+
                     } else {
                         Toast.makeText(GrammarDetailActivity.this, "Bad request", Toast.LENGTH_SHORT).show();
                     }
