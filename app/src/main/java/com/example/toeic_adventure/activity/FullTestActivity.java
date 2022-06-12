@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FullTestActivity extends AppCompatActivity {
+    private long mLastClickTime = 0;
     String fullTestId;
     Toolbar myToolbar;
     TextView tvPart1, tvPart2, tvPart3, tvPart4, tvPart5, tvPart6, tvPart7;
@@ -41,7 +43,6 @@ public class FullTestActivity extends AppCompatActivity {
     JSONArray part6 = new JSONArray();
     JSONArray part7 = new JSONArray();
     Button btnSubmit;
-    int score = 0;
     boolean isSubmitted = false;
     int totalSentencesPart1 = 0;
     int totalSentencesPart2 = 0;
@@ -151,10 +152,13 @@ public class FullTestActivity extends AppCompatActivity {
                 finish();
             }
         });
-
         tvPart1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
                 Intent fullTestPart1Intent = new Intent(FullTestActivity.this, FullTestPart1Activity.class);
                 fullTestPart1Intent.putExtra("questions", part1.toString());
                 fullTestPart1Intent.putExtra("isSubmitted", isSubmitted);
@@ -164,6 +168,10 @@ public class FullTestActivity extends AppCompatActivity {
         tvPart2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
                 Intent fullTestPart2Intent = new Intent(FullTestActivity.this, FullTestPart2Activity.class);
                 fullTestPart2Intent.putExtra("questions", part2.toString());
                 fullTestPart2Intent.putExtra("isSubmitted", isSubmitted);
@@ -173,6 +181,10 @@ public class FullTestActivity extends AppCompatActivity {
         tvPart3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
                 Intent fullTestPart3Intent = new Intent(FullTestActivity.this, FullTestPart3Activity.class);
                 fullTestPart3Intent.putExtra("questions", part3.toString());
                 fullTestPart3Intent.putExtra("isSubmitted", isSubmitted);
@@ -182,6 +194,10 @@ public class FullTestActivity extends AppCompatActivity {
         tvPart4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
                 Intent fullTestPart4Intent = new Intent(FullTestActivity.this, FullTestPart4Activity.class);
                 fullTestPart4Intent.putExtra("questions", part4.toString());
                 fullTestPart4Intent.putExtra("isSubmitted", isSubmitted);
@@ -191,6 +207,10 @@ public class FullTestActivity extends AppCompatActivity {
         tvPart5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
                 Intent fullTestPart5Intent = new Intent(FullTestActivity.this, FullTestPart5Activity.class);
                 fullTestPart5Intent.putExtra("questions", part5.toString());
                 fullTestPart5Intent.putExtra("isSubmitted", isSubmitted);
@@ -200,6 +220,10 @@ public class FullTestActivity extends AppCompatActivity {
         tvPart6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
                 Intent fullTestPart6Intent = new Intent(FullTestActivity.this, FullTestPart6Activity.class);
                 fullTestPart6Intent.putExtra("questions", part6.toString());
                 fullTestPart6Intent.putExtra("isSubmitted", isSubmitted);
@@ -209,6 +233,10 @@ public class FullTestActivity extends AppCompatActivity {
         tvPart7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
                 Intent fullTestPart7Intent = new Intent(FullTestActivity.this, FullTestPart7Activity.class);
                 fullTestPart7Intent.putExtra("questions", part7.toString());
                 fullTestPart7Intent.putExtra("isSubmitted", isSubmitted);
@@ -226,9 +254,9 @@ public class FullTestActivity extends AppCompatActivity {
                 tvPart5.setText("Part 5\nCorrect sentences: " + String.valueOf(correctSentencesPart5) + "/" + String.valueOf(totalSentencesPart5));
                 tvPart6.setText("Part 6\nCorrect sentences: " + String.valueOf(correctSentencesPart6) + "/" + String.valueOf(totalSentencesPart6));
                 tvPart7.setText("Part 7\nCorrect sentences: " + String.valueOf(correctSentencesPart7) + "/" + String.valueOf(totalSentencesPart7));
-                CorrectSentencesFullTest correctSentences = new CorrectSentencesFullTest(correctSentencesPart1 + correctSentencesPart2 + correctSentencesPart3 + correctSentencesPart4,
-                        correctSentencesPart5 + correctSentencesPart6 + correctSentencesPart7);
-
+                CorrectSentencesFullTest correctSentences = new CorrectSentencesFullTest(
+                        correctSentencesPart5 + correctSentencesPart6 + correctSentencesPart7,
+                        correctSentencesPart1 + correctSentencesPart2 + correctSentencesPart3 + correctSentencesPart4);
                 ApiService.apiService.submitFullTestAnswer(new FullTestBody(correctSentences, fullTestId)).enqueue(new Callback<Object>() {
                     @Override
                     public void onResponse(Call<Object> call, Response<Object> response) {
@@ -239,7 +267,6 @@ public class FullTestActivity extends AppCompatActivity {
                             Toast.makeText(FullTestActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     }
-
                     @Override
                     public void onFailure(Call<Object> call, Throwable t) {
                         Toast.makeText(FullTestActivity.this, "Failed to submit answer", Toast.LENGTH_SHORT).show();

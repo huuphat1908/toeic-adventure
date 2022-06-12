@@ -54,7 +54,6 @@ public class FullTestPart5Activity extends AppCompatActivity {
                 onSubmit();
             }
         });
-
         rbA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -181,8 +180,8 @@ public class FullTestPart5Activity extends AppCompatActivity {
 
     private void handleQuestion() {
         try {
-            question = questions.getJSONObject(index ).getJSONObject("question");
-            answer = questions.getJSONObject(index ).getJSONObject("answer");
+            question = questions.getJSONObject(index).getJSONObject("question");
+            answer = questions.getJSONObject(index).getJSONObject("answer");
             choices = question.getJSONArray("choices");
             int indexTitle = index + 1;
             tvIndex.setText(indexTitle + "/" + questions.length());
@@ -192,22 +191,23 @@ public class FullTestPart5Activity extends AppCompatActivity {
             rbC.setText(choices.getString(2));
             rbD.setText(choices.getString(3));
 
-            switch (answer.getString("userAnswer").split(" ")[0]) {
-                case "":
-                    rgAnswer.clearCheck();
-                    break;
-                case "(A)":
-                    rbA.setChecked(true);
-                    break;
-                case "(B)":
-                    rbB.setChecked(true);
-                    break;
-                case "(C)":
-                    rbC.setChecked(true);
-                    break;
-                case "(D)":
-                    rbD.setChecked(true);
-                    break;
+            if (answer.getString("userAnswer").equals("")) {
+                rgAnswer.clearCheck();
+            }  else {
+                switch (answer.getString("userAnswer").substring(0, 3)) {
+                    case "(A)":
+                        rbA.setChecked(true);
+                        break;
+                    case "(B)":
+                        rbB.setChecked(true);
+                        break;
+                    case "(C)":
+                        rbC.setChecked(true);
+                        break;
+                    case "(D)":
+                        rbD.setChecked(true);
+                        break;
+                }
             }
             if (isSubmitted) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -227,7 +227,7 @@ public class FullTestPart5Activity extends AppCompatActivity {
                 rbD.setTextColor(getResources().getColor(R.color.black));
                 switch (rgAnswer.getCheckedRadioButtonId()) {
                     case -1:
-                        switch (answer.getString("text").split(" ")[0]) {
+                        switch (answer.getString("text").substring(0, 3)) {
                             case "(A)":
                                 rbA.setTextColor(getResources().getColor(R.color.pink));
                                 break;
@@ -243,28 +243,28 @@ public class FullTestPart5Activity extends AppCompatActivity {
                         }
                         break;
                     case R.id.rbA:
-                        if (!answer.getString("text").split(" ")[0].equals("(A)")) {
+                        if (!answer.getString("text").substring(0, 3).equals("(A)")) {
                             rbA.setTextColor(getResources().getColor(R.color.pink));
                         } else {
                             rbA.setTextColor(getResources().getColor(R.color.green));
                         }
                         break;
                     case R.id.rbB:
-                        if (!answer.getString("text").split(" ")[0].equals("(B)")) {
+                        if (!answer.getString("text").substring(0, 3).equals("(B)")) {
                             rbB.setTextColor(getResources().getColor(R.color.pink));
                         } else {
                             rbB.setTextColor(getResources().getColor(R.color.green));
                         }
                         break;
                     case R.id.rbC:
-                        if (!answer.getString("text").split(" ")[0].equals("(C)")) {
+                        if (!answer.getString("text").substring(0, 3).equals("(C)")) {
                             rbC.setTextColor(getResources().getColor(R.color.pink));
                         } else {
                             rbC.setTextColor(getResources().getColor(R.color.green));
                         }
                         break;
                     case R.id.rbD:
-                        if (!answer.getString("text").split(" ")[0].equals("(D)")) {
+                        if (!answer.getString("text").substring(0, 3).equals("(D)")) {
                             rbD.setTextColor(getResources().getColor(R.color.pink));
                         } else {
                             rbD.setTextColor(getResources().getColor(R.color.green));

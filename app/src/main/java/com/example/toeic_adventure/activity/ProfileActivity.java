@@ -53,7 +53,6 @@ public class ProfileActivity extends Fragment {
     private LinearLayout linearLayoutBottom;
 
     public ProfileActivity() {
-        // Required empty public constructor
     }
 
     public static ProfileActivity newInstance(String param1, String param2) {
@@ -77,7 +76,6 @@ public class ProfileActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
         imProfile = (ImageView) rootView.findViewById(R.id.imProfile);
@@ -90,7 +88,6 @@ public class ProfileActivity extends Fragment {
         linearLayoutBottom = (LinearLayout) rootView.findViewById(R.id.linearLayoutBottom);
 
         fetchProfileUser();
-
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -109,7 +106,6 @@ public class ProfileActivity extends Fragment {
                 startActivity(loginIntent);
             }
         });
-
         return rootView;
     }
 
@@ -139,16 +135,19 @@ public class ProfileActivity extends Fragment {
                     txtJoinedDay.setText((int) getDaysDiff(resObj.getString("joinDate")) + " day ago");
                     txtScoreFullTest.setText(String.valueOf(done.getInt("fullTest")));
                     txtScoreSkillTest.setText(String.valueOf(done.getInt("skillTest")));
-                    txtPredictedScore.setText(String.valueOf(resObj.getInt("predictedScore")));
+                    if (resObj.getInt("predictedScore") == -1) {
+                        txtPredictedScore.setText("Complete at least one full test to get predicted score");
+                    } else {
+                        txtPredictedScore.setText(String.valueOf(resObj.getInt("predictedScore")));
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(getContext(), "JSON object error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"JSON object error", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
-                Toast.makeText(getContext(), "Unknown error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Failed to call API", Toast.LENGTH_SHORT).show();
             }
         });
     };

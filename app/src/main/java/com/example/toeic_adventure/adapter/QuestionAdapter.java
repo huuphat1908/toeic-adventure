@@ -1,6 +1,8 @@
 package com.example.toeic_adventure.adapter;
 
 import android.content.Context;
+import android.os.Build;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +11,9 @@ import android.widget.BaseAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
 import com.example.toeic_adventure.R;
+
 import org.json.JSONException;
 
 import java.util.ArrayList;
@@ -55,7 +59,6 @@ public class QuestionAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) MyContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(MyLayout, null);
 
-        // Set test information to layout
         TextView tvQuestion = (TextView) view.findViewById(R.id.tvQuestion);
         RadioGroup rgAnswer = (RadioGroup) view.findViewById(R.id.rgAnswer);
         RadioButton rbA = (RadioButton) view.findViewById(R.id.rbA);
@@ -63,11 +66,12 @@ public class QuestionAdapter extends BaseAdapter {
         RadioButton rbC = (RadioButton) view.findViewById(R.id.rbC);
         RadioButton rbD = (RadioButton) view.findViewById(R.id.rbD);
 
-        if (QuestionList.get(i).text.equals("")) {
-            tvQuestion.setVisibility(View.INVISIBLE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            tvQuestion.setText(Html.fromHtml(QuestionList.get(i).text, Html.FROM_HTML_MODE_COMPACT));
         } else {
             tvQuestion.setText(QuestionList.get(i).text);
         }
+
         try {
             rbA.setText(QuestionList.get(i).choices.getString(0));
             rbB.setText(QuestionList.get(i).choices.getString(1));
@@ -77,22 +81,23 @@ public class QuestionAdapter extends BaseAdapter {
             e.printStackTrace();
         }
 
-        switch (AnswerList.get(i).userAnswer.split(" ")[0]) {
-            case "":
-                rgAnswer.clearCheck();
-                break;
-            case "(A)":
-                rbA.setChecked(true);
-                break;
-            case "(B)":
-                rbB.setChecked(true);
-                break;
-            case "(C)":
-                rbC.setChecked(true);
-                break;
-            case "(D)":
-                rbD.setChecked(true);
-                break;
+        if (AnswerList.get(i).userAnswer.equals("")) {
+            rgAnswer.clearCheck();
+        } else {
+            switch (AnswerList.get(i).userAnswer.substring(0, 3)) {
+                case "(A)":
+                    rbA.setChecked(true);
+                    break;
+                case "(B)":
+                    rbB.setChecked(true);
+                    break;
+                case "(C)":
+                    rbC.setChecked(true);
+                    break;
+                case "(D)":
+                    rbD.setChecked(true);
+                    break;
+            }
         }
 
         rbA.setOnClickListener(new View.OnClickListener() {
@@ -131,44 +136,44 @@ public class QuestionAdapter extends BaseAdapter {
             rbD.setTextColor(MyContext.getResources().getColor(R.color.black));
             switch (rgAnswer.getCheckedRadioButtonId()) {
                 case -1:
-                    switch (AnswerList.get(i).text.split(" ")[0]) {
+                    switch (AnswerList.get(i).text.substring(0, 3)) {
                         case "(A)":
-                            rbA.setTextColor(MyContext.getResources().getColor(R.color.pink));
+                            rbA.setTextColor(MyContext.getResources().getColor(R.color.green));
                             break;
                         case "(B)":
-                            rbB.setTextColor(MyContext.getResources().getColor(R.color.pink));
+                            rbB.setTextColor(MyContext.getResources().getColor(R.color.green));
                             break;
                         case "(C)":
-                            rbC.setTextColor(MyContext.getResources().getColor(R.color.pink));
+                            rbC.setTextColor(MyContext.getResources().getColor(R.color.green));
                             break;
                         case "(D)":
-                            rbD.setTextColor(MyContext.getResources().getColor(R.color.pink));
+                            rbD.setTextColor(MyContext.getResources().getColor(R.color.green));
                             break;
                     }
                     break;
                 case R.id.rbA:
-                    if (!AnswerList.get(i).text.split(" ")[0].equals("(A)")) {
+                    if (!AnswerList.get(i).text.substring(0, 3).equals("(A)")) {
                         rbA.setTextColor(MyContext.getResources().getColor(R.color.pink));
                     } else {
                         rbA.setTextColor(MyContext.getResources().getColor(R.color.green));
                     }
                     break;
                 case R.id.rbB:
-                    if (!AnswerList.get(i).text.split(" ")[0].equals("(B)")) {
+                    if (!AnswerList.get(i).text.substring(0, 3).equals("(B)")) {
                         rbB.setTextColor(MyContext.getResources().getColor(R.color.pink));
                     } else {
                         rbB.setTextColor(MyContext.getResources().getColor(R.color.green));
                     }
                     break;
                 case R.id.rbC:
-                    if (!AnswerList.get(i).text.split(" ")[0].equals("(C)")) {
+                    if (!AnswerList.get(i).text.substring(0, 3).equals("(C)")) {
                         rbC.setTextColor(MyContext.getResources().getColor(R.color.pink));
                     } else {
                         rbC.setTextColor(MyContext.getResources().getColor(R.color.green));
                     }
                     break;
                 case R.id.rbD:
-                    if (!AnswerList.get(i).text.split(" ")[0].equals("(D)")) {
+                    if (!AnswerList.get(i).text.substring(0, 3).equals("(D)")) {
                         rbD.setTextColor(MyContext.getResources().getColor(R.color.pink));
                     } else {
                         rbD.setTextColor(MyContext.getResources().getColor(R.color.green));

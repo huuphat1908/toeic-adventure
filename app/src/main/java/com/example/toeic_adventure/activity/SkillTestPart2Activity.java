@@ -280,7 +280,7 @@ public class SkillTestPart2Activity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
-                Toast.makeText(SkillTestPart2Activity.this, "Unknown error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SkillTestPart2Activity.this, "Failed to call API", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -313,24 +313,25 @@ public class SkillTestPart2Activity extends AppCompatActivity {
             choices = question.getJSONArray("choices");
             int indexTitle = index + 1;
             tvIndex.setText(indexTitle + "/" + questions.length());
-            tvGuideline.setText("Câu " + indexTitle + ": Listen to question and choose a correct");
+            tvGuideline.setText("Listen to question and choose a correct");
             rbA.setText(choices.getString(0));
             rbB.setText(choices.getString(1));
             rbC.setText(choices.getString(2));
 
-            switch (answer.getString("userAnswer").split(" ")[0]) {
-                case "":
-                    rgAnswer.clearCheck();
-                    break;
-                case "(A)":
-                    rbA.setChecked(true);
-                    break;
-                case "(B)":
-                    rbB.setChecked(true);
-                    break;
-                case "(C)":
-                    rbC.setChecked(true);
-                    break;
+            if (answer.getString("userAnswer").equals("")) {
+                rgAnswer.clearCheck();
+            }  else {
+                switch (answer.getString("userAnswer").substring(0, 3)) {
+                    case "(A)":
+                        rbA.setChecked(true);
+                        break;
+                    case "(B)":
+                        rbB.setChecked(true);
+                        break;
+                    case "(C)":
+                        rbC.setChecked(true);
+                        break;
+                }
             }
             if (index == questions.length() - 1) {
                 btnSubmit.setVisibility(View.VISIBLE);
@@ -358,34 +359,34 @@ public class SkillTestPart2Activity extends AppCompatActivity {
                 rbC.setTextColor(getResources().getColor(R.color.black));
                 switch (rgAnswer.getCheckedRadioButtonId()) {
                     case -1:
-                        switch (answer.getString("text").split(" ")[0]) {
+                        switch (answer.getString("text").substring(0, 3)) {
                             case "(A)":
-                                rbA.setTextColor(getResources().getColor(R.color.pink));
+                                rbA.setTextColor(getResources().getColor(R.color.green));
                                 break;
                             case "(B)":
-                                rbB.setTextColor(getResources().getColor(R.color.pink));
+                                rbB.setTextColor(getResources().getColor(R.color.green));
                                 break;
                             case "(C)":
-                                rbC.setTextColor(getResources().getColor(R.color.pink));
+                                rbC.setTextColor(getResources().getColor(R.color.green));
                                 break;
                         }
                         break;
                     case R.id.rbA:
-                        if (!answer.getString("text").split(" ")[0].equals("(A)")) {
+                        if (!answer.getString("text").substring(0, 3).equals("(A)")) {
                             rbA.setTextColor(getResources().getColor(R.color.pink));
                         } else {
                             rbA.setTextColor(getResources().getColor(R.color.green));
                         }
                         break;
                     case R.id.rbB:
-                        if (!answer.getString("text").split(" ")[0].equals("(B)")) {
+                        if (!answer.getString("text").substring(0, 3).equals("(B)")) {
                             rbB.setTextColor(getResources().getColor(R.color.pink));
                         } else {
                             rbB.setTextColor(getResources().getColor(R.color.green));
                         }
                         break;
                     case R.id.rbC:
-                        if (!answer.getString("text").split(" ")[0].equals("(C)")) {
+                        if (!answer.getString("text").substring(0, 3).equals("(C)")) {
                             rbC.setTextColor(getResources().getColor(R.color.pink));
                         } else {
                             rbC.setTextColor(getResources().getColor(R.color.green));

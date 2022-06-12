@@ -140,7 +140,7 @@ public class FullTestPart6Activity extends AppCompatActivity {
             Toast.makeText(FullTestPart6Activity.this, e.toString(), Toast.LENGTH_SHORT).show();
         }
         Intent intent = new Intent();
-        intent.putExtra("part", 3);
+        intent.putExtra("part", 6);
         intent.putExtra("questions", questions.toString());
         intent.putExtra("completedSentences", completedSentences);
         intent.putExtra("correctSentences", correctSentences);
