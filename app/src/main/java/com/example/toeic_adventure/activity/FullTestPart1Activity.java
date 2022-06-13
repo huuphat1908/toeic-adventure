@@ -1,7 +1,6 @@
 package com.example.toeic_adventure.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -9,19 +8,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.toeic_adventure.R;
-import com.example.toeic_adventure.adapter.QuestionAdapter;
+import com.example.toeic_adventure.adapter.QuestionPart1Adapter;
 import com.example.toeic_adventure.model.Answer;
 import com.example.toeic_adventure.model.Question;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -60,7 +57,7 @@ public class FullTestPart1Activity extends AppCompatActivity {
 
     ArrayList<Question> questionList;
     ArrayList<Answer> answerList;
-    QuestionAdapter adapter;
+    QuestionPart1Adapter adapter;
 
     int correctSentences = 0;
     int completedSentences = 0;
@@ -259,7 +256,7 @@ public class FullTestPart1Activity extends AppCompatActivity {
         questionList = new ArrayList<Question>();
         answerList = new ArrayList<Answer>();
         isSubmittedList = new ArrayList<Boolean>();
-        adapter = new QuestionAdapter(
+        adapter = new QuestionPart1Adapter(
                 FullTestPart1Activity.this,
                 R.layout.question_layout_item,
                 questionList,
@@ -275,18 +272,7 @@ public class FullTestPart1Activity extends AppCompatActivity {
         sbAudio = (SeekBar) findViewById(R.id.sbAudio);
         mediaPlayer = new MediaPlayer();
         sbAudio.setMax(100);
-        tvTranscript = new TextView(this);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(0,10,0,0);
-        tvTranscript.setLayoutParams(params);
-        tvTranscript.setBackground(ContextCompat.getDrawable(FullTestPart1Activity.this, R.drawable.sharp_cardview_bg));
-        tvTranscript.setTextColor(getResources().getColor(R.color.black));
-        tvTranscript.setVisibility(View.INVISIBLE);
-        if (tvTranscript != null) {
-            lvQuestion.addFooterView(tvTranscript);
-        } else {
-            throw new NullPointerException("tvTranscript is null");
-        }
+        tvTranscript = (TextView) findViewById(R.id.tvTranscript);
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
         isSubmitted = getIntent().getBooleanExtra("isSubmitted", false);
     }
@@ -346,7 +332,6 @@ public class FullTestPart1Activity extends AppCompatActivity {
             tvTotalDuration.setText(milliSecondsToTimer(mediaPlayer.getDuration()));
         } catch (Exception e) {
             Toast.makeText(FullTestPart1Activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.d("Error", e.getMessage());
         }
     }
 

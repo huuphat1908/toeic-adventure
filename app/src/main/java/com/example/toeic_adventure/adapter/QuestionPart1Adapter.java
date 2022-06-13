@@ -19,14 +19,14 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionPart5Adapter extends BaseAdapter {
+public class QuestionPart1Adapter extends BaseAdapter {
     Context MyContext;
     int MyLayout;
     List<com.example.toeic_adventure.model.Question> QuestionList;
     List<com.example.toeic_adventure.model.Answer> AnswerList;
     List<Boolean> IsSubmittedList;
 
-    public QuestionPart5Adapter(Context context,
+    public QuestionPart1Adapter(Context context,
                            int layout,
                            List<com.example.toeic_adventure.model.Question> questionList,
                            List<com.example.toeic_adventure.model.Answer> answerList,
@@ -55,7 +55,6 @@ public class QuestionPart5Adapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        // Init view from layout
         LayoutInflater inflater = (LayoutInflater) MyContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(MyLayout, null);
         view.setMinimumHeight(viewGroup.getHeight() / getCount());
@@ -67,12 +66,7 @@ public class QuestionPart5Adapter extends BaseAdapter {
         RadioButton rbC = (RadioButton) view.findViewById(R.id.rbC);
         RadioButton rbD = (RadioButton) view.findViewById(R.id.rbD);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            tvQuestion.setText(Html.fromHtml(QuestionList.get(i).text, Html.FROM_HTML_MODE_COMPACT));
-        } else {
-            tvQuestion.setText(QuestionList.get(i).text);
-        }
-
+        tvQuestion.setVisibility(View.INVISIBLE);
         try {
             rbA.setText(QuestionList.get(i).choices.getString(0));
             rbB.setText(QuestionList.get(i).choices.getString(1));

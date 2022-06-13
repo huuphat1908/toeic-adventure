@@ -19,18 +19,18 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionAdapter extends BaseAdapter {
+public class QuestionPart2Adapter extends BaseAdapter {
     Context MyContext;
     int MyLayout;
     List<com.example.toeic_adventure.model.Question> QuestionList;
     List<com.example.toeic_adventure.model.Answer> AnswerList;
     List<Boolean> IsSubmittedList;
 
-    public QuestionAdapter(Context context,
-                           int layout,
-                           List<com.example.toeic_adventure.model.Question> questionList,
-                           List<com.example.toeic_adventure.model.Answer> answerList,
-                           List<Boolean> isSubmittedList) {
+    public QuestionPart2Adapter(Context context,
+                                int layout,
+                                List<com.example.toeic_adventure.model.Question> questionList,
+                                List<com.example.toeic_adventure.model.Answer> answerList,
+                                List<Boolean> isSubmittedList) {
         MyContext = context;
         MyLayout = layout;
         QuestionList = questionList;
@@ -66,17 +66,13 @@ public class QuestionAdapter extends BaseAdapter {
         RadioButton rbC = (RadioButton) view.findViewById(R.id.rbC);
         RadioButton rbD = (RadioButton) view.findViewById(R.id.rbD);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            tvQuestion.setText(Html.fromHtml(QuestionList.get(i).text, Html.FROM_HTML_MODE_COMPACT));
-        } else {
-            tvQuestion.setText(QuestionList.get(i).text);
-        }
-
+        rbD.setVisibility(View.INVISIBLE);
+        rbD.setClickable(false);
+        tvQuestion.setText("Listen to question and choose a correct answer");
         try {
             rbA.setText(QuestionList.get(i).choices.getString(0));
             rbB.setText(QuestionList.get(i).choices.getString(1));
             rbC.setText(QuestionList.get(i).choices.getString(2));
-            rbD.setText(QuestionList.get(i).choices.getString(3));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -93,9 +89,6 @@ public class QuestionAdapter extends BaseAdapter {
                     break;
                 case "(C)":
                     rbC.setChecked(true);
-                    break;
-                case "(D)":
-                    rbD.setChecked(true);
                     break;
             }
         }
@@ -118,22 +111,14 @@ public class QuestionAdapter extends BaseAdapter {
                 AnswerList.get(i).userAnswer = rbC.getText().toString();
             }
         });
-        rbD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AnswerList.get(i).userAnswer = rbD.getText().toString();
-            }
-        });
         if (IsSubmittedList.get(i)) {
             rgAnswer.setClickable(false);
             rbA.setClickable(false);
             rbB.setClickable(false);
             rbC.setClickable(false);
-            rbD.setClickable(false);
             rbA.setTextColor(MyContext.getResources().getColor(R.color.black));
             rbB.setTextColor(MyContext.getResources().getColor(R.color.black));
             rbC.setTextColor(MyContext.getResources().getColor(R.color.black));
-            rbD.setTextColor(MyContext.getResources().getColor(R.color.black));
             switch (rgAnswer.getCheckedRadioButtonId()) {
                 case -1:
                     switch (AnswerList.get(i).text.substring(0, 3)) {
@@ -145,9 +130,6 @@ public class QuestionAdapter extends BaseAdapter {
                             break;
                         case "(C)":
                             rbC.setTextColor(MyContext.getResources().getColor(R.color.green));
-                            break;
-                        case "(D)":
-                            rbD.setTextColor(MyContext.getResources().getColor(R.color.green));
                             break;
                     }
                     break;
@@ -170,13 +152,6 @@ public class QuestionAdapter extends BaseAdapter {
                         rbC.setTextColor(MyContext.getResources().getColor(R.color.pink));
                     } else {
                         rbC.setTextColor(MyContext.getResources().getColor(R.color.green));
-                    }
-                    break;
-                case R.id.rbD:
-                    if (!AnswerList.get(i).text.substring(0, 3).equals("(D)")) {
-                        rbD.setTextColor(MyContext.getResources().getColor(R.color.pink));
-                    } else {
-                        rbD.setTextColor(MyContext.getResources().getColor(R.color.green));
                     }
                     break;
             }

@@ -54,6 +54,13 @@
             android:divider="@null"
             android:dividerHeight="0dp"/>
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvTranscript"
+        android:background="@drawable/sharp_cardview_bg"
+        android:textColor="@color/black"
+        android:visibility="invisible"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

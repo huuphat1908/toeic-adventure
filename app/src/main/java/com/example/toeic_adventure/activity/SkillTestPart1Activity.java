@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.toeic_adventure.R;
 import com.example.toeic_adventure.adapter.QuestionAdapter;
+import com.example.toeic_adventure.adapter.QuestionPart1Adapter;
 import com.example.toeic_adventure.api.ApiService;
 import com.example.toeic_adventure.model.Answer;
 import com.example.toeic_adventure.model.Question;
@@ -67,7 +68,7 @@ public class SkillTestPart1Activity extends AppCompatActivity {
 
     ArrayList<Question> questionList;
     ArrayList<Answer> answerList;
-    QuestionAdapter adapter;
+    QuestionPart1Adapter adapter;
 
     @Override
     protected void onDestroy() {
@@ -293,7 +294,7 @@ public class SkillTestPart1Activity extends AppCompatActivity {
         questionList = new ArrayList<Question>();
         answerList = new ArrayList<Answer>();
         isSubmittedList = new ArrayList<Boolean>();
-        adapter = new QuestionAdapter(
+        adapter = new QuestionPart1Adapter(
                 SkillTestPart1Activity.this,
                 R.layout.question_layout_item,
                 questionList,
@@ -309,18 +310,7 @@ public class SkillTestPart1Activity extends AppCompatActivity {
         sbAudio = (SeekBar) findViewById(R.id.sbAudio);
         mediaPlayer = new MediaPlayer();
         sbAudio.setMax(100);
-        tvTranscript = new TextView(this);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(0,10,0,0);
-        tvTranscript.setLayoutParams(params);
-        tvTranscript.setBackground(ContextCompat.getDrawable(SkillTestPart1Activity.this, R.drawable.sharp_cardview_bg));
-        tvTranscript.setTextColor(getResources().getColor(R.color.black));
-        tvTranscript.setVisibility(View.INVISIBLE);
-        if (tvTranscript != null) {
-            lvQuestion.addFooterView(tvTranscript);
-        } else {
-            throw new NullPointerException("tvTranscript is null");
-        }
+        tvTranscript = (TextView) findViewById(R.id.tvTranscript);
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
         isSubmitted = false;
     }
