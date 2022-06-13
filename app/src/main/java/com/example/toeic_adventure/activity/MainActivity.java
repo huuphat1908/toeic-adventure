@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -23,18 +24,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-        //check token
         localStorage = getSharedPreferences(LOCAL_STORAGE, Context.MODE_PRIVATE);
         token = localStorage.getString("token", "");
         if (token.isEmpty()) {
-            Intent intentLogin = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intentLogin);
+            Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
         }
-        //init nav bottom
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
         NavController navController = navHostFragment.getNavController();
-
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
     }
 }
