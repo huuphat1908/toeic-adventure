@@ -279,7 +279,6 @@ public class SkillTestPart6Activity extends AppCompatActivity {
                 } else {
                     tvTranscript.setText(Html.fromHtml(transcript));
                 }
-                btnSubmit.setVisibility(View.VISIBLE);
                 btnSubmit.setText("Exit");
                 btnSubmit.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -336,18 +336,12 @@ public class SkillTestPart1Activity extends AppCompatActivity {
             isSubmittedList.add(isSubmitted);
             adapter.notifyDataSetChanged();
 
-            if (index == questions.length() - 1) {
-                btnSubmit.setVisibility(View.VISIBLE);
-            } else {
-                btnSubmit.setVisibility(View.INVISIBLE);
-            }
             if (isSubmitted) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     tvTranscript.setText(Html.fromHtml(answer.getString("explanation"), Html.FROM_HTML_MODE_COMPACT));
                 } else {
                     tvTranscript.setText(Html.fromHtml(answer.getString("explanation")));
                 }
-                btnSubmit.setVisibility(View.VISIBLE);
                 btnSubmit.setText("Exit");
                 btnSubmit.setOnClickListener(new View.OnClickListener() {
                     @Override

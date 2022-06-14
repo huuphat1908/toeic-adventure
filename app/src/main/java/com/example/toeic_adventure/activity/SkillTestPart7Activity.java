@@ -303,11 +303,6 @@ public class SkillTestPart7Activity extends AppCompatActivity {
             }
             adapter.notifyDataSetChanged();
 
-            if (index == questions.length() - 1) {
-                btnSubmit.setVisibility(View.VISIBLE);
-            } else {
-                btnSubmit.setVisibility(View.INVISIBLE);
-            }
             if (isSubmitted) {
                 String transcript = "<b>Transcript</b><br />" ;
                 for (int i = 0; i < questionList.size(); i++) {
@@ -318,7 +313,6 @@ public class SkillTestPart7Activity extends AppCompatActivity {
                 } else {
                     tvTranscript.setText(Html.fromHtml(transcript));
                 }
-                btnSubmit.setVisibility(View.VISIBLE);
                 btnSubmit.setText("Exit");
                 btnSubmit.setOnClickListener(new View.OnClickListener() {
                     @Override

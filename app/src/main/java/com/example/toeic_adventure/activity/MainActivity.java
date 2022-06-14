@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
         //push notification daily
         NotificationChannel();
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        calendar.set(Calendar.MINUTE, 10);
+        calendar.set(Calendar.HOUR_OF_DAY, 7);
+        calendar.set(Calendar.MINUTE, 30);
         calendar.set(Calendar.SECOND, 00);
         if (Calendar.getInstance().after(calendar)) {
             calendar.add(Calendar.DAY_OF_MONTH, 1);
