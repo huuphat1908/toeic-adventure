@@ -246,12 +246,6 @@ public class SkillTestPart6Activity extends AppCompatActivity {
                 tvQuestion.setText(Html.fromHtml(question.getString("text")));
             }
 
-            if (index == questions.length() - 1) {
-                btnSubmit.setVisibility(View.VISIBLE);
-            } else {
-                btnSubmit.setVisibility(View.INVISIBLE);
-            }
-
             questionList.clear();
             answerList.clear();
             isSubmittedList.clear();
