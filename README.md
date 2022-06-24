@@ -50,8 +50,8 @@ STT | Name | Github
 ## Yêu cầu thiết bị
 - Android
   - minSdkVersion: 21.0
-  - targetSdkVersion: 29.0
-  - Gradle: 3.5.3
+  - targetSdkVersion: 32
+
 ## Công nghệ và thư viện
 - Công nghệ
   - Ngôn ngữ: Java
